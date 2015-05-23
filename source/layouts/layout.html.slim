@@ -1,0 +1,51 @@
+doctype html
+html
+  head
+    title = current_page.data.title || 'Blog' + ' | Bob Maerten'
+    meta charset='utf-8'
+    meta name='viewport' content='width=device-width, initial-scale=1'
+    = partial 'open_graph'
+    = partial 'favicons'
+    = stylesheet_link_tag 'main'
+  body#top
+    header#header
+      a.image.avatar href='/'
+        = image_tag 'avatar2014.jpg', alt: 'Photo de Bob Maerten'
+      h1
+        strong Bob Maerten
+        br
+        |  Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités. 
+    #main
+      == yield
+    footer#footer
+      ul.icons
+        li
+          a.icon.fa-envelope-o href="mailto:#{data.settings.social.email}"
+            span.label
+              | Email
+        li
+          a.icon.fa-twitter href="#{data.settings.social.twitter.url}"
+            span.label
+              | Twitter
+        li
+          a.icon.fa-github href="#{data.settings.social.github.url}"
+            span.label
+              | Github
+      ul.copyright
+        li
+          | © Bob Maerten
+        li
+          | Design&nbsp;: 
+          a href='http://html5up.net' 
+            | HTML5 UP
+        li
+          | Photo&nbsp;: 
+          a href='http://unsplash.com/juskteez/'
+            | Juskteez Vu
+    = javascript_include_tag 'jquery.min'
+    = javascript_include_tag 'jquery.min'
+    = javascript_include_tag 'jquery.poptrox.min'
+    = javascript_include_tag 'skel.min'
+    = javascript_include_tag 'util'
+    = javascript_include_tag 'main'
+    = yield_content :javascripts

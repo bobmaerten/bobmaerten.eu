@@ -1,0 +1,11 @@
+= wrap_layout :layout do
+
+  section#post
+    header.major
+      h2.post-title= current_page.data.title
+    p.post-meta
+      = partial 'metadata', object: current_page
+    div.post-description
+      p == yield
+
+  == partial 'juvia_thread'

@@ -1,0 +1,28 @@
+---
+title: Archives
+pageable: true
+per_page: 30
+
+---
+section#archives
+  header.major
+    h2 Archives
+
+  - if paginate
+    p = "Page #{page_number} sur #{num_pages}"
+    - if prev_page
+      p = link_to 'Page précédente', prev_page, relative: true
+
+  ul
+    - page_articles.each_with_index do |article, i|
+      li
+        span = article.date.strftime('%d/%m/%Y')
+        |  - 
+        = link_to article.title, article, relative: true
+
+  - if paginate
+    - if next_page
+      p = link_to 'Page suivante', next_page, relative: true
+
+  p
+    = link_to 'Catégories', '/blog/tags.html', relative: true

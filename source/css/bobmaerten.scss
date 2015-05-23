@@ -1,0 +1,27 @@
+.post-category {
+    margin: 0 0.3em 0 0;
+    padding: 0.3em 0.5em;
+    color: #fff;
+    background: #999;
+    font-size: 80%;
+}
+a.post-category:hover {
+    color: #fff;
+}
+.post-category-links      { background: #5aba59; }
+.post-category-life       { background: #4d85d1; }
+.post-category-vim        { background: #8156a7; }
+.post-category-ruby       { background: #df2d4f; }
+.post-category-debian     { background: rgb(223, 4, 81); }
+.post-category-ubuntu     { background: rgb(221, 72, 20); }
+.post-category-ruby       { background: rgb(198, 26, 26); }
+.post-category-links      { background: rgb(71, 167, 17); }
+.post-category-blog       { background: rgb(0, 85, 128); }
+.post-category-life       { background: rgb(127, 0, 127); }
+.post-category-dev        { background: #451ae1; }
+.post-category-sysadm     { background: #e1ab1a; }
+.post-category-linux      { background: #61605e; }
+.post-category-osx        { background: #63C6F7; }
+.post-category-patisserie { background: #00979C; }
+
+#previous-posts h3 a { border-bottom: none; }

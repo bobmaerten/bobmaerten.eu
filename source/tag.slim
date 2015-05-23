@@ -1,0 +1,25 @@
+---
+title: Catégories
+pageable: true
+per_page: 25
+---
+section#categories
+  header.major
+    h2 = "Billets dans la catégorie #{tagname}"
+
+  ul
+  - page_articles.each_with_index do |article, i|
+    li
+      = article.date.strftime('%d/%m/%Y')
+      |  - 
+      = link_to article.title, article, relative: true
+
+section#others
+  header
+    h2 Autres catégories
+  p.post-meta
+    - blog.tags.each do |tag, articles|
+      - next if tag == tagname
+      = link_to tag, tag_path(tag), class: "post-category post-category-#{tag}" , relative: true
+  p
+    = link_to 'Archive des billets', '/blog/archives.html', relative: true

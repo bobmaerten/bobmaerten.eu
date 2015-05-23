@@ -1,0 +1,13 @@
+---
+title: Catégories
+pageable: true
+per_page: 25
+---
+section#categories
+  header.major
+    h2 Catégories
+  p.post-meta
+    - blog.tags.each do |tag, articles|
+      = link_to tag, tag_path(tag), class: "post-category post-category-#{tag}" , relative: true
+  p
+    = link_to 'Archive des billets', '/blog/archives.html', relative: true

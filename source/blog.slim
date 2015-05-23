@@ -1,0 +1,28 @@
+- I18n.default_locale = :fr
+- latest_post = blog.articles.first
+
+section#featured-post
+  header.major
+    h2 = link_to latest_post.title, latest_post, style: 'border-bottom: none;', relative: true
+  = partial 'metadata', object: latest_post
+  p =  latest_post.summary
+  ul.actions
+    li = link_to 'Lire la suite…', latest_post, class: 'button', relative: true
+section#previous-posts
+  h2 Précédents billets
+  .row
+    - blog.articles[1..-1].each_with_index do |post, i|
+      - if i%2 == 0
+        - align = '6u 12u$(xsmall)'
+      - else
+        - align = '6u$ 12u(xsmall)'
+      article.work-item class="#{align}"
+        - if post.try(:image)
+          = image_tag post.image
+        / - else  
+        /   = image_tag 'avatar2014.jpg'
+        / / a.image.fit.thumb[href='#']
+        /   = image_tag 'avatar2014.jpg'
+        h3 = link_to post.title, post, relative: true
+        p.post-meta
+          = partial 'metadata', object: post
