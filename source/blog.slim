@@ -4,8 +4,11 @@
 section#featured-post
   header.major
     h2 = link_to latest_post.title, latest_post, style: 'border-bottom: none;', relative: true
-  p =  latest_post.summary
+  .image.fit
+    = image_tag "#{latest_post.data.image}.jpg", srcset: "#{latest_post.data.image}_2x.jpg 2x", alt: 'Map'
   = partial 'metadata', object: latest_post
+  p =  latest_post.summary
+  p = link_to 'Lire la suite…', latest_post, class: 'button', relative: true
 section#previous-posts
   h2 Précédents billets
   .row
