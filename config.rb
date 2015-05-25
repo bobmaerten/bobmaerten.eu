@@ -26,6 +26,7 @@ activate :blog do |blog|
   blog.taglink = 'tags/:tag.html'
   blog.layout = 'post'
   blog.summary_separator = /READMORE/
+  blog.new_article_template = "blog_post.tmpl"
   # blog.summary_length = 250
   # blog.year_link = ':year.html'
   # blog.month_link = ':year/:month.html'
