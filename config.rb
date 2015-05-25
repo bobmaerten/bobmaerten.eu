@@ -56,8 +56,10 @@ end
 #
 # With no layout
 # page '/path/to/file.html', :layout => false
-page '/feed.xml',    layout: false
+page '/atom.xml',    layout: false
 page '/sitemap.xml', layout: false
+page "blog/index.html", proxy: '/blog.html'
+
 
 #
 # With alternative layout

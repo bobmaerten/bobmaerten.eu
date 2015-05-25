@@ -4,10 +4,8 @@
 section#featured-post
   header.major
     h2 = link_to latest_post.title, latest_post, style: 'border-bottom: none;', relative: true
-  = partial 'metadata', object: latest_post
   p =  latest_post.summary
-  ul.actions
-    li = link_to 'Lire la suite…', latest_post, class: 'button', relative: true
+  = partial 'metadata', object: latest_post
 section#previous-posts
   h2 Précédents billets
   .row
