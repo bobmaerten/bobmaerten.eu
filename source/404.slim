@@ -1,7 +1,8 @@
 ---
-title: La page demandée est introuvable
+title: 404
 ---
 section#error
   header.major
     h2 La page demandée est introuvable
-  = image_tag 'wall.jpg', srcset: 'wall_2x.jpg', alt: 'wall'
+  p
+    = link_to 'Retourner à la page d\'accueil', '/index.html', relative: true
