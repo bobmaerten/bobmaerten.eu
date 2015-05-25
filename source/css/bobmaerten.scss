@@ -25,3 +25,31 @@ a.post-category:hover {
 .post-category-patisserie { background: #00979C; }
 
 #previous-posts h3 a { border-bottom: none; }
+
+#header {
+  ul.nav {
+    color: _palette(accent2, fg);
+    // font-size: 0.8em;
+    list-style: none;
+    // margin: (_size(element-margin) * 0.5) 0 0 0;
+    padding: 0;
+
+    li {
+      // border-left: solid 1px _palette(accent2, border);
+      display: inline-block;
+      line-height: 1em;
+      margin-left: 0.75em;
+      padding-left: 0.75em;
+
+      &:first-child {
+        border-left: 0;
+        margin-left: 0;
+        padding-left: 0;
+      }
+
+      a {
+        color: inherit;
+      }
+    }
+  }
+}
