@@ -1,28 +1,28 @@
-- I18n.default_locale = :fr
-- latest_post = blog.articles.first
-
-section#featured-post
+section#about
   header.major
-    h2 = link_to latest_post.title, latest_post, style: 'border-bottom: none;', relative: true
-  = partial 'metadata', object: latest_post
-  p =  latest_post.summary
-  ul.actions
-    li = link_to 'Lire la suite…', latest_post, class: 'button', relative: true
-section#previous-posts
-  h2 Précédents billets
-  .row
-    - blog.articles[1..-1].each_with_index do |post, i|
-      - if i%2 == 0
-        - align = '6u 12u$(xsmall)'
-      - else
-        - align = '6u$ 12u(xsmall)'
-      article.work-item class="#{align}"
-        - if post.try(:image)
-          = image_tag post.image
-        / - else  
-        /   = image_tag 'avatar2014.jpg'
-        / / a.image.fit.thumb[href='#']
-        /   = image_tag 'avatar2014.jpg'
-        h3 = link_to post.title, post, relative: true
-        p.post-meta
-          = partial 'metadata', object: post
+    h2 À Propos
+  p Bonjour, je m'appelle Bob, j'ai dans la quarantaine et j'habite le nord de la France près de Valenciennes.
+  = image_tag 'map.jpg', srcset: 'map_2x.jpg 2x', alt: 'Map'
+  p
+    | Il y a quelques mois, las de mon environnement professionnel, j'ai mis de coté ma carrière dans la fonction publique pour tenter l'aventure du privé. Je suis désormais développeur Ruby on Rails chez 
+    a href="http://levups.com"
+      i class="fa fa-cloud"
+        | &nbsp;Level&nbsp;Up&nbsp;Solutions
+    | , et je travaille essentiellement sur une solution maison de gestion de site e-commerce.
+  p
+    | Vous trouverez sur ce site mes bonnes et mes mauvaises humeurs, des tutoriels, éventuellement des recettes de pâtisserie, mais surtout pas de pub ni de racollage (ou alors ce qui me tient vraiment à cœeur). Tout le reste se trouve sur les divers 
+    a[href="http://plus.google.com/115563477684195197330"]
+      | réseaux
+    a[href="http://twitter.com/bobmaerten"]
+      |  sociaux
+    |  auxquels nous sommes désormais 
+    a[href="http://www.youtube.com/watch?v=8vLSf1i4E7A"]
+      |  tous enchainés
+    | .
+  p Il va sans dire que les propos tenus ici n'engagent que moi, mais il parait que ça va mieux en le disant.
+  h2 Opensource
+  p
+    | Il m'arrive de contribuer dans une certaine mesure à des projets libres. Vous trouverez sur mon compte 
+    a[href="http://github.com/bobmaerten"]
+      | Github
+    |  mes diverses participations ainsi que mes propres projets.
