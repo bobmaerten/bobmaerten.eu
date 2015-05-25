@@ -11,6 +11,7 @@ compass_config do |config|
 end
 
 require 'slim'
+Slim::Engine.disable_option_validator!
 require 'builder'
 require 'better_errors'
 
@@ -114,4 +115,19 @@ configure :build do
   activate :relative_assets
   activate :gzip
   activate :sitemap, hostname: data.settings.site.url
+  activate :imageoptim do |options|
+    options.pngout = false
+    options.svgo   = false
+  end
+end
+
+activate :deploy do |deploy|
+  deploy.method = :git
+  deploy.remote   = "origin" # remote name or git url, default: origin
+  deploy.branch   = "master" # default: gh-pages
+  # Optional Settings
+  # deploy.user  = "deploy" # no default
+  # deploy.port  = 5309 # ssh port, default: 22
+  # deploy.build_before = true
+  deploy.clean = true # remove orphaned files on remote host, default: false
 end
