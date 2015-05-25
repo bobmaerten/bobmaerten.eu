@@ -3,7 +3,7 @@
   section#post
     header.major
       h2.post-title= current_page.data.title
-    .post-image
+    .image.fit
       - if current_page.data.image
         = image_tag "#{current_page.data.image}.jpg", srcset: "#{current_page.data.image}_2x.jpg 2x", alt: "#{current_page.data.image}"
     p.post-meta

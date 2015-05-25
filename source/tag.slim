@@ -21,5 +21,6 @@ section#others
     - blog.tags.each do |tag, articles|
       - next if tag == tagname
       = link_to tag, tag_path(tag), class: "post-category post-category-#{tag}" , relative: true
+      |  
   p
     = link_to 'Archive des billets', '/blog/archives.html', relative: true
