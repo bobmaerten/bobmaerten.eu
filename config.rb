@@ -59,7 +59,8 @@ end
 # page '/path/to/file.html', :layout => false
 page '/atom.xml',    layout: false
 page '/sitemap.xml', layout: false
-page "blog/index.html", proxy: '/blog.html'
+page 'blog/index.html', proxy: '/blog.html'
+page "/404.html", directory_index: false
 
 
 #
