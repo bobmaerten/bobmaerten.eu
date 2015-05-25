@@ -108,7 +108,7 @@ configure :build do
       ]
     }
   end
-  activate :minify_html, remove_input_attributes: false
+  activate :minify_html
   activate :minify_css
   activate :minify_javascript
   activate :asset_hash
@@ -116,6 +116,7 @@ configure :build do
   activate :gzip
   activate :sitemap, hostname: data.settings.site.url
   activate :imageoptim do |options|
+    options.manifest = false
     options.pngout = false
     options.svgo   = false
   end

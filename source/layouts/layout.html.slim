@@ -16,12 +16,8 @@ html
         br
         |  Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités. 
       ul.nav
-        li
-          a href="/index.html"
-            | Home
-        li
-          a href="/blog/index.html"
-            | Blog
+        li = link_to 'Home', '/index.html', relative: true
+        li = link_to 'Blog', '/blog/index.html', relative: true
     #main
       == yield
     footer#footer
@@ -49,10 +45,5 @@ html
           | Photo&nbsp;: 
           a href='http://unsplash.com/juskteez/'
             | Juskteez Vu
-    = javascript_include_tag 'jquery.min'
-    = javascript_include_tag 'jquery.min'
-    = javascript_include_tag 'jquery.poptrox.min'
-    = javascript_include_tag 'skel.min'
-    = javascript_include_tag 'util'
-    = javascript_include_tag 'main'
+    = javascript_include_tag 'all'
     = yield_content :javascripts
