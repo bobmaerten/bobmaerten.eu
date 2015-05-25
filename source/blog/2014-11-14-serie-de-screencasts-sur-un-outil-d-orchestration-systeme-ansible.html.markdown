@@ -2,8 +2,8 @@
 title: "Série de screencasts sur un outil d'orchestration système : Ansible"
 date: 2014-11-14 12:28 CET
 tags: sysadm, linux, life
+image: camera
 ---
-
 Il parait que c'est Vendredi, et comme « Vendredi c'est permis »  alors je fais un peu de promo. ;-)
 
 J'ai eu l'opportunité de réaliser des screencasts pour une plate-forme de tutoriels en ligne locale ([Synbioz](https://synbioz.com) à Lomme/Euratechnologies) sur le sujet de l'orchestration de tâches d'administration système avec un outil qu'on utilise au quotidien depuis quelques mois au système : Ansible.

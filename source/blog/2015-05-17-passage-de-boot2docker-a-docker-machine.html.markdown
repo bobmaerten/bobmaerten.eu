@@ -2,8 +2,7 @@
 title: Passage de boot2docker à docker-machine
 date: 2015-05-17 13:12:14 +0200
 tags: sysadm, dev, linux, osx
-image: trainstation
-
+image: sliders
 ---
 Entre mon nouveau job, mon passage à OSX pour le boulot, et la défaillance de mon portable sous Linux, j'ai eu peu de temps à consacrer à l'actualité de Docker. Cependant ça bouge pas mal ces derniers temps avec des projets comme [machine](https://docs.docker.com/machine/), [compose](https://docs.docker.com/compose/) et [swarm](https://docs.docker.com/swarm/) et j'ai récemment essayé de rattraper un peu le retard. Dans ce billet je vais exposer ma découverte de `docker-machine` qui m'a permis de retrouver l'usage courant que j'avais de docker sous Linux.
 
@@ -14,7 +13,7 @@ READMORE
 Comme un bon OSXien bien élevé au grain, j'ai tout d'abord suivi les conseils du net en installant [boot2docker](https://github.com/boot2docker/boot2docker) pour faire fonctionner docker sous forme d'une VM Linux sous VirtualBox. La procédure est très simple&nbsp;:
 
 ```console
-$ brew cask install virtualbox 
+$ brew cask install virtualbox
 $ brew install boot2docker
 $ boot2docker up
 ```
@@ -154,7 +153,7 @@ Cette manipulation ne résistant pas au reboot, sous OSX on peut ajouter un `pli
 
 Voici le plist (`/Library/LaunchDaemons/com.docker.route.plist`) pour ma VM sur le vboxnet0 et d'adresse IP 192.168.99.100
 
-```xml 
+```xml
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE plist PUBLIC '-//Apple//DTD PLIST 1.0//EN' 'http://www.apple.com/DTDs/PropertyList-1.0.dtd'>
 <plist version='1.0'>

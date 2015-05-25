@@ -3,6 +3,7 @@ title: 'Les liens utiles de la semaine 37'
 date: 2013-09-13
 comments: true
 tags: links
+image: book
 ---
 Voici une compilation des liens qui m’ont soit été utiles cette semaine, soit paru intéressants.
 

@@ -2,6 +2,7 @@
 title: De retour en ligne
 date: 2014-02-04 21:07 CET
 tags: blog
+image: forestway
 ---
 Suite à un certain nombre de problèmes d'ordre financier, j'ai du me résoudre à résilier un bon nombre de services/abonnements en ligne, et l'hébergement du blog a fait partie des victimes.
 

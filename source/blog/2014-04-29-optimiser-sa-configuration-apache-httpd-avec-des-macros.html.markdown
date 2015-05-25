@@ -2,6 +2,7 @@
 title: Optimiser sa configuration Apache/httpd avec des macros
 date: 2014-04-29 08:35 CEST
 tags: sysadm, debian
+image: cabs
 ---
 Depuis quelques temps, nous avons pris l'habitude au bureau d'installer systématiquement toutes nos applications web derrière un *'reverse proxy'*. Cela permet de gagner en souplesse par le fait de déclarer dans notre DNS une adresse générique pour l'application et de pouvoir gérer facilement en aval l'emplacement de l'application sur tel ou tel serveur, gérer la maintenance, ou encore établir une répartition de charge si le besoin s'en fait sentir.
 

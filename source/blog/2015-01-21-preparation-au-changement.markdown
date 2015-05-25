@@ -2,6 +2,7 @@
 title: Préparation au changement
 date: 2015-01-21 08:32 CEST
 tags: life, work
+image: forestway
 ---
 À l'extrême opposé des concepts fondamentaux de la [Loi de Murphy](http://fr.wikipedia.org/wiki/Loi_de_Murphy), c'est lorsque tu ne t'attends plus à rien qu'une agréable surprise te saute à la tronche. En effet, dans quelques semaines, je vais mettre de côté ma carrière dans la fonction publique pour rejoindre une entreprise privée à taille humaine pour une aventure pleine de découverte, de rencontres, et je l'espère avec un minimum de réussite.
 

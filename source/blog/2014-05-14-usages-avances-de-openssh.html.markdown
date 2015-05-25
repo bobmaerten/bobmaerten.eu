@@ -2,6 +2,7 @@
 title: Usages avancés de OpenSSH
 date: 2014-05-14 11:13 CEST
 tags: sysadm, life
+image: coffee
 ---
 Dans le cadre du lancement du site [Hackademy](https://hackademy.io) par mes amis de chez [Synbioz](https://twitter.com/synbioz), j'ai eu l'opportunité de réaliser un screencast sur l'utilisation (légèrement) avancée de SSH.
 

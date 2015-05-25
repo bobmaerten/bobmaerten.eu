@@ -2,6 +2,7 @@
 title: Confection des macarons 1/x
 date: 2013-09-16 13:24 CEST
 tags: patisserie
+image: macarons
 ---
 Comme le souligne si justement [Virginie](https://twitter.com/le_bric_a_brac/status/378512686793129985), ce blog manque cruellement de sucre ! Alors pour inaugurer cette nouvelle catégorie, je vais poster en plusieurs billets (d'où le 1/x dans le titre) la recette ainsi que les trucs et astuces que j'utilise pour la confection des macarons.
 

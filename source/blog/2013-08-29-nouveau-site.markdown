@@ -3,6 +3,7 @@ title: 'Nouveau site'
 date: 2013-08-29
 comments: true
 tags: blog
+image: road
 ---
 Et voilà, je profite de la rentrée pour ouvrir un nouveau site pour succéder au [précédent](http://bobmaerten.github.io) ([encore](http://web.archive.org/web/20130311192144/http://blog.sledge.fr/)). Après avoir cherché à construire une page d'accueil tout simple, essayé d'utiliser [Middleman](htttp://middlemanapp.com) avec divers templates plus ou moins réussis, j'ai fini par utiliser [Octopress](http://octopress.org) de nouveau à l'aide d'un template sympa trouvé dans la [liste du wiki](https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes).
 

@@ -2,6 +2,7 @@
 title: En pause, encore...
 date: 2014-07-22 10:54 CEST
 tags: blog, life
+image: field
 ---
 Eh oui, j'imagine que pour toi, lecteur de l'inconnu ce doit être pénible à force, mais ce blog si tant est qu'il ait eu une réelle existance un jour se retrouve de nouveau en sommeil, faute de motivation, de volonté à continuer à écrire même des trucs intéressants sur des sujets autres que l'informatique, de lassitude face à un web qui n'évolue vraiment pas dans le bon sens.
 

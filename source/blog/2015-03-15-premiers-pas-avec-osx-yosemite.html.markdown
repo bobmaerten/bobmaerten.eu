@@ -2,7 +2,7 @@
 title: Premiers pas avec OSX Yosemite
 date: 2015-03-15 10:11 CET
 tags: osx, life
-
+image: mba2
 ---
 Comme je le disais dans le [précédent billet](/blog/2015/preparation-au-changement), je vais dès le mois prochain changer d'environnement professionnel, mais également d'environnement logiciel et matériel dans la mesure où je vais passer sous OSX Yosemite.
 

@@ -2,6 +2,7 @@
 title: Renonciation
 date: 2014-09-25 17:48 CEST
 tags: life
+image: wall
 ---
 J'abandonne, j'arrête, je stoppe, je laisse tomber, bref je renonce. Autant de synonymes du sentiment de raz-le bol général qui m'envahit vis à vis de mon activité professionnelle.
 

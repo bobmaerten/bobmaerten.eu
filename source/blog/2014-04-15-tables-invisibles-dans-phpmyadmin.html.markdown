@@ -2,6 +2,7 @@
 title: Tables invisibles dans PHPMyAdmin
 date: 2014-04-15 16:45 CEST
 tags: sysadm, dev
+image: sliders
 ---
 Hé, cela faisait un bail que je n'avais pas posté quelque chose ici, alors pour y remédier, un petit retour sur un cas bizarre qui m'est arrivé cet après-midi.
 

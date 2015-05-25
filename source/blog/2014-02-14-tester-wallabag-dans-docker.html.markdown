@@ -2,6 +2,7 @@
 title: Tester wallabag dans Docker
 date: 2014-02-14 10:30 CET
 tags: sysadm
+image: city
 ---
 TL;DR: ```sudo docker pull bobmaerten/docker-wallabag && sudo docker run -p 8080:80 -d bobmaerten/docker-wallabag``` et hop, direct dans ton *browser* [http://localhost:8080](http://localhost:8080)
 

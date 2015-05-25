@@ -3,6 +3,7 @@ title: 'Mon premier déplacement en Vélotaf'
 date: 2013-08-31
 comments: true
 tags: life
+image: road
 ---
 Je n'habite pas vraiment à proximité de mon travail. Depuis quelques années, je prends un bus pour aller à la gare prendre un train qui m'amène sur lille, puis le métro et quelques centaines de mètres pour rejoindre mon bureau. Ça ne parait pas grand chose, mais avec toutes les interconnexions mise bout-à-bout, on arrive pas loin de 3h de transports par jour, qui ne me « servent » à rien puisque je ne peux pas faire grand chose à part lire mes mails (mais pas y répondre vu la piètre qualité de la 3G sur le trajet). Et vu le temps de trajet, faire du sport le midi n'était pas envisageable.
 

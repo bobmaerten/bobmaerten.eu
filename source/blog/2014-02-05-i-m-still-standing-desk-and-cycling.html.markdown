@@ -2,6 +2,7 @@
 title: I'm still standing(-desk) and cycling!
 date: 2014-02-05 14:56 CET
 tags: life
+image: record
 ---
 Un petit billet non technique et non patissier histoire de changer.
 

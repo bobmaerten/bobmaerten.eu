@@ -3,6 +3,7 @@ title: 'Dépendances de paquets Debian/Ubuntu pour certain(e)s gems ruby'
 date: 2013-09-05
 comments: true
 tags: debian, ubuntu, ruby
+image: strawberries
 ---
 Lorsqu'il vous arrive d'installer certain(e)s gems à l'aide de la commande `gem install` ou à l'aide de `bundle`, il arrive que l'installation échoue avec un message obscur du style :
 

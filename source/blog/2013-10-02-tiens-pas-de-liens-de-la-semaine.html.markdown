@@ -2,6 +2,7 @@
 title: Tiens, pas de liens de la semaine ?
 date: 2013-10-02 15:11 CEST
 tags: blog
+image: book
 ---
 Vous aviez remarqué, hein ?
 

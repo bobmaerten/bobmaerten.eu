@@ -2,6 +2,7 @@
 title: Confection des macarons, les ingrédients
 date: 2013-09-19 08:42 CEST
 tags: patisserie
+image: macarons
 ---
 Un billet sur les ingrédients, qui sont comment souvent très simples mais sur lesquels j'aimerais apporter quelques précisions tout de même. Une coque de macaron ce n'est effectivement que des blancs d'œuf, du sucre et de la poudre d'amande.
 READMORE
@@ -60,4 +61,3 @@ Eh bien, tout dépends du nombre, mais on peut faire :
 - des cookies
 
 Bref, c'est pas les idées qui manquent. ;-)
-

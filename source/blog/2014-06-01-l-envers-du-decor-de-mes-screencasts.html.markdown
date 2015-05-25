@@ -2,6 +2,7 @@
 title: L'envers du décor de mes screencasts
 date: 2014-06-01 09:50 CEST
 tags: sysadm, linux, life
+image: camera
 ---
 À l'occasion de la sortie de mon nouveau [screencast sur l'administration système avec Ansible](https://hackademy.io/tutoriel-videos/ansible-automatiser-gestion-serveur-partie-1) je voulais partager quelques techniques que j'ai utilisées pour produire les exemples exposés dans la video.
 

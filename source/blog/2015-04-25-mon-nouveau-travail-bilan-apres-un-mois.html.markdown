@@ -2,7 +2,7 @@
 title: Mon nouveau travail, bilan après un mois
 date: 2015-04-25 15:25:48 +0200
 tags: life, work
-
+image: road
 ---
 Pour être tout à fait honnête, j'avais prévu de faire un point une semaine, 15j et 1 mois après mon changement de travail, mais force est de constater que je suis complètement largué sur le timing.
 

@@ -2,7 +2,7 @@
 title: Retour (virtuel) des commentaires
 date: 2015-05-10 18:09:02 +0200
 tags: blog, ruby, sysadm
-
+image: record
 ---
 Cela faisait un petit moment que je voulais réintéger les commentaires sur ce blog. Étant hébergé sur GitHub Pages et donc purement statique, la solution est forcément externe. Je ne souhaitais pas pour autant utiliser le service évident pour ce genre de chose (disqus).
 

@@ -2,6 +2,7 @@
 title: Instance postgresql à la demande avec Docker
 date: 2014-03-04 14:38 CET
 tags: sysadm, dev, linux
+image: coffeebeans
 ---
 MàJ du 14/03/2014 : Quelques modifications sur le fichier source. Je devrais ptet trouver un moyen d'insérer un [gist](https://gist.github.com/bobmaerten/9329752) dans le blog.
 

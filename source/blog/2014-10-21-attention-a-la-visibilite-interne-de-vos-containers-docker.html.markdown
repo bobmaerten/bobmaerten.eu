@@ -2,6 +2,7 @@
 title: Attention à la visibilité interne de vos conteneurs Docker
 date: 2014-10-21 13:56 CEST
 tags: sysadm, linux, ubuntu
+image: coffeebeans
 ---
 Au détour d'une [question sur twitter](https://twitter.com/bourvill/status/524492824302333953) de [Maxime](https://twitter.com/bourvill), j'ai eu l'occasion de me rendre compte que par défaut, 2 *containers* Docker lancés sur le même *host* pouvaient effectivement se « voir » et donc échanger sur leur ports ouverts comme bon leur semblent.
 

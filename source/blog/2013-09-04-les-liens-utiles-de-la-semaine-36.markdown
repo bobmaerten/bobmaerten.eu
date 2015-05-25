@@ -3,6 +3,7 @@ title: 'Les liens utiles de la semaine 36'
 date: 2013-09-04
 comments: true
 tags: links
+image: book
 ---
 Voici une compilation des liens qui m’ont soit été utiles cette semaine, soit paru intéressants.
 
