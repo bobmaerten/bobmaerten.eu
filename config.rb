@@ -60,6 +60,7 @@ end
 page '/atom.xml',    layout: false
 page '/sitemap.xml', layout: false
 page 'blog/index.html', proxy: '/blog.html'
+page 'index.html', proxy: '/blog.html'
 page "/404.html", directory_index: false
 
 
