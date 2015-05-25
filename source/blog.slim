@@ -15,12 +15,9 @@ section#previous-posts
       - else
         - align = '6u$ 12u(xsmall)'
       article.work-item class="#{align}"
-        - if post.try(:image)
-          = image_tag post.image
-        / - else  
-        /   = image_tag 'avatar2014.jpg'
-        / / a.image.fit.thumb[href='#']
-        /   = image_tag 'avatar2014.jpg'
         h3 = link_to post.title, post, relative: true
+        - if post.data.image
+          a.image.fit.thumb href="#{post.url}"
+            = image_tag "#{post.data.image}.jpg", srcset: "#{post.data.image}_2x.jpg 2x", alt: 'Map'
         p.post-meta
           = partial 'metadata', object: post
