@@ -5,21 +5,25 @@ meta property='dc:language'     content='fr-FR'
 meta property='og:site_name'    content="#{data.settings.site.title}"
 meta property='og:type'         content='website'
 meta property='og:url'          content="#{data.settings.site.url}"
-meta property='og:title'        content="#{data.page.title}"
-meta property='og:description'  content="#{data.page.description}"
+meta property='og:title'        content="#{data.page.title || data.settings.site.title}"
+meta property='og:description'  content="#{data.page.description || data.settings.site.description}"
 meta property='og:image'        content="#{data.settings.site.logo}"
 
 meta name='geo.position'        content='50.348923;3.488592'
 meta name='geo.placename'       content='Valenciennes, Nord'
 meta name='geo.region'          content='FR-59'
 
-meta name='twitter:card'        content="#{data.settings.site.title}"
 meta name='twitter:site'        content="#{data.settings.social.twitter.name}"
-meta name='twitter:creator'     content="#{data.settings.social.twitter.name}"
-meta name='twitter:domain'      content="#{data.settings.site.url}"
-meta name='twitter:title'       content="#{data.page.title}"
-meta name='twitter:description' content="#{data.page.description}"
-meta name='twitter:image:src'   content="#{data.settings.site.url}/#{data.page.image}.jpg"
+meta name='twitter:title'       content="#{data.page.title || data.settings.site.title}"
+meta name='twitter:description' content="#{data.page.description || data.settings.site.description}"
+- if current_page.data.image
+  meta name='twitter:card'        content="summary_large_image"
+  meta name='twitter:image:src'   content="#{card_image_url(current_page.data.image)}"
+  meta name='twitter:creator'     content="#{data.settings.social.twitter.name}"
+- else
+  meta name='twitter:card'        content="summary"
+  meta name='twitter:image'       content="#{card_image_url('avatar2014')}"
+
 
 meta itemprop='name'            content="#{data.page.title}"
 meta itemprop='description'     content="#{data.page.description}"
