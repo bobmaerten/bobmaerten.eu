@@ -18,6 +18,8 @@ require 'better_errors'
 activate :i18n
 activate :directory_indexes
 activate :syntax
+activate :protect_emails
+# activate :automatic_image_sizes
 
 activate :blog do |blog|
   blog.name = 'blog'
@@ -64,8 +66,6 @@ page '/sitemap.xml', layout: false
 page 'blog/index.html', proxy: '/blog.html'
 page 'index.html', proxy: '/blog.html'
 
-
-#
 # With alternative layout
 # page '/path/to/file.html', :layout => :otherlayout
 #
@@ -77,13 +77,6 @@ page 'index.html', proxy: '/blog.html'
 # Proxy pages (https://middlemanapp.com/advanced/dynamic_pages/)
 # proxy '/this-page-has-no-template.html', '/template-file.html', locals: {
 #  which_fake_page: 'Rendering a fake page with a local variable' }
-
-###
-# Helpers
-###
-#
-# Automatic image dimensions on image_tag helper
-# activate :automatic_image_sizes
 
 # Reload the browser automatically whenever files change
 configure :development do
@@ -123,13 +116,4 @@ configure :build do
     options.pngout = false
     options.svgo   = false
   end
-end
-
-activate :deploy do |deploy|
-  deploy.build_before = true # default: false
-  deploy.method = :rsync
-  deploy.host   = 'bobmaerten.eu'
-  # Optional Settings
-  deploy.clean = true # remove orphaned files on remote host, default: false
-  # deploy.flags = '-rltgoDvzO --no-p --del' # add custom flags, default: -avz
 end

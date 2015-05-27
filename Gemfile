@@ -18,7 +18,7 @@ gem 'middleman-autoprefixer',  '~> 2.1.1'
 gem 'middleman-syntax'
 gem 'middleman-google-analytics'
 gem 'middleman-imageoptim'
-gem 'middleman-deploy'
+gem 'middleman-protect-emails'
 
 gem 'nokogiri','~> 1.6.3.1'
 gem 'slim',    '~> 3.0.2'
