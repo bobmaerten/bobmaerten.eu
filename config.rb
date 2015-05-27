@@ -120,6 +120,7 @@ configure :build do
   activate :minify_javascript
   activate :asset_hash
   activate :relative_assets
+  set :relative_links, true
   activate :gzip
   activate :sitemap, hostname: data.settings.site.url
   activate :imageoptim do |options|

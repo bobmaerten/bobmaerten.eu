@@ -2,12 +2,12 @@
 
 section#featured-post
   header.major
-    h2 = link_to latest_post.title, latest_post, style: 'border-bottom: none;', relative: true
+    h2 = link_to latest_post.title, latest_post, style: 'border-bottom: none;'
   .image.fit
     = image_tag "#{latest_post.data.image}.jpg", srcset: "#{latest_post.data.image}_2x.jpg 2x", alt: 'Map'
   = partial 'metadata', object: latest_post
   p =  latest_post.summary
-  p = link_to 'Lire la suite…', latest_post, class: 'button', relative: true
+  p = link_to 'Lire la suite…', latest_post, class: 'button'
 section#previous-posts
   h2 Précédents billets
   .row
@@ -17,7 +17,7 @@ section#previous-posts
       - else
         - align = '6u$ 12u(xsmall)'
       article.work-item class="#{align}"
-        h3 = link_to post.title, post, relative: true
+        h3 = link_to post.title, post
         - if post.data.image
           a.image.fit.thumb href="#{post.url}"
             = image_tag "#{post.data.image}.jpg", srcset: "#{post.data.image}_2x.jpg 2x", alt: 'Map'

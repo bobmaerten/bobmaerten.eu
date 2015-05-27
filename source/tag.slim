@@ -12,7 +12,7 @@ section#categories
     li
       = article.date.strftime('%d/%m/%Y')
       |  - 
-      = link_to article.title, article, relative: true
+      = link_to article.title, article
 
 section#others
   header
@@ -20,7 +20,7 @@ section#others
   p.post-meta
     - blog.tags.each do |tag, articles|
       - next if tag == tagname
-      = link_to tag, tag_path(tag), class: "post-category post-category-#{tag}" , relative: true
+      = link_to tag, tag_path(tag), class: "post-category post-category-#{tag}" 
       |  
   p
-    = link_to 'Archive des billets', '/blog/archives.html', relative: true
+    = link_to 'Archive des billets', '/blog/archives.html'

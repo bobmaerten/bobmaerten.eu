@@ -8,6 +8,6 @@ section#categories
     h2 Catégories
   p.post-meta
     - blog.tags.each do |tag, articles|
-      = link_to tag, tag_path(tag), class: "post-category post-category-#{tag}" , relative: true
+      = link_to tag, tag_path(tag), class: "post-category post-category-#{tag}" 
   p
-    = link_to 'Archive des billets', '/blog/archives.html', relative: true
+    = link_to 'Archive des billets', '/blog/archives.html'
