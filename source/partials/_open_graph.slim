@@ -5,17 +5,17 @@ meta property='dc:language'     content='fr-FR'
 meta property='og:site_name'    content="#{data.settings.site.title}"
 meta property='og:type'         content='website'
 meta property='og:url'          content="#{data.settings.site.url}"
-meta property='og:title'        content="#{data.page.title || data.settings.site.title}"
-meta property='og:description'  content="#{data.page.description || data.settings.site.description}"
-meta property='og:image'        content="#{data.settings.site.logo}"
+meta property='og:title'        content="#{current_page.data.title || data.settings.site.title}"
+meta property='og:description'  content="#{current_page.data.description || data.settings.site.description}"
+meta property='og:image'        content="#{card_image_url('avatar2014')}"
 
 meta name='geo.position'        content='50.348923;3.488592'
 meta name='geo.placename'       content='Valenciennes, Nord'
 meta name='geo.region'          content='FR-59'
 
 meta name='twitter:site'        content="#{data.settings.social.twitter.name}"
-meta name='twitter:title'       content="#{data.page.title || data.settings.site.title}"
-meta name='twitter:description' content="#{data.page.description || data.settings.site.description}"
+meta name='twitter:title'       content="#{current_page.data.title || data.settings.site.title}"
+meta name='twitter:description' content="#{current_page.data.description || data.settings.site.description}"
 - if current_page.data.image
   meta name='twitter:card'        content="summary_large_image"
   meta name='twitter:image:src'   content="#{card_image_url(current_page.data.image)}"
@@ -25,9 +25,9 @@ meta name='twitter:description' content="#{data.page.description || data.setting
   meta name='twitter:image'       content="#{card_image_url('avatar2014')}"
 
 
-meta itemprop='name'            content="#{data.page.title}"
-meta itemprop='description'     content="#{data.page.description}"
-meta itemprop='image'           content="#{data.settings.site.logo}"
+meta itemprop='name'            content="#{current_page.data.title || data.settings.site.title}"
+meta itemprop='description'     content="#{current_page.data.description || data.settings.site.description}"
+meta itemprop='image'           content="#{card_image_url('avatar2014')}"
 
 link rel='publisher' href="#{data.settings.social.google_plus}"
 link rel='alternate' href="#{data.settings.social.rss.url}" type='application/rss+xml' title="#{data.settings.site.title}"
