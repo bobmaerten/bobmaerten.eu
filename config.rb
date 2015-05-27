@@ -15,7 +15,7 @@ Slim::Engine.disable_option_validator!
 require 'builder'
 require 'better_errors'
 
-activate :i18n
+activate :i18n, mount_at_root: :fr
 activate :directory_indexes
 activate :syntax
 activate :protect_emails
