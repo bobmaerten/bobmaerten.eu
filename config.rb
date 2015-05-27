@@ -21,9 +21,8 @@ activate :syntax
 activate :protect_emails
 # activate :automatic_image_sizes
 
-helpers do  
+helpers do
   def card_image_url(source)
-    # 'https://bobmaerten.eu' + image-url(source)
     path = image_path("#{source}.jpg")
     if path.start_with? '..'
       path = path[3..-1]
