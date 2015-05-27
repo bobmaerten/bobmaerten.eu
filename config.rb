@@ -24,9 +24,7 @@ activate :protect_emails
 helpers do
   def card_image_url(source)
     path = image_path("#{source}.jpg")
-    if path.start_with? '..'
-      path = path[3..-1]
-    end
+    path = path[3..-1] if path.start_with? '..'
     "https://bobmaerten.eu/#{path}"
   end
 end
@@ -39,7 +37,7 @@ activate :blog do |blog|
   blog.taglink = 'tags/:tag.html'
   blog.layout = 'post'
   blog.summary_separator = /READMORE/
-  blog.new_article_template = "blog_post.tmpl"
+  blog.new_article_template = 'blog_post.tmpl'
   # blog.summary_length = 250
   # blog.year_link = ':year.html'
   # blog.month_link = ':year/:month.html'
@@ -69,8 +67,8 @@ end
 #
 # With no layout
 # page '/path/to/file.html', :layout => false
-page "/404.html", directory_index: false
-page "/about.html", directory_index: false
+page '/404.html', directory_index: false
+page '/about.html', directory_index: false
 page '/atom.xml',    layout: false
 page '/sitemap.xml', layout: false
 page 'blog/index.html', proxy: '/blog.html'
