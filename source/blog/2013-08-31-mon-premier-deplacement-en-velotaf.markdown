@@ -9,7 +9,7 @@ Je n'habite pas vraiment à proximité de mon travail. Depuis quelques années, 
 
 Donc, cette année, je me suis décidé à « profiter de ce temps perdu » pour me remettre un peu à l'exercice en essayant de remplacer les trajets hors-train par le vélo. Et comme on m'avait volé mon vélo (oh c'est dur à taper du 1er coup ça) l'année dernière, je me suis mis en tête de me racheter un vélo le plus léger possible afin que ce ne soit pas un fardeau à manipuler dans le train.
 
-![Mon Vélo brut d'achat](/blog/2013-08-31-mon-premier-deplacement-en-velotaf/monvelo.png)
+![Mon Vélo brut d'achat](2013-08-31-mon-premier-deplacement-en-velotaf/monvelo.png)
 
 Cet été, j'ai trouvé ce qui m'a semblé être une bonne affaire sur leboncoin, un vélo de course, donc très léger, dont le cadre a été complètement restauré et repeint, avec des roues et pneus neufs pour pas trop cher.
 

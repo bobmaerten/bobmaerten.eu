@@ -6,7 +6,7 @@ image: macarons
 ---
 Comme le souligne si justement [Virginie](https://twitter.com/le_bric_a_brac/status/378512686793129985), ce blog manque cruellement de sucre ! Alors pour inaugurer cette nouvelle catégorie, je vais poster en plusieurs billets (d'où le 1/x dans le titre) la recette ainsi que les trucs et astuces que j'utilise pour la confection des macarons.
 
-![Macarons](/blog/2013/confection-des-macarons-1-x/macarons.jpg)
+![Macarons](2013-09-16-confection-des-macarons-1-x/macarons.jpg)
 
 READMORE
 Bon, j'avoue que le titre est faussement aguicheur puisque pour commencer, je vais parler un peu du matériel. Car en patisserie, avoir le bon matériel se relève vite indispensable sous peine de devoir faire avec les moyens du bord, faire mal, et être déçu du résultat. J'en veux pour preuve le jour où je suis passé d'une poche à douille en silicone bon marché à des [poches jetables](#poches_jetables) avec de vraies douilles, quel changement ! Plus de précision, plus de résistance à la pression, des coupes et des décors bien net et rapidement. Rien à voir.
@@ -14,8 +14,8 @@ Bon, j'avoue que le titre est faussement aguicheur puisque pour commencer, je va
 Donc, pour en revenir aux macarons, voici une petite liste du matériel que je préconise :
 
 ## poches à douille jetables avec douille
-![Poche jetable](/blog/2013/confection-des-macarons-1-x/poche-jetable.jpg)
-![Douille 8mm](/blog/2013/confection-des-macarons-1-x/douille8.jpg)
+![Poche jetable](2013-09-16-confection-des-macarons-1-x/poche-jetable.jpg)
+![Douille 8mm](2013-09-16-confection-des-macarons-1-x/douille8.jpg)
 
 
 Avec une douille de 8mm lisse pour coucher la pate et la couper bien net. Ce combo vous servira pour tout appareil à former :
@@ -27,14 +27,14 @@ Avec une douille de 8mm lisse pour coucher la pate et la couper bien net. Ce com
 Oubliez les trucs du genre utiliser le coin d'un sac congélation, ça fouarre tout le temps.
 
 ## une maryse
-![Maryse](/blog/2013/confection-des-macarons-1-x/maryse.jpg)
+![Maryse](2013-09-16-confection-des-macarons-1-x/maryse.jpg)
 
 
 Elle vous sera très pratique pour mélanger toute pâte comme un chef et bien racler le fond des récipients. Faites attention, certaines maryses ne supportent pas les fortes chaleurs, j'en ai fondu une, et raté la préparation d'un caramel comme cela.
 
 
 ## une plaque à patisserie
-![Plaque de cuisson](/blog/2013/confection-des-macarons-1-x/plaque.jpg)
+![Plaque de cuisson](2013-09-16-confection-des-macarons-1-x/plaque.jpg)
 
 
 Bien plus rigide, droite et au fond plus pratique que la lèche-frite du four, elle se pose sur la grille du four et repartit mieux la chaleur.
