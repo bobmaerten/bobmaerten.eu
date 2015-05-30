@@ -11,7 +11,7 @@ dependencies:
   override:
     - bundle install --path=vendor/bundle
     - bundle exec middleman build
-    - docker build -t bobmaerten/bobmaerten.eu:$CIRCLE_SHA1
+    - docker build -t bobmaerten/bobmaerten.eu:$CIRCLE_SHA1 .
 
 deployment:
   production:
