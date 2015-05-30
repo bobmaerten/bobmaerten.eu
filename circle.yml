@@ -10,12 +10,15 @@ machine:
 dependencies:
   override:
     - bundle install --path=vendor/bundle
+
+test:
+  override:
     - bundle exec middleman build
-    - docker build -t bobmaerten/bobmaerten.eu:$CIRCLE_SHA1 .
+    - docker build -t bobmaerten/bobmaerten.eu .
 
 deployment:
   production:
     branch: master
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push bobmaerten/bobmaerten.eu:$CIRCLE_SHA1
+      - docker push bobmaerten/bobmaerten.eu
