@@ -119,9 +119,4 @@ configure :build do
   set :relative_links, true
   activate :gzip
   activate :sitemap, hostname: data.settings.site.url
-  activate :imageoptim do |options|
-    options.manifest = false
-    options.pngout = false
-    options.svgo   = false
-  end
 end
