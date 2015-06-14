@@ -88,8 +88,6 @@ page 'index.html',      proxy: '/blog.html'
 # Reload the browser automatically whenever files change
 configure :development do
   activate :livereload
-  use BetterErrors::Middleware
-  BetterErrors.application_root = __dir__
 end
 
 # Build-specific configuration
