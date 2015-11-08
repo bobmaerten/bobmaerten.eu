@@ -16,7 +16,6 @@ gem 'middleman-sitemap',       '~> 0.0.13'
 gem 'middleman-autoprefixer',  '~> 2.1.1'
 # gem 'middleman-navtree'
 gem 'middleman-syntax'
-gem 'middleman-google-analytics'
 gem 'middleman-imageoptim'
 gem 'middleman-protect-emails'
 

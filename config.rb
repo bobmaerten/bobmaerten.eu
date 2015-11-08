@@ -50,14 +50,6 @@ activate :blog do |blog|
   blog.page_link = 'page/:num'
 end
 
-# activate :google_analytics do |ga|
-#   ga.tracking_id = data.settings.google_analytics.tracking_code
-#   ga.anonymize_ip = true
-#   ga.debug = false
-#   ga.development = false
-#   ga.minify = true
-# end
-
 ###
 # Page options, layouts, aliases and proxies
 ###
