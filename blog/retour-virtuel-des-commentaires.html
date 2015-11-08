@@ -1,0 +1,100 @@
+<!DOCTYPE html><html><head><title>Retour (virtuel) des commentaires</title><meta charset=utf-8 /><meta content="width=device-width, initial-scale=1" name=viewport /><meta content="Bob Maerten" property="dc:creator"/><meta content="text/html" property="dc:format"/><meta content=fr-FR property="dc:language"/><meta content="Bob Maerten — Blog Perso" property="og:site_name"/><meta content=website property="og:type"/><meta content="https://bobmaerten.eu" property="og:url"/><meta content="Retour (virtuel) des commentaires" property="og:title"/><meta content="Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités" property="og:description"/><meta content="https://bobmaerten.eu/img/avatar2014-46bb536d.jpg" property="og:image"/><meta content="50.348923;3.488592" name="geo.position"/><meta content="Valenciennes, Nord" name="geo.placename"/><meta content=FR-59 name="geo.region"/><meta content="@bobmaerten" name="twitter:site"/><meta content="Retour (virtuel) des commentaires" name="twitter:title"/><meta content="Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités" name="twitter:description"/><meta content=summary_large_image name="twitter:card"/><meta content="https://bobmaerten.eu/img/record-3940ef69.jpg" name="twitter:image:src"/><meta content="@bobmaerten" name="twitter:creator"/><meta content="Retour (virtuel) des commentaires" itemprop=name /><meta content="Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités" itemprop=description /><meta content="https://bobmaerten.eu/img/avatar2014-46bb536d.jpg" itemprop=image /><link href="https://plus.google.com/+BobMaerten" rel=publisher /><link href="/atom.xml" rel=alternate title="Bob Maerten — Blog Perso" type="application/rss+xml"/><meta content=yes name=mobile-web-app-capable /><meta content="Bob Maerten — Blog Perso" name=application-name /><link href="/chrome-touch-icon-192x192.png" rel=icon sizes=192x192 /><meta content=yes name=apple-mobile-web-app-capable /><meta content=black name=apple-mobile-web-app-status-bar-style /><meta content="Bob Maerten — Blog Perso" name=apple-mobile-web-app-title /><link href="/apple-touch-icon.png" rel=apple-touch-icon /><meta content="ms-touch-icon-144x144-precomposed.png" name=msapplication-TileImage /><meta content="#F5F5F5" name=msapplication-TileColor /><meta content="#F5F5F5" name=theme-color /><link href="/favicon-196x196.png" rel=icon sizes=196x196 type="image/png"/><link href="/favicon-160x160.png" rel=icon sizes=160x160 type="image/png"/><link href="/favicon-96x96.png" rel=icon sizes=96x96 type="image/png"/><link href="/favicon-32x32.png" rel=icon sizes=32x32 type="image/png"/><link href="/favicon-16x16.png" rel=icon sizes=16x16 type="image/png"/><link href="../css/main-3bd7cfb8.css" rel=stylesheet /></head><body id=top><header id=header><a class="image avatar" href="/"><img srcset="../img/avatar2014_2x-72fa57cb.jpg 2x" alt="Photo de Bob Maerten" src="../img/avatar2014-46bb536d.jpg"/></a><h1><strong>Bob Maerten</strong><br/> Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités. </h1><ul class=nav><li><a href="../about.html">À propos</a></li><li><a href="./">Blog</a></li></ul></header><div id=main><section id=post><header class=major><h2 class=post-title>Retour (virtuel) des commentaires</h2></header><div class="image fit"><img srcset="../img/record_2x-2e3826a9.jpg 2x" alt=record src="../img/record-3940ef69.jpg"/></div><p class=post-meta><span>10 Mai 2015</span><br/><span><a class="post-category post-category-blog" href="tags/blog.html">blog</a></span><span><a class="post-category post-category-ruby" href="tags/ruby.html">ruby</a></span><span><a class="post-category post-category-sysadm" href="tags/sysadm.html">sysadm</a></span></p><div class=post-description><p><p>Cela faisait un petit moment que je voulais réintéger les commentaires sur ce blog. Étant hébergé sur GitHub Pages et donc purement statique, la solution est forcément externe. Je ne souhaitais pas pour autant utiliser le service évident pour ce genre de chose (disqus).</p> <p>Non pas que j&#39;eusse de quelconques griefs envers ce service mais dans la continuité de proposer du contenu relativement maitrisé (un site statique), je souhaiter également maitriser cette partie commentaires. J&#39;avais fait quelques essais il y quelques mois avec une appli Rails appelée <a href="https://github.com/phusion/juvia">Juvia</a> produite par <a href="http://www.phusion.nl">Phusion</a> qui manifestment n&#39;est plus maintenue, mais qui a poutant été mis à jour entre temps en 4.2.</p> <p></p> <p>Je me suis dit que ce serait une bonne occasion de tester la mise en place de cette application dans un container Docker. De plus cela me permettrait d&#39;associer la veille technologique nécessaire à cette mise en place avec mes nouvelles activités professionnelles (Rails + Sysadm + Hébergement).</p> <h2>Construction de l&#39;image</h2> <p>Les gens qui gravitent autour de docker ne chôment pas. Des images officielles pour faire tourner des scripts <a href="https://registry.hub.docker.com/_/ruby/">ruby</a> et même des applications <a href="https://registry.hub.docker.com/_/rails/">rails</a> sont disponibles. En regardant le Dockerfile de l&#39;image rails, on remarque qu&#39;elle surcharge celle de ruby2.2, qui elle même s&#39;appuie sur une succession d&#39;images dérivées de debian:jessie. Ce qui signifie qu&#39;il est toujours possible d&#39;ajouter de nouveaux packages en cas d&#39;usage d&#39;une gem qui nécessite une compilation particulière.</p> <p>C&#39;est ce qui s&#39;est produit lors de l&#39;essai de contruction de l&#39;image de l&#39;application de gestion des commentaires dont il est question ici. Le <code>Dockerfile</code> est très simple comme le recommande le README de l&#39;image, mais la construction échoue&nbsp;:</p> <pre class="highlight plaintext"><code>$ cat Dockerfile
+FROM rails:onbuild
+
+$ docker build -t juvia_image .
+Sending build context to Docker daemon 160.5 MB
+Sending build context to Docker daemon
+Step 0 : FROM rails:onbuild
+# Executing 4 build triggers
+Trigger 0, COPY Gemfile /usr/src/app/
+Step 0 : COPY Gemfile /usr/src/app/
+ ---&gt; Using cache
+Trigger 1, COPY Gemfile.lock /usr/src/app/
+Step 0 : COPY Gemfile.lock /usr/src/app/
+ ---&gt; Using cache
+Trigger 2, RUN bundle install
+Step 0 : RUN bundle install
+ ---&gt; Running in f004b22629a9
+Don't run Bundler as root. Bundler can ask for sudo if it is needed, and
+installing your bundle as root will break this application for all non-root
+users on this machine.
+Fetching gem metadata from https://rubygems.org/.........
+Fetching version metadata from https://rubygems.org/...
+Fetching dependency metadata from https://rubygems.org/..
+Using rake 10.4.2
+Installing i18n 0.7.0
+Installing json 1.8.2
+...
+Installing capybara-screenshot 1.0.9
+
+Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+    /usr/local/bin/ruby -r ./siteconf20150510-5-1wvt9so.rb extconf.rb
+Command 'qmake -spec linux-g++ ' not available
+
+Makefile not found
+
+Gem files will remain installed in /usr/local/bundle/gems/capybara-webkit-1.3.1 for inspection.
+Results logged to /usr/local/bundle/extensions/x86_64-linux/2.2.0-static/capybara-webkit-1.3.1/gem_make.out
+An error occurred while installing capybara-webkit (1.3.1), and Bundler cannot
+continue.
+Make sure that `gem install capybara-webkit -v '1.3.1'` succeeds before
+bundling.
+INFO[0154] The command [/bin/sh -c bundle install] returned a non-zero code: 5
+</code></pre> <p>Comme on le constate, il manque l&#39;outil <code>qmake</code> pour que capybara-webkit puisse se compiler. Il faudrait ajouter l&#39;installation du paquet en question dans le Dockerfile. Mais cette gem est dans les groupes :development et :test, qui ne sont pas utiles pour le fonctionnement en production. Pour éviter leur installation, il faudrait pouvoir préciser <code>--without test development</code> à la commande bundle. Dans tous les cas, il faut réécrire le Dockerfile et en s&#39;inspirant de celui de l&#39;image rails, on arrive à quelque chose comme ça&nbsp;:</p> <pre class="highlight plaintext"><code>$ cat Dockerfile
+FROM ruby:2.2.2
+RUN apt-get update \
+        &amp;&amp; apt-get install sqlite3 nodejs --no-install-recommends -y qt5-default libqt5webkit5-dev \
+        &amp;&amp; apt-get clean \
+        &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+RUN bundle config --global frozen 1
+
+ENV RAILS_ENV production
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY Gemfile /usr/src/app/Gemfile
+COPY Gemfile.lock /usr/src/app/Gemfile.lock
+RUN bundle install --without='development test postgres mysql' --path=help
+
+COPY . /usr/src/app
+
+RUN bundle exec rake db:create \
+ &amp;&amp; bundle exec rake db:schema:load \
+ &amp;&amp; bundle exec rake assets:precompile RAILS_GROUPS=assets
+
+EXPOSE 3000
+CMD ['rails', 'server', '-b', '0.0.0.0']
+</code></pre> <p>Je passe les petites corrections pour avoir les bonnes valeurs sur les fichiers sensibles de Rails (SECREY_KEY_BASE en production, des valeurs correctes dans database.yml, etc.). Au final l&#39;image se construit et on peut valider le fonctionnement.</p> <pre class="highlight plaintext"><code>$ docker run --detach --name juvia_app -e SECRET_KEY_BASE='abcde' juvia_image
+3489371959f964b3b7d85e2bbda19d294a2c841b0a987261d68794c21bb4d59b
+
+$ docker logs juvia_app
+[2015-05-10 17:18:12] INFO  WEBrick 1.3.1
+[2015-05-10 17:18:12] INFO  ruby 2.2.2 (2015-04-13) [x86_64-linux]
+[2015-05-10 17:18:12] INFO  WEBrick::HTTPServer#start: pid=1 port=3000
+
+$ curl -I $(boot2docker ip):3000
+HTTP/1.1 302 Found
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Location: http://192.168.59.103:3000/admin/dashboard/new_admin
+Content-Type: text/html; charset=utf-8
+Cache-Control: no-cache
+X-Request-Id: ba8299a1-d93d-4a14-93c1-d573e2c31178
+X-Runtime: 0.002761
+Server: WEBrick/1.3.1 (Ruby/2.2.2/2015-04-13)
+Date: Sun, 10 May 2015 17:21:14 GMT
+Content-Length: 0
+Connection: Keep-Alive
+</code></pre> <p>Oui, vous constatez l&#39;utilisation de <a href="http://boot2docker.io">boot2docker</a>. Depuis mon passage sur OSX, mon portable sous linux a rendu l&#39;âme (carte mère grillé), donc je me suis rabattu sur un environnement compatible, malgré <a href="https://twitter.com/bobmaerten/status/597347960058454016">quelques surprises</a>. Au fond c&#39;est assez transparent, une fois la <a href="http://blog.blackfire.io/how-we-use-docker.html">configuration correctement installée</a>.</p> <h2>Mise en place du conteneur</h2> <p>Voila, nous avons une image plus ou moins fonctionelle, reste plus qu&#39;à la déployer et assurer la persistance des données. Pour le déploiement, j&#39;ai à ma disposition une petite instance d&#39;un serveur Ubuntu chez <a href="https://www.digitalocean.com/?refcode=dd83518f68db">DigitalOcean</a> sur lequel un <em>daemon</em> docker assure le travail, ainsi qu&#39;un <a href="https://github.com/jwilder/nginx-proxy">conteneur particulier</a> qui “écoute” les événements du service et qui met en place un reverse-proxy sur le nom du VIRTUAL_HOST passé en variable d&#39;environnement du conteneur.</p> <p>Pour la persitance des données on peut soit monter un dossier de l&#39;hôte lors du démarrage du conteneur avec l&#39;option <code>-v</code> ou alors créer des <em>data-volumes</em> et utiliser l&#39;option <code>--volumes-from</code>. Pour des questions de simplicité et puisque je maitrise mon contexte j&#39;utilise la première solution, mais docker préconise plutôt l&#39;usage de conteneur de données pour des raisons de portabilité.</p> <p>Voici donc la ligne de commande permettant de lancer le conteneur&nbsp;:</p> <pre class="highlight plaintext"><code>docker run --name comments \
+       -e VIRTUAL_HOST='comments.bobmaerten.eu' \
+       -e SECRET_KEY_BASE='$(rake secret)' \
+       -v /root/containers/comments/db:/usr/src/app/db \
+       -v /root/containers/comments/log:/usr/src/app/log \
+       --restart=always \
+       --detach juvia_app
+</code></pre> <h2>Résultats</h2> <p>Si tout vas bien, lors du déploiement de cette version du site avec ce billet, le layout devrait afficher la liste des commentaires des billets ainsi qu&#39;un formulaire pour en laisser. Ce sera l&#39;occasion de tester l&#39;application en réel et de voir les améliorations à apporter même si j&#39;ai déjà quelques idées (localisation, ajout de notifications, etc.).</p> </p></div></section><section id=comments><h2>Commentaires</h2><div aria-live=polite id=juvia_thread><noscript>Please enable JavaScript to view the comments powered by Juvia.</noscript></div></section></div><footer id=footer><ul class=icons><li><a class="icon fa-envelope-o" href="#email-protection-uryyb@oboznregra.rh"><span class=label>Email</span></a></li><li><a class="icon fa-rss" href="/atom.xml"><span class=label>RSS</span></a></li><li><a class="icon fa-twitter" href="https://twitter.com/bobmaerten"><span class=label>Twitter</span></a></li><li><a class="icon fa-github" href="https://github.com/bobmaerten"><span class=label>Github</span></a></li></ul><ul class=copyright><li>© Bob Maerten</li><li>Design&nbsp;: <a href="http://html5up.net">HTML5 UP</a></li><li>Photo&nbsp;: <a href="http://unsplash.com/juskteez/">Juskteez Vu</a></li></ul></footer><script src="../js/all-39da47a7.js"></script><script src="../js/juvia-10e4cb99.js"></script><script type="text/javascript">!function(){try{var a,b,c,d,g=document.getElementsByTagName("a");for(c=0;g.length-c;c++)try{b=g[c].getAttribute("href"),b&&b.indexOf("#email-protection-")>-1&&b.length>19&&(a="",d=19+b.indexOf("#email-protection-"),b.length>d&&(a=b.substr(18).replace(/[a-zA-Z]/g,function(a){return String.fromCharCode(("Z">=a?90:122)>=(a=a.charCodeAt(0)+13)?a:a-26)})),g[c].setAttribute("href","mailto:"+a))}catch(h){}}catch(h){}}();</script>
+</body></html>

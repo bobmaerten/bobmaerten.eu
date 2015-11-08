@@ -1,0 +1,104 @@
+<!DOCTYPE html><html><head><title>L'envers du décor de mes screencasts</title><meta charset=utf-8 /><meta content="width=device-width, initial-scale=1" name=viewport /><meta content="Bob Maerten" property="dc:creator"/><meta content="text/html" property="dc:format"/><meta content=fr-FR property="dc:language"/><meta content="Bob Maerten — Blog Perso" property="og:site_name"/><meta content=website property="og:type"/><meta content="https://bobmaerten.eu" property="og:url"/><meta content="L'envers du décor de mes screencasts" property="og:title"/><meta content="Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités" property="og:description"/><meta content="https://bobmaerten.eu/img/avatar2014-46bb536d.jpg" property="og:image"/><meta content="50.348923;3.488592" name="geo.position"/><meta content="Valenciennes, Nord" name="geo.placename"/><meta content=FR-59 name="geo.region"/><meta content="@bobmaerten" name="twitter:site"/><meta content="L'envers du décor de mes screencasts" name="twitter:title"/><meta content="Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités" name="twitter:description"/><meta content=summary_large_image name="twitter:card"/><meta content="https://bobmaerten.eu/img/camera-85357064.jpg" name="twitter:image:src"/><meta content="@bobmaerten" name="twitter:creator"/><meta content="L'envers du décor de mes screencasts" itemprop=name /><meta content="Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités" itemprop=description /><meta content="https://bobmaerten.eu/img/avatar2014-46bb536d.jpg" itemprop=image /><link href="https://plus.google.com/+BobMaerten" rel=publisher /><link href="/atom.xml" rel=alternate title="Bob Maerten — Blog Perso" type="application/rss+xml"/><meta content=yes name=mobile-web-app-capable /><meta content="Bob Maerten — Blog Perso" name=application-name /><link href="/chrome-touch-icon-192x192.png" rel=icon sizes=192x192 /><meta content=yes name=apple-mobile-web-app-capable /><meta content=black name=apple-mobile-web-app-status-bar-style /><meta content="Bob Maerten — Blog Perso" name=apple-mobile-web-app-title /><link href="/apple-touch-icon.png" rel=apple-touch-icon /><meta content="ms-touch-icon-144x144-precomposed.png" name=msapplication-TileImage /><meta content="#F5F5F5" name=msapplication-TileColor /><meta content="#F5F5F5" name=theme-color /><link href="/favicon-196x196.png" rel=icon sizes=196x196 type="image/png"/><link href="/favicon-160x160.png" rel=icon sizes=160x160 type="image/png"/><link href="/favicon-96x96.png" rel=icon sizes=96x96 type="image/png"/><link href="/favicon-32x32.png" rel=icon sizes=32x32 type="image/png"/><link href="/favicon-16x16.png" rel=icon sizes=16x16 type="image/png"/><link href="../css/main-3bd7cfb8.css" rel=stylesheet /></head><body id=top><header id=header><a class="image avatar" href="/"><img srcset="../img/avatar2014_2x-72fa57cb.jpg 2x" alt="Photo de Bob Maerten" src="../img/avatar2014-46bb536d.jpg"/></a><h1><strong>Bob Maerten</strong><br/> Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités. </h1><ul class=nav><li><a href="../about.html">À propos</a></li><li><a href="./">Blog</a></li></ul></header><div id=main><section id=post><header class=major><h2 class=post-title>L'envers du décor de mes screencasts</h2></header><div class="image fit"><img srcset="../img/camera_2x-c26cd8b4.jpg 2x" alt=camera src="../img/camera-85357064.jpg"/></div><p class=post-meta><span> 1 Jun 2014</span><br/><span><a class="post-category post-category-sysadm" href="tags/sysadm.html">sysadm</a></span><span><a class="post-category post-category-linux" href="tags/linux.html">linux</a></span><span><a class="post-category post-category-life" href="tags/life.html">life</a></span></p><div class=post-description><p><p>À l&#39;occasion de la sortie de mon nouveau <a href="https://hackademy.io/tutoriel-videos/ansible-automatiser-gestion-serveur-partie-1">screencast sur l&#39;administration système avec Ansible</a> je voulais partager quelques techniques que j&#39;ai utilisées pour produire les exemples exposés dans la video.</p> <h2>Simuler des machines distantes</h2> <p>Vous avez remarqué que je me connectais à une bonne quinzaine de serveur tout au long de la video. Et si je vous disais que ces serveurs n&#39;en sont pas vraiment ?!</p> <p>En effet pour les besoins de l&#39;exemple, je dois montrer des connexions SSH multiples et cela assez rapidement pour ne pas faire trainer en longueur la video. De plus je fonctionne avec 0 budget, donc hors de question de taper dans des offres cloud (même si j&#39;en fais illusion à un moment).</p> <p>C&#39;est là que <a href="https://docker.io">Docker</a> entre en scène. En arrière-plan du terminal affiché à l&#39;écran pendant le screencast, une autre fenêtre met en oeuvre la mécanique. J&#39;utilise des conteneurs docker pour isoler des services SSH et me permettre de simuler des accès à des machines complètes. Vous trouverez ci-dessous le <code>Dockerfile</code> et les scripts de <code>build</code> et de <code>start</code> somme toute assez classiques.</p> <p>Dockerfile</p> <pre class="highlight plaintext"><code>FROM     ubuntu
+MAINTAINER Bob Maerten 'bob.maerten@gmail.com'
+
+ENV DEBIAN_FRONTEND noninteractive
+RUN locale-gen en_US
+RUN locale-gen en_US.UTF-8
+RUN locale-gen fr_FR.UTF-8
+
+# make sure the package repository is up to date
+RUN echo 'deb http://archive.ubuntu.com/ubuntu trusty main universe' &gt; /etc/apt/sources.list
+RUN apt-get update
+
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN echo 'root:screencast' | chpasswd
+
+# create some default users
+RUN mkdir /home/bob
+RUN useradd -s /bin/bash -d /home/bob bob
+RUN chown bob:bob /home/bob
+RUN echo 'bob:plop' | chpasswd
+
+RUN mkdir /home/user
+RUN useradd -s /bin/bash -d /home/user user
+RUN chown user:user /home/user
+RUN echo 'user:plop' | chpasswd
+
+RUN mkdir /home/deploy
+RUN useradd -s /bin/bash -d /home/deploy deploy
+RUN chown deploy:deploy /home/deploy
+RUN echo 'deploy:plop' | chpasswd
+
+# make this last one with sudo accreditations
+RUN mkdir /home/admin
+RUN useradd -s /bin/bash -d /home/admin admin
+RUN chown admin:admin /home/admin
+RUN echo 'admin:plop' | chpasswd
+ADD sudo_admin /etc/sudoers.d/10_admin
+RUN chown root: /etc/sudoers.d/10_admin
+RUN chmod 660 /etc/sudoers.d/10_admin
+
+EXPOSE 22
+CMD    /usr/sbin/sshd -D
+</code></pre> <p>sudo_admin</p> <pre class="highlight plaintext"><code>admin ALL = (root) NOPASSWD: ALL
+</code></pre> <p>build_server.sh</p> <pre class="highlight shell"><code><span class="c">#!/bin/bash</span>
+docker build -t hackademy/sshserver .
+</code></pre> <p>start_server.sh</p> <pre class="highlight shell"><code><span class="c">#!/bin/bash</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s1">'$1'</span> <span class="o">]</span>
+  <span class="k">then
+    </span><span class="nb">echo</span> <span class="s1">'usage: $0 &lt;server name&gt;'</span>
+<span class="k">fi
+</span>docker run -h <span class="nv">$1</span> -d hackademy/sshserver
+</code></pre> <p>Ce dernier script me permet donc de lancer une batterie de conteneurs qui feront office de « machines » sur lequelles j&#39;aurais un shell disponible pour effectuer des commandes distantes. L&#39;empreinte de ces VMs est relativement faible, en tout cas, suffisament pour que ma petite machine (C2Duo 4Go RAM) à la maison encaisse le choc.</p> <pre class="highlight plaintext"><code>$ ./build_server.sh
+...
+$ for i in $(seq 1 9); do ./start-server.sh web-0$i; done &gt; server_ids
+$ cat server_ids
+e84065a55b84db66301147cf353972a4c7b34ba28513fc2a848e0708bc7f5d8b
+c20a0c2f18f3477290ada61d5ae7872ec7bc06c490f51af81ddc37c5ed901569
+ddf52e12278e8a92161297dc63ac782aa2f3075eab127684b68a54fd367805e5
+db31c10d76a56e6c5225b06212304a0cd83598ed5c75ee679fa80df2ecd1f0eb
+0972068252a523b1bb5ec3ac1b02943ac2246cd4047ff5e04fe9a940886b20e3
+648dd8b5bf3817e83a6dea5b585437edbc05d2d604a198e9d2f2f45e9323bae5
+6eeaf3218e1bb3a9b0ef339c004f38b73bab6fdbe4c0801da761f13ad7aeb515
+d179421e252452735634160feeb06747e980c905806f139ea2430301e9da60b5
+e2547fdb9956214632c4a3ed83ee80c10bb96ce513257530850194d7dab9ab87
+</code></pre> <p>Toutes ces machines ont une adresse IP que je récupère à l&#39;aide de la commande <code>docker inspect</code></p> <pre class="highlight plaintext"><code>$ N=1
+$ for i in $(cat server_ids); \
+  do echo '$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $i)  web-0$N'; \
+  N=$((N+1)); \
+  done
+172.17.0.2  web-01
+172.17.0.3  web-02
+172.17.0.4  web-03
+172.17.0.5  web-04
+172.17.0.6  web-05
+172.17.0.7  web-06
+172.17.0.8  web-07
+172.17.0.9  web-08
+172.17.0.10  web-09
+</code></pre> <p>que je peux ajouter dans un fichier <code>/etc/hosts</code> afin de pouvoir me connecter à ces machines avec leur nom. Je peux ensuite utiliser ces noms dans mon fichier <code>~/.ssh/config</code> selon les besoin du screencast.</p> <pre class="highlight plaintext"><code>$ cat ~/.ssh/hosts
+Host webserver
+    HostName web-01
+    User admin
+    IdentityFile ~/.ssh/id_rsa
+    StrictHostKeyChecking no
+</code></pre> <p>Une fois le screencast terminé, je peux supprimer les conteneurs.</p> <pre class="highlight plaintext"><code>$ for i in $(cat server_ids); do docker stop $i; done
+</code></pre> <p>Pratique docker, non ? ;-)</p> <h2>Taper rapidement des commandes sans se planter (ou presque)</h2> <p>Une autre technique que j&#39;ai utilisée consiste à éviter de taper des commandes le plus possible, car c&#39;est souvent gage d&#39;erreur de frappes du fait de ne pas être complètement concentré sur le terminal. J&#39;ai donc trouvé un outil sous linux qui permet d&#39;envoyer des frappes de touches ou des mouvements de souris sur une autre fenêtre. Il s&#39;agit de <a href="http://www.semicomplete.com/projects/xdotool/xdotool.xhtml">xdotool</a>.</p> <p>Associé à un petit script maison qui prend en paramètre la chaine de caractères à envoyer, lancé dans un xterm (et pas le terminal classique pour éviter la confusion des fenêtres), il m&#39;a été possible de simuler une écriture rapide de commandes.</p> <pre class="highlight plaintext"><code>$ cat ~/bin/type.sh
+#!/bin/bash
+WID=`xdotool search --onlyvisible --name 'Terminal'`
+xdotool windowfocus $WID
+xdotool type --delay $1 '$2'
+xdotool key 'Return'
+$ type.sh 50 'cette commande s'affiche caractère par caractère sur un autre terminal'
+</code></pre> <p>Du coup, je rassemble tout cela dans un autre script pour pré-enregistrer les lignes à taper pendant l&#39;enregistrement du screencast, entrecoupées de <code>read</code> pour pouvoir temporiser en fonction de la piste audio préalablement enregistrée.</p> <pre class="highlight plaintext"><code>$ cat screencast.sh
+#!/bin/bash
+type.sh 50 'ansible webserver -m copy -a \'src=web/contacts.html dest=/var/www/site/contacts.html\''
+read
+type.sh 50 'ansible webserver -m file -a \'dest=/var/www/tmp mode=0660 owner=www-data group=www-data\' --sudo'
+read
+type.sh 50 'ansible webserver -m apt -a \'name=php5-ldap state=present\' --sudo'
+read
+type.sh 50 'ansible dbserver -m user -a \'name=sqluser state=absent\' --sudo'
+</code></pre> <p>Voilà, vous savez tout. Il n&#39;y a plus qu&#39;à vous lancer vous aussi. De nombreux sujets n&#39;attendent que des gens suffisamment passionnés pour les exposer aux autres. C&#39;est intéressant à faire, on apprends plein de choses en le faisant et les retours sont toujours très intéressants.</p> <p>À qui le tour ?</p> </p></div></section><section id=comments><h2>Commentaires</h2><div aria-live=polite id=juvia_thread><noscript>Please enable JavaScript to view the comments powered by Juvia.</noscript></div></section></div><footer id=footer><ul class=icons><li><a class="icon fa-envelope-o" href="#email-protection-uryyb@oboznregra.rh"><span class=label>Email</span></a></li><li><a class="icon fa-rss" href="/atom.xml"><span class=label>RSS</span></a></li><li><a class="icon fa-twitter" href="https://twitter.com/bobmaerten"><span class=label>Twitter</span></a></li><li><a class="icon fa-github" href="https://github.com/bobmaerten"><span class=label>Github</span></a></li></ul><ul class=copyright><li>© Bob Maerten</li><li>Design&nbsp;: <a href="http://html5up.net">HTML5 UP</a></li><li>Photo&nbsp;: <a href="http://unsplash.com/juskteez/">Juskteez Vu</a></li></ul></footer><script src="../js/all-39da47a7.js"></script><script src="../js/juvia-10e4cb99.js"></script><script type="text/javascript">!function(){try{var a,b,c,d,g=document.getElementsByTagName("a");for(c=0;g.length-c;c++)try{b=g[c].getAttribute("href"),b&&b.indexOf("#email-protection-")>-1&&b.length>19&&(a="",d=19+b.indexOf("#email-protection-"),b.length>d&&(a=b.substr(18).replace(/[a-zA-Z]/g,function(a){return String.fromCharCode(("Z">=a?90:122)>=(a=a.charCodeAt(0)+13)?a:a-26)})),g[c].setAttribute("href","mailto:"+a))}catch(h){}}catch(h){}}();</script>
+</body></html>

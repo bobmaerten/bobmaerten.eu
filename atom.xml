@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Bob Maerten — Blog Perso</title>
+  <subtitle>Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités</subtitle>
+  <id>https://bobmaerten.eu/blog</id>
+  <link href="https://bobmaerten.eu/blog"/>
+  <link href="https://bobmaerten.eu/blog/atom.xml" rel="self"/>
+  <updated>2015-06-26T17:23:10+02:00</updated>
+  <author>
+    <name>Bob Maerten</name>
+  </author>
+  <entry>
+    <title>Comportement des touches Home et End du pavé numérique sous OSX</title>
+    <link rel="alternate" href="https://bobmaerten.eu/blog/comportement-des-touches-home-et-end-du-pave-numerique-sous-osx.html"/>
+    <id>https://bobmaerten.eu/blog/comportement-des-touches-home-et-end-du-pave-numerique-sous-osx.html</id>
+    <published>2015-06-26T17:23:10+02:00</published>
+    <updated>2015-11-08T12:29:14+01:00</updated>
+    <author>
+      <name>Bob Maerten — Blog Perso</name>
+    </author>
+    <content type="html">&lt;p&gt;Le truc qui me rendait fous depuis mon passage sous OSX c&amp;#39;était le comportement des touches &lt;code&gt;Home&lt;/code&gt; et &lt;code&gt;End&lt;/code&gt; du pavé numérique. En tant que développeur, dans mon éditeur de texte, le comportement est d&amp;#39;aller respectivement en début et en fin de ligne. Or dans le navigateur et en particulier dans les &lt;em&gt;textarea&lt;/em&gt; de GitHub, le comportement des touches en question est rattaché au &lt;em&gt;viewport&lt;/em&gt; du navigateur. Si bien que lorsque naturellement j&amp;#39;appuie sur &lt;code&gt;Home&lt;/code&gt; pour revenir en début de ligne, mon navigateur me renvoyait en début de page.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Rage" src="http://media.giphy.com/media/wvQIqJyNBOCjK/giphy.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Mais en fouillant un peu, ce comportement ne semble pas naturel pour pas de gens, qui pour le coup installent un outil appelé &lt;a href="https://pqrs.org/osx/karabiner/"&gt;Karabiner&lt;/a&gt;, permettant de modifier le comportement du clavier en général.&lt;/p&gt;
+
+&lt;p&gt;Cependant le comportement modifié rentrait en conflit avec ma configuration sous iTerm2, ce n&amp;#39;était donc pas mieux.&lt;/p&gt;
+
+&lt;p&gt;Au final, c&amp;#39;est dans &lt;a href="http://www.evansweb.info/2005/03/24/mac-os-x-and-home-end-keys/"&gt;un billet&lt;/a&gt; du &lt;a href="http://www.evansweb.info/"&gt;blog de Jon Evans&lt;/a&gt; datant de plus de 10 que je trouve une solution simple, rapide, parfaitement adaptée et toujours valide&amp;nbsp;! Le site ne semble plus alimenté depuis quelques années mais est toujours dispo, chapeau bas &lt;a href="https://twitter.com/burmasauce"&gt;@burmasauce&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Toujours est-il que la solution est de créer un fichier &lt;code&gt;~/Library/KeyBindings/DefaultKeyBinding.dict&lt;/code&gt; contenant&amp;nbsp;:&lt;/p&gt;
+&lt;pre class="highlight json"&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="err"&gt;/*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;Remap&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;Home&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;/&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;End&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;be&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;correct&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;:-)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;*/&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"\UF729"&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="err"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;"moveToBeginningOfLine:"&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="w"&gt;                   &lt;/span&gt;&lt;span class="err"&gt;/*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;Home&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="err"&gt;*/&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"\UF72B"&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="err"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;"moveToEndOfLine:"&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="w"&gt;                         &lt;/span&gt;&lt;span class="err"&gt;/*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;End&lt;/span&gt;&lt;span class="w"&gt;          &lt;/span&gt;&lt;span class="err"&gt;*/&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"$\UF729"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;"moveToBeginningOfLineAndModifySelection:"&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;/*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;Shift&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;Home&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;*/&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"$\UF72B"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;"moveToEndOfLineAndModifySelection:"&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="w"&gt;       &lt;/span&gt;&lt;span class="err"&gt;/*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;Shift&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;End&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="err"&gt;*/&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;et de redémarrer une nouvelle session afin de retrouver un niveau de santé mentale viable.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Quelques déboires avec le webservice de Prestashop</title>
+    <link rel="alternate" href="https://bobmaerten.eu/blog/quelques-deboires-avec-le-webservice-de-prestashop.html"/>
+    <id>https://bobmaerten.eu/blog/quelques-deboires-avec-le-webservice-de-prestashop.html</id>
+    <published>2015-06-17T21:15:39+02:00</published>
+    <updated>2015-11-08T12:29:14+01:00</updated>
+    <author>
+      <name>Bob Maerten — Blog Perso</name>
+    </author>
+    <content type="html">&lt;p&gt;Tiens il y avait un moment que je n&amp;#39;avais pas écrit par ici, et une fois n&amp;#39;est pas coutume il s&amp;#39;agit d&amp;#39;un billet pour évacuer. C&amp;#39;est Prestashop qui va en prendre pour son grade. Eh oui, Prestashop. Car même si mon activité principale est d&amp;#39;évoluer avec Ruby on Rails, il arrive à l&amp;#39;occasion que l&amp;#39;on doivent explorer d&amp;#39;autres univers.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Dans le cadre du boulot nous devons actuellement interfacer un &lt;em&gt;backoffice&lt;/em&gt; maison avec un &lt;em&gt;front-end&lt;/em&gt; Prestashop. Pour cela, nous avons pris le parti d&amp;#39;utiliser au maximum l&amp;#39;API REST de l&amp;#39;outil. Celle-ci est assez bien fichue car elle permet non seulement d&amp;#39;accéder aux principaux éléments de la boutique (produits, commandes, clients, stocks, etc.) mais également de les modifier. Et c&amp;#39;est sur ces mises à jour que s&amp;#39;est déversé la rage que je tente d&amp;#39;évacuer ici…&lt;/p&gt;
+
+&lt;p&gt;J&amp;#39;avais des erreurs 500 qui se déclenchaient lors de mes tentatives de mise à jours via le webservice, mais rien d&amp;#39;autre. Les retours des appels HTTP se contentaient de préciser d&amp;#39;aller voir les logs, dans lesquels il n&amp;#39;y avait bien évidemment rien, malgré un paramétrage de PHP/Apache plutôt verbeux.&lt;/p&gt;
+
+&lt;p&gt;Il faut savoir que les appels à l&amp;#39;API ne sont pas verbeux par défaut, et il m&amp;#39;a fallu longuement chercher pour comprendre et forcer le système de verbosité du webservice de Prestashop. J&amp;#39;ai clairement perdu les réflexes et les usages des applications PHP, et surtout travaillant avec Rails, on s&amp;#39;habitue vite aux environnements bien isolés et proprement déclarés (merci &lt;code&gt;RAKE_ENV/RAILS_ENV&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Par convention les valeurs permettant de contrôler le comportement de Prestashop sont à modifier dans &lt;code&gt;config/settings.inc.php&lt;/code&gt;. Or pour la verbosité des messages d&amp;#39;erreurs du webservice, il faut forcer dans &lt;code&gt;config/defines.inc.php&lt;/code&gt; la variable &lt;code&gt;_PS_MODE_DEV_&lt;/code&gt; à &lt;strong&gt;true&lt;/strong&gt; par que dans celui dans lequel on s&amp;#39;attend à ce que ça fonctionne, eh bien, ça ne fonctionne pas. Et je passe sur le fait de devoir fonctionner en mode &lt;code&gt;DEV&lt;/code&gt; pour avoir les messages d&amp;#39;erreurs de l&amp;#39;API. Eh donc ça veut dire qu&amp;#39;en prod, tu dois tourner en mode dev aussi&amp;nbsp;?!&lt;/p&gt;
+
+&lt;p&gt;D&amp;#39;autre part, la consigne dans les documentations du webservice stipulent bien que pour la modification d&amp;#39;une ressource il faut d&amp;#39;abord récupérer le contenu XML via le webservice pour le renvoyer selon le même format avec les modifications. Cela ne fonctionnait pas sur certaines ressources (stock, produits, etc.) mais par manque de verbosité des messages il était délicat de comprendre pourquoi.&lt;/p&gt;
+
+&lt;p&gt;Avec des messages plus “clairs” sur la mise à jour du stock comme : “Vous ne pouvez pas mettre à jour le stock disponible quand il dépend du stock”, ce n&amp;#39;est pas forcément beaucoup plus évident, mais en l&amp;#39;occurrence l&amp;#39;idée est ici de modifier non seulement la valeur de quantité mais également la valeur de &lt;code&gt;depends_on_stock&lt;/code&gt;. Je n&amp;#39;aurais jamais trouvé sans l&amp;#39;affichage de ces messages d&amp;#39;erreurs&amp;nbsp;!&lt;/p&gt;
+
+&lt;p&gt;D&amp;#39;autres sont plus mystérieux dans la mesure ou il faut supprimer des lignes pour que la validation de la ressource s&amp;#39;effectue correctement. Ce n&amp;#39;est bien évidemment pas précisé dans la documentation, uniquement sur ces fichus messages d&amp;#39;erreur. Pour la mise à jour d&amp;#39;un produit par exemple&amp;nbsp;: “&lt;em&gt;parameter &lt;code&gt;manufacturer_name&lt;/code&gt; not writable. Please remove this attribute of this XML&lt;/em&gt;”, signifie qu&amp;#39;il faut supprimer le paramètre spécifié dans le XML passé (et &lt;code&gt;quantity&lt;/code&gt; également au passage, message qui n&amp;#39;apparaît qu&amp;#39;à la tentative suivante…). Bref, tout cela va peut-être sans dire pour les habitués du &lt;em&gt;framework&lt;/em&gt;, mais ça va tout de même mieux en le disant.&lt;/p&gt;
+
+&lt;p&gt;Déjà que j&amp;#39;étais pas fan de XML, mais là, devoir le triturer pour pouvoir mettre à jour des données, c&amp;#39;était le pompon. Heureusement qu&amp;#39;il y a des &lt;em&gt;libs&lt;/em&gt; qui font ça à peu près bien, mais tout ça reste du XML et quelque part, pas franchement naturel à utiliser.&lt;/p&gt;
+
+&lt;p&gt;Allez, on va dire que c&amp;#39;était un mauvais moment à passer. Jusqu&amp;#39;à la prochaine mise à jour de l&amp;#39;API… 😬&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Passage de boot2docker à docker-machine</title>
+    <link rel="alternate" href="https://bobmaerten.eu/blog/passage-de-boot2docker-a-docker-machine.html"/>
+    <id>https://bobmaerten.eu/blog/passage-de-boot2docker-a-docker-machine.html</id>
+    <published>2015-05-17T13:12:14+02:00</published>
+    <updated>2015-11-08T12:29:14+01:00</updated>
+    <author>
+      <name>Bob Maerten — Blog Perso</name>
+    </author>
+    <content type="html">&lt;p&gt;Entre mon nouveau job, mon passage à OSX pour le boulot, et la défaillance de mon portable sous Linux, j&amp;#39;ai eu peu de temps à consacrer à l&amp;#39;actualité de Docker. Cependant ça bouge pas mal ces derniers temps avec des projets comme &lt;a href="https://docs.docker.com/machine/"&gt;machine&lt;/a&gt;, &lt;a href="https://docs.docker.com/compose/"&gt;compose&lt;/a&gt; et &lt;a href="https://docs.docker.com/swarm/"&gt;swarm&lt;/a&gt; et j&amp;#39;ai récemment essayé de rattraper un peu le retard. Dans ce billet je vais exposer ma découverte de &lt;code&gt;docker-machine&lt;/code&gt; qui m&amp;#39;a permis de retrouver l&amp;#39;usage courant que j&amp;#39;avais de docker sous Linux.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2&gt;Boot2Docker&lt;/h2&gt;
+
+&lt;p&gt;Comme un bon OSXien bien élevé au grain, j&amp;#39;ai tout d&amp;#39;abord suivi les conseils du net en installant &lt;a href="https://github.com/boot2docker/boot2docker"&gt;boot2docker&lt;/a&gt; pour faire fonctionner docker sous forme d&amp;#39;une VM Linux sous VirtualBox. La procédure est très simple&amp;nbsp;:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ brew cask install virtualbox
+$ brew install boot2docker
+$ boot2docker up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Les recettes installent les dernières versions des logiciels requis. &lt;code&gt;boot2docker&lt;/code&gt; est au final un executable permettant de lancer/stopper/mettre à jour la VM en suivant les mises à jour de docker. Jusque là tout va bien, on parvient même à oublier la présence de cette VM et il m&amp;#39;est arrivé de chercher la cause de l&amp;#39;absence d&amp;#39;un service web en appelant &lt;code&gt;http://localhost:&amp;lt;service_port&amp;gt;&lt;/code&gt; au lieu de &lt;code&gt;http://&amp;lt;boot2docker_ip&amp;gt;:&amp;lt;service_port&amp;gt;&lt;/code&gt;&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Il existe certes quelques soucis de performances inhérents à l&amp;#39;usage de VirtualBox qui n&amp;#39;est pas par définition très véloce sur les systèmes de fichiers. Celà dit pour un usage en développent ce n&amp;#39;est pas très ennuyeux, et il existe des &lt;a href="http://blog.blackfire.io/how-we-use-docker.html"&gt;solutions de contournement&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Docker Machine&lt;/h2&gt;
+
+&lt;p&gt;Dernièrement, le sous-projet &lt;code&gt;machine&lt;/code&gt; est arrivé chez Docker permettant de faire la même chose mais avec la possibilité d&amp;#39;utiliser différents &lt;em&gt;drivers&lt;/em&gt;. En fonction du &lt;em&gt;driver&lt;/em&gt; utilisé &lt;code&gt;machine&lt;/code&gt; va installer un système d&amp;#39;exploitation permettant d&amp;#39;utiliser docker sur la cible indiquée. Cette cible pouvant être un fournisseur de ressources sur le &lt;em&gt;cloud&lt;/em&gt; ou votre propre installation VirtualBox locale.&lt;/p&gt;
+
+&lt;p&gt;L&amp;#39;intérêt évident ici est de permettre d&amp;#39;utiliser les mêmes commandes et d&amp;#39;acquérir les mêmes habitudes quel que soit l&amp;#39;environnement cible que l&amp;#39;on manipule (dev, staging, prod) et quelque soit le service utilisé (VirtualBox, service Cloud, voire en développant son propre &lt;em&gt;driver&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;Pour répliquer l&amp;#39;environnement boot2docker, il suffit donc d&amp;#39;installer &lt;code&gt;docker-machine&lt;/code&gt; ou de suivre les &lt;a href="https://docs.docker.com/machine/#installation"&gt;consignes d&amp;#39;installation&lt;/a&gt; du site officiel. Dès lors, &lt;code&gt;machine&lt;/code&gt; va télécharger au besoin la dernière version de l&amp;#39;iso de &lt;em&gt;boot2docker&lt;/em&gt; et déployer une nouvelle VM sous VirtualBox, exactement de la même manière que le processus “natif” de boot2docker.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ brew install docker-machine
+$ docker-machine create --driver virtualbox dev
+INFO[0000] Creating SSH key...
+INFO[0000] No default boot2docker iso found locally, downloading the latest release...
+INFO[0001] Downloading latest boot2docker release to /Users/bob/.docker/machine/cache/boot2docker.iso...
+INFO[0044] Creating VirtualBox VM...
+INFO[0051] Starting VirtualBox VM...
+INFO[0051] Waiting for VM to start...
+INFO[0103] 'dev' has been created and is now the active machine.
+INFO[0103] To point your Docker client at it, run this in your shell: eval '$(docker-machine env dev)'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Remarquez la dernière ligne qui est assez importante. Lancer &lt;code&gt;eval &amp;#39;$(docker-machine env dev)&amp;#39;&lt;/code&gt; permet en effet de paramétrer le &lt;em&gt;shell&lt;/em&gt; courant pour permettre d&amp;#39;utiliser l&amp;#39;environnement choisi avec les outils docker.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ eval '$(docker-machine env dev)'
+
+$ docker info
+Containers: 0
+Images: 0
+Storage Driver: aufs
+Root Dir: /mnt/sda1/var/lib/docker/aufs
+Backing Filesystem: extfs
+Dirs: 0
+Dirperm1 Supported: true
+Execution Driver: native-0.2
+Kernel Version: 4.0.3-boot2docker
+Operating System: Boot2Docker 1.6.2 (TCL 5.4); master : 4534e65 - Wed May 13 21:24:28 UTC 2015
+CPUs: 8
+Total Memory: 997.3 MiB
+Name: dev
+[...]
+Labels:
+ provider=virtualbox
+
+$ docker run busybox echo Hello World
+Unable to find image 'busybox:latest' locally
+latest: Pulling from busybox
+cf2616975b4a: Pull complete
+6ce2e90b0bc7: Pull complete
+8c2e06607696: Already exists
+busybox:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+Digest: sha256:38a203e1986cf79639cfb9b2e1d6e773de84002feea2d4eb006b52004ee8502d
+Status: Downloaded newer image for busybox:latest
+Hello World
+
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND              CREATED             STATUS                      PORTS               NAMES
+d289f3082caf        busybox:latest      'echo Hello World'   11 seconds ago      Exited (0) 11 seconds ago                       drunk_pare
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Et comme je le disais plus haut, le &lt;em&gt;workflow&lt;/em&gt; est exactement le même en utilisant un autre &lt;em&gt;driver&lt;/em&gt;&amp;nbsp;:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker-machine create --driver digitalocean --digitalocean-access-token=$MY_ACCESS_TOKEN docker-prod
+INFO[0000] Creating SSH key...
+INFO[0001] Creating Digital Ocean droplet...
+INFO[0201] 'docker-prod' has been created and is now the active machine.
+INFO[0201] To point your Docker client at it, run this in your shell: eval '$(docker-machine env docker-prod)'
+
+$ eval '$(docker-machine env docker-prod)'
+
+$ docker run busybox echo Hello World
+Unable to find image 'busybox:latest' locally
+latest: Pulling from busybox
+cf2616975b4a: Pull complete
+6ce2e90b0bc7: Pull complete
+8c2e06607696: Already exists
+busybox:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+Digest: sha256:38a203e1986cf79639cfb9b2e1d6e773de84002feea2d4eb006b52004ee8502d
+Status: Downloaded newer image for busybox:latest
+Hello World
+
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND              CREATED             STATUS                     PORTS               NAMES
+7b8b283fceaa        busybox:latest      'echo Hello World'   11 seconds ago      Exited (0) 9 seconds ago                       gloomy_bohr
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Et ces deux environnements sont désormais accessibles en permuttant d&amp;#39;une cible à l&amp;#39;autre avec la commande &lt;code&gt;eval&lt;/code&gt; indiquée au démarrage d&amp;#39;une machine&amp;nbsp;:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker-machine ls
+NAME          ACTIVE   DRIVER         STATE     URL                         SWARM
+dev                    virtualbox     Running   tcp://192.168.99.102:2376
+docker-prod   *        digitalocean   Running   tcp://45.55.254.233:2376
+
+$ eval '$(docker-machine env dev)'
+
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND              CREATED             STATUS                      PORTS               NAMES
+d289f3082caf        busybox:latest      'echo Hello World'   2 minutes ago       Exited (0) 2 minutes ago                        drunk_pare
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Accéder aux containers depuis l&amp;#39;hôte&lt;/h2&gt;
+
+&lt;p&gt;Il y avait encore quelque chose qui me gênait dans l&amp;#39;usage d&amp;#39;une VM pour Docker en local, c&amp;#39;est l&amp;#39;accès aux containers directement depuis ma machine. Sous linux, Docker est exposé sur une interface routée par défaut. Avec une VM sous VirtualBox, il faut déclarer la route manuellement&amp;nbsp;:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ /usr/sbin/scutil -w State:/Network/Interface/vboxnet0/IPv4 -t 0
+
+$ sudo /sbin/route -n add -net 172.17.0.0 -netmask 255.255.0.0 -gateway $(docker-machine ip)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On peut ainsi créer un &lt;em&gt;container&lt;/em&gt; et le &lt;em&gt;ping&lt;/em&gt;er depuis le système local.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker run --name=redis -d redis
+
+$ ping -c 3 $(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $(docker ps -ql))
+PING 172.17.0.1 (172.17.0.1): 56 data bytes
+64 bytes from 172.17.0.1: icmp_seq=0 ttl=63 time=3.164 ms
+64 bytes from 172.17.0.1: icmp_seq=1 ttl=63 time=3.985 ms
+64 bytes from 172.17.0.1: icmp_seq=2 ttl=63 time=9.379 ms
+
+--- 172.17.0.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 3.164/5.509/9.379/2.757 ms
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Cette manipulation ne résistant pas au reboot, sous OSX on peut ajouter un &lt;code&gt;plist&lt;/code&gt; pour remettre la route au démarrage de la machine. Il faut toutefois faire attention à quel &lt;em&gt;vboxnet&lt;/em&gt; est rattaché la VM et quelle est l&amp;#39;ip attribuée par VirtualBox&amp;nbsp;:&lt;/p&gt;
+
+&lt;p&gt;Voici le plist (&lt;code&gt;/Library/LaunchDaemons/com.docker.route.plist&lt;/code&gt;) pour ma VM sur le vboxnet0 et d&amp;#39;adresse IP 192.168.99.100&lt;/p&gt;
+&lt;pre class="highlight xml"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;?xml version='1.0' encoding='UTF-8'?&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;&amp;lt;!DOCTYPE plist PUBLIC '-//Apple//DTD PLIST 1.0//EN' 'http://www.apple.com/DTDs/PropertyList-1.0.dtd'&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;plist&lt;/span&gt; &lt;span class="na"&gt;version=&lt;/span&gt;&lt;span class="s"&gt;'1.0'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;dict&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;Label&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;com.docker.route&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;ProgramArguments&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;array&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;bash&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;-c&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+    &lt;span class="c"&gt;&amp;lt;!-- You need to adapt the vboxnet0 to the interface that suits your setup, use ifconfig to find it --&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;/usr/sbin/scutil -w State:/Network/Interface/vboxnet0/IPv4 -t 0;sudo /sbin/route -n add -net 172.17.0.0 -netmask 255.255.0.0 -gateway 192.168.99.100&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/array&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;KeepAlive&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;RunAtLoad&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;LaunchOnlyOnce&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/dict&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/plist&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Bonus: accéder aux containers par un nom DNS&lt;/h2&gt;
+
+&lt;p&gt;Le top du top serait d&amp;#39;avoir un système qui permet d&amp;#39;accéder aux conteneurs créés par leur nom plutôt que par un IP ou une redirection de port. On trouve pas mal de projets liés à cette problèmatique sur github, mais celui qui a retenu mon attention est &lt;a href="https://github.com/tonistiigi/dnsdock"&gt;dnsdock&lt;/a&gt;. Il s&amp;#39;appuie sur les recherches d&amp;rsquo;&lt;a href="http://www.asbjornenge.com/wwc/vagrant_skydocking.html"&gt;autres&lt;/a&gt; &lt;a href="https://github.com/tonistiigi/dnsdock"&gt;projet&lt;/a&gt;, mais il a pour lui la simplicité que je recherchais à la fois dans son installation et son utilisation.&lt;/p&gt;
+
+&lt;p&gt;Dans un premier temps il suffit de lancer un conteneur qui va repérer la création/suppression d&amp;#39;autre conteneur et enregistrer leurs nom dans un service DNS&amp;nbsp;:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker run -d -v /var/run/docker.sock:/var/run/docker.sock --name dnsdock --restart=always -p 172.17.42.1:53:53/udp tonistiigi/dnsdock
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notez l&amp;#39;utilisation &lt;code&gt;--restart=always&lt;/code&gt; permettant de recharger le container au redémarrage de la VM.&lt;/p&gt;
+
+&lt;p&gt;Ensuite, il suffit d&amp;#39;ajouter un &lt;code&gt;resolver&lt;/code&gt; à OSX pour résoudre les noms des conteneurs avec le suffixe &lt;code&gt;.docker&lt;/code&gt; (voir la documentation de dnsdock pour un paramétrage différent).&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ sudo mkdir -p /etc/resolver ; echo 'nameserver 172.17.42.1' | sudo tee /etc/resolver/docker
+
+$ ping redis.docker
+PING redis.docker (172.17.0.2): 56 data bytes
+64 bytes from 172.17.0.2: icmp_seq=0 ttl=63 time=2.256 ms
+64 bytes from 172.17.0.2: icmp_seq=1 ttl=63 time=5.212 ms
+64 bytes from 172.17.0.2: icmp_seq=2 ttl=63 time=2.228 ms
+
+--- redis.docker ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 2.228/3.232/5.212/1.400 ms
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A priori il est possible de faire la même chose sous Linux en ajoutant l&amp;#39;adresse de &lt;em&gt;bridge&lt;/em&gt; au fichier &lt;code&gt;/etc/resolv.conf&lt;/code&gt; en tant que &lt;em&gt;resolver&lt;/em&gt;, mais n&amp;#39;en ayant plus sous la main je ne peux donner de mode opératoire. L&amp;#39;utilisation d&amp;#39;une autre image comme &lt;a href="https://github.com/iverberk/docker-spy"&gt;docker-spy&lt;/a&gt; pourrait être opportune également.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Voilà, j&amp;#39;ai désormais de quoi faire tourner des conteneurs Docker de manière pas trop douloureuse sous OSX, mais entre boot2docker et docker-machine alors, comment choisir&amp;nbsp;? Les moins de 40 ans ne comprendront surement pas l&amp;#39;allusion mais voici ma petite recette pour choisir.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Pub FLUOGUM" src="http://i.imgur.com/QkkmmIs.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;À ma gauche un &lt;em&gt;host&lt;/em&gt; qui tourne sous boot2docker.&lt;/p&gt;
+
+&lt;p&gt;À ma droite mon &lt;em&gt;host&lt;/em&gt; qui tourne sous docker-machine.&lt;/p&gt;
+
+&lt;p&gt;A priori c&amp;#39;est la même chose, mais ce n&amp;#39;est pas la même chose !&lt;/p&gt;
+
+&lt;p&gt;Car dans mon host, y&amp;#39;a du docker-machine,&lt;/p&gt;
+
+&lt;p&gt;et ♫ “docker-machine, c&amp;#39;est bon pour &lt;a href="https://twitter.com/icecrime/status/599928881953443840"&gt;créer et switcher d&amp;#39;environnement&lt;/a&gt;&amp;nbsp;!”&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Retour (virtuel) des commentaires</title>
+    <link rel="alternate" href="https://bobmaerten.eu/blog/retour-virtuel-des-commentaires.html"/>
+    <id>https://bobmaerten.eu/blog/retour-virtuel-des-commentaires.html</id>
+    <published>2015-05-10T18:09:02+02:00</published>
+    <updated>2015-11-08T12:29:14+01:00</updated>
+    <author>
+      <name>Bob Maerten — Blog Perso</name>
+    </author>
+    <content type="html">&lt;p&gt;Cela faisait un petit moment que je voulais réintéger les commentaires sur ce blog. Étant hébergé sur GitHub Pages et donc purement statique, la solution est forcément externe. Je ne souhaitais pas pour autant utiliser le service évident pour ce genre de chose (disqus).&lt;/p&gt;
+
+&lt;p&gt;Non pas que j&amp;#39;eusse de quelconques griefs envers ce service mais dans la continuité de proposer du contenu relativement maitrisé (un site statique), je souhaiter également maitriser cette partie commentaires. J&amp;#39;avais fait quelques essais il y quelques mois avec une appli Rails appelée &lt;a href="https://github.com/phusion/juvia"&gt;Juvia&lt;/a&gt; produite par &lt;a href="http://www.phusion.nl"&gt;Phusion&lt;/a&gt; qui manifestment n&amp;#39;est plus maintenue, mais qui a poutant été mis à jour entre temps en 4.2.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Je me suis dit que ce serait une bonne occasion de tester la mise en place de cette application dans un container Docker. De plus cela me permettrait d&amp;#39;associer la veille technologique nécessaire à cette mise en place avec mes nouvelles activités professionnelles (Rails + Sysadm + Hébergement).&lt;/p&gt;
+
+&lt;h2&gt;Construction de l&amp;#39;image&lt;/h2&gt;
+
+&lt;p&gt;Les gens qui gravitent autour de docker ne chôment pas. Des images officielles pour faire tourner des scripts &lt;a href="https://registry.hub.docker.com/_/ruby/"&gt;ruby&lt;/a&gt; et même des applications &lt;a href="https://registry.hub.docker.com/_/rails/"&gt;rails&lt;/a&gt; sont disponibles. En regardant le Dockerfile de l&amp;#39;image rails, on remarque qu&amp;#39;elle surcharge celle de ruby2.2, qui elle même s&amp;#39;appuie sur une succession d&amp;#39;images dérivées de debian:jessie. Ce qui signifie qu&amp;#39;il est toujours possible d&amp;#39;ajouter de nouveaux packages en cas d&amp;#39;usage d&amp;#39;une gem qui nécessite une compilation particulière.&lt;/p&gt;
+
+&lt;p&gt;C&amp;#39;est ce qui s&amp;#39;est produit lors de l&amp;#39;essai de contruction de l&amp;#39;image de l&amp;#39;application de gestion des commentaires dont il est question ici. Le &lt;code&gt;Dockerfile&lt;/code&gt; est très simple comme le recommande le README de l&amp;#39;image, mais la construction échoue&amp;nbsp;:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ cat Dockerfile
+FROM rails:onbuild
+
+$ docker build -t juvia_image .
+Sending build context to Docker daemon 160.5 MB
+Sending build context to Docker daemon
+Step 0 : FROM rails:onbuild
+# Executing 4 build triggers
+Trigger 0, COPY Gemfile /usr/src/app/
+Step 0 : COPY Gemfile /usr/src/app/
+ ---&amp;gt; Using cache
+Trigger 1, COPY Gemfile.lock /usr/src/app/
+Step 0 : COPY Gemfile.lock /usr/src/app/
+ ---&amp;gt; Using cache
+Trigger 2, RUN bundle install
+Step 0 : RUN bundle install
+ ---&amp;gt; Running in f004b22629a9
+Don't run Bundler as root. Bundler can ask for sudo if it is needed, and
+installing your bundle as root will break this application for all non-root
+users on this machine.
+Fetching gem metadata from https://rubygems.org/.........
+Fetching version metadata from https://rubygems.org/...
+Fetching dependency metadata from https://rubygems.org/..
+Using rake 10.4.2
+Installing i18n 0.7.0
+Installing json 1.8.2
+...
+Installing capybara-screenshot 1.0.9
+
+Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+    /usr/local/bin/ruby -r ./siteconf20150510-5-1wvt9so.rb extconf.rb
+Command 'qmake -spec linux-g++ ' not available
+
+Makefile not found
+
+Gem files will remain installed in /usr/local/bundle/gems/capybara-webkit-1.3.1 for inspection.
+Results logged to /usr/local/bundle/extensions/x86_64-linux/2.2.0-static/capybara-webkit-1.3.1/gem_make.out
+An error occurred while installing capybara-webkit (1.3.1), and Bundler cannot
+continue.
+Make sure that `gem install capybara-webkit -v '1.3.1'` succeeds before
+bundling.
+INFO[0154] The command [/bin/sh -c bundle install] returned a non-zero code: 5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Comme on le constate, il manque l&amp;#39;outil &lt;code&gt;qmake&lt;/code&gt; pour que capybara-webkit puisse se compiler. Il faudrait ajouter l&amp;#39;installation du paquet en question dans le Dockerfile. Mais cette gem est dans les groupes :development et :test, qui ne sont pas utiles pour le fonctionnement en production. Pour éviter leur installation, il faudrait pouvoir préciser &lt;code&gt;--without test development&lt;/code&gt; à la commande bundle. Dans tous les cas, il faut réécrire le Dockerfile et en s&amp;#39;inspirant de celui de l&amp;#39;image rails, on arrive à quelque chose comme ça&amp;nbsp;:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ cat Dockerfile
+FROM ruby:2.2.2
+RUN apt-get update \
+        &amp;amp;&amp;amp; apt-get install sqlite3 nodejs --no-install-recommends -y qt5-default libqt5webkit5-dev \
+        &amp;amp;&amp;amp; apt-get clean \
+        &amp;amp;&amp;amp; rm -rf /var/lib/apt/lists/*
+
+RUN bundle config --global frozen 1
+
+ENV RAILS_ENV production
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY Gemfile /usr/src/app/Gemfile
+COPY Gemfile.lock /usr/src/app/Gemfile.lock
+RUN bundle install --without='development test postgres mysql' --path=help
+
+COPY . /usr/src/app
+
+RUN bundle exec rake db:create \
+ &amp;amp;&amp;amp; bundle exec rake db:schema:load \
+ &amp;amp;&amp;amp; bundle exec rake assets:precompile RAILS_GROUPS=assets
+
+EXPOSE 3000
+CMD ['rails', 'server', '-b', '0.0.0.0']
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Je passe les petites corrections pour avoir les bonnes valeurs sur les fichiers sensibles de Rails (SECREY_KEY_BASE en production, des valeurs correctes dans database.yml, etc.). Au final l&amp;#39;image se construit et on peut valider le fonctionnement.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker run --detach --name juvia_app -e SECRET_KEY_BASE='abcde' juvia_image
+3489371959f964b3b7d85e2bbda19d294a2c841b0a987261d68794c21bb4d59b
+
+$ docker logs juvia_app
+[2015-05-10 17:18:12] INFO  WEBrick 1.3.1
+[2015-05-10 17:18:12] INFO  ruby 2.2.2 (2015-04-13) [x86_64-linux]
+[2015-05-10 17:18:12] INFO  WEBrick::HTTPServer#start: pid=1 port=3000
+
+$ curl -I $(boot2docker ip):3000
+HTTP/1.1 302 Found
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Location: http://192.168.59.103:3000/admin/dashboard/new_admin
+Content-Type: text/html; charset=utf-8
+Cache-Control: no-cache
+X-Request-Id: ba8299a1-d93d-4a14-93c1-d573e2c31178
+X-Runtime: 0.002761
+Server: WEBrick/1.3.1 (Ruby/2.2.2/2015-04-13)
+Date: Sun, 10 May 2015 17:21:14 GMT
+Content-Length: 0
+Connection: Keep-Alive
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Oui, vous constatez l&amp;#39;utilisation de &lt;a href="http://boot2docker.io"&gt;boot2docker&lt;/a&gt;. Depuis mon passage sur OSX, mon portable sous linux a rendu l&amp;#39;âme (carte mère grillé), donc je me suis rabattu sur un environnement compatible, malgré &lt;a href="https://twitter.com/bobmaerten/status/597347960058454016"&gt;quelques surprises&lt;/a&gt;. Au fond c&amp;#39;est assez transparent, une fois la &lt;a href="http://blog.blackfire.io/how-we-use-docker.html"&gt;configuration correctement installée&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Mise en place du conteneur&lt;/h2&gt;
+
+&lt;p&gt;Voila, nous avons une image plus ou moins fonctionelle, reste plus qu&amp;#39;à la déployer et assurer la persistance des données.
+Pour le déploiement, j&amp;#39;ai à ma disposition une petite instance d&amp;#39;un serveur Ubuntu chez &lt;a href="https://www.digitalocean.com/?refcode=dd83518f68db"&gt;DigitalOcean&lt;/a&gt; sur lequel un &lt;em&gt;daemon&lt;/em&gt; docker assure le travail, ainsi qu&amp;#39;un &lt;a href="https://github.com/jwilder/nginx-proxy"&gt;conteneur particulier&lt;/a&gt; qui “écoute” les événements du service et qui met en place un reverse-proxy sur le nom du VIRTUAL_HOST passé en variable d&amp;#39;environnement du conteneur.&lt;/p&gt;
+
+&lt;p&gt;Pour la persitance des données on peut soit monter un dossier de l&amp;#39;hôte lors du démarrage du conteneur avec l&amp;#39;option &lt;code&gt;-v&lt;/code&gt; ou alors créer des &lt;em&gt;data-volumes&lt;/em&gt; et utiliser l&amp;#39;option &lt;code&gt;--volumes-from&lt;/code&gt;. Pour des questions de simplicité et puisque je maitrise mon contexte j&amp;#39;utilise la première solution, mais docker préconise plutôt l&amp;#39;usage de conteneur de données pour des raisons de portabilité.&lt;/p&gt;
+
+&lt;p&gt;Voici donc la ligne de commande permettant de lancer le conteneur&amp;nbsp;:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;docker run --name comments \
+       -e VIRTUAL_HOST='comments.bobmaerten.eu' \
+       -e SECRET_KEY_BASE='$(rake secret)' \
+       -v /root/containers/comments/db:/usr/src/app/db \
+       -v /root/containers/comments/log:/usr/src/app/log \
+       --restart=always \
+       --detach juvia_app
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Résultats&lt;/h2&gt;
+
+&lt;p&gt;Si tout vas bien, lors du déploiement de cette version du site avec ce billet, le layout devrait afficher la liste des commentaires des billets ainsi qu&amp;#39;un formulaire pour en laisser. Ce sera l&amp;#39;occasion de tester l&amp;#39;application en réel et de voir les améliorations à apporter même si j&amp;#39;ai déjà quelques idées (localisation, ajout de notifications, etc.).&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Mon nouveau travail, bilan après un mois</title>
+    <link rel="alternate" href="https://bobmaerten.eu/blog/mon-nouveau-travail-bilan-apres-un-mois.html"/>
+    <id>https://bobmaerten.eu/blog/mon-nouveau-travail-bilan-apres-un-mois.html</id>
+    <published>2015-04-25T15:25:48+02:00</published>
+    <updated>2015-11-08T12:29:14+01:00</updated>
+    <author>
+      <name>Bob Maerten — Blog Perso</name>
+    </author>
+    <content type="html">&lt;p&gt;Pour être tout à fait honnête, j&amp;#39;avais prévu de faire un point une semaine, 15j et 1 mois après mon changement de travail, mais force est de constater que je suis complètement largué sur le timing.&lt;/p&gt;
+
+&lt;p&gt;Il faut dire que le changement fût assez rude. Je n&amp;#39;aurais pas cru que de revenir à mes premières amours de développeur serait aussi difficile&amp;nbsp;! Les journées, voire les semaines passent à une vitesse&amp;hellip; Bref, ce n&amp;#39;est pas simple, mais ça revient un peu à la fois, et j&amp;#39;apprends plein de choses en plus de découvrir ce nouveau domaine assez méconnu pour moi qu&amp;#39;est le e-commerce.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Sans entrer dans les détails, je travaille pour un client qui utilise notre solution &lt;em&gt;adhoc&lt;/em&gt; de site de e-commerce, associé à un back-office de gestion commerciale, le tout développé en &lt;a href="http://rubyonrails.org/"&gt;Ruby on Rails&lt;/a&gt; depuis quelques années et quelques versions majeures de &lt;em&gt;RoR&lt;/em&gt;, donc qui a beaucoup évolué depuis. Même sans prendre en compte mon double &lt;em&gt;noobiisme&lt;/em&gt; de sysadmin en rémission et du domaine concerné, rentrer dans le concept de l&amp;#39;application n&amp;#39;est pas simple. Mon boss a eu la bonne idée de me coller sur la couverture des tests. C&amp;#39;est un très bon moyen de comprendre ce qu&amp;#39;est censé faire l&amp;#39;appli, tout en me replongeant dans la logique des tests unitaires/fonctionnels. C&amp;#39;est également un excellent moyen d&amp;#39;augmenter la confiance dans les modifications que je peux apporter.&lt;/p&gt;
+
+&lt;p&gt;J&amp;#39;apprécie également le flux de travail mis en place. Répartis à quatres coins de mon écran, un éditeur de texte, plusieurs &lt;em&gt;shells&lt;/em&gt; au sein d&amp;#39;une session &lt;a href="http://tmux.sourceforge.net/"&gt;tmux&lt;/a&gt; faisant tourner la &lt;em&gt;stack&lt;/em&gt; de l&amp;#39;application, un &lt;a href="https://github.com/guard/guard"&gt;guard&lt;/a&gt; pour valider les tests associés au fichier que je suis en train de modifier, une console pour accéder aux données, l&amp;#39;appli github pour &lt;em&gt;commit&lt;/em&gt;er et &lt;em&gt;push&lt;/em&gt;er mes changements. Une fois le travail poussé sur github, les hooks se mettent en marche et déclenchent un test global chez &lt;a href="https://codeship.com"&gt;codeship&lt;/a&gt; ainsi qu&amp;#39;une analyse du code chez &lt;a href="https://codeclimate.com"&gt;codeclimate&lt;/a&gt; et je suis notifié du résultat dans &lt;a href="https://slack.com"&gt;slack&lt;/a&gt;.  Ces actions s&amp;#39;exécutent également lorsque qu&amp;#39;on fait un &lt;em&gt;Pull Request&lt;/em&gt; et ont la bonne idée de s&amp;#39;insérer directement dans les infos de github, ce qui permet d&amp;#39;avoir une confiance accrue dans la fusion de branche, et ça franchement c&amp;#39;est top.&lt;/p&gt;
+
+&lt;p&gt;En ce qui concerne l&amp;#39;organisation du travail, j&amp;#39;avais naturellement des appréhensions vis à vis de ma relation au télétravail, mais finalement elles se sont dissipées assez rapidement. Des &lt;em&gt;calls&lt;/em&gt; (&lt;a href="http://www.mumble.com"&gt;mumble&lt;/a&gt;/&lt;a href="https://join.me"&gt;join.me&lt;/a&gt;) réguliers avec mon boss et les clients (y compris quand je bloque sur un point), un &lt;a href="https://slack.com"&gt;slack&lt;/a&gt; pour la communication interne, et un compte-rendu du travail effectué en fin de journée que j&amp;#39;organise un peu comme je l&amp;#39;entends du moment que le travail est fait. Et ça, ça change tout&amp;nbsp;! Aller poster un courrier ou chercher un recommandé à la poste, prendre une 1/2h pour aller chez le coiffeur ou à un rendez-vous médical, effectuer une démarche administrative pendant les horaires de bureaux, tout cela est possible et accessible.&lt;/p&gt;
+
+&lt;p&gt;Donc me voilà, presque un mois après cette reconversion assez inatendue, de retour derrière un éditeur de texte pour transformer des specifications en services concrets, utiles et utilisés. Rien que cela est un énorme gain qui, certes me prends du temps et de l&amp;#39;énergie, mais qui m&amp;#39;apporte la satisfaction professionnelle qui me manquait tant. L&amp;#39;effort intellectuel est parfois difficile, tant au niveau du retard à rattraper sur les évolutions des outils, des concepts et parfois aussi de l&amp;#39;algorithmique que je n&amp;#39;ai que peu pratiquée ces dernières années, mais en vaut largement la chandelle.&lt;/p&gt;
+
+&lt;p&gt;J&amp;#39;essairai de faire d&amp;#39;autres points prochainement, et je l&amp;#39;espère des billets un peu plus techniques et concrèts quand je serai plus à l&amp;#39;aise. En attendant, je retourne m&amp;#39;imprégner de cette &lt;em&gt;codebase&lt;/em&gt; que je ne désespère pas d&amp;#39;appréhender globalement tantôt.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Premiers pas avec OSX Yosemite</title>
+    <link rel="alternate" href="https://bobmaerten.eu/blog/premiers-pas-avec-osx-yosemite.html"/>
+    <id>https://bobmaerten.eu/blog/premiers-pas-avec-osx-yosemite.html</id>
+    <published>2015-03-15T10:11:00+01:00</published>
+    <updated>2015-11-08T12:29:14+01:00</updated>
+    <author>
+      <name>Bob Maerten — Blog Perso</name>
+    </author>
+    <content type="html">&lt;p&gt;Comme je le disais dans le &lt;a href="/blog/2015/preparation-au-changement"&gt;précédent billet&lt;/a&gt;, je vais dès le mois prochain changer d&amp;#39;environnement professionnel, mais également d&amp;#39;environnement logiciel et matériel dans la mesure où je vais passer sous OSX Yosemite.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;La réception du matos ce weekend m&amp;#39;a permis de remettre les mains dans l&amp;#39;environnement à la pomme auquel je n&amp;#39;avais pas vraiment touché depuis une formation à OSX 10.6 il y a quelques années, laissée sans suite.&lt;/p&gt;
+
+&lt;p&gt;Si vous suivez mon activité en ligne vous savez surement que je suis un utilisateur de GNU/Linux (et Debian/Ubuntu en particulier) depuis trèèèèèès longtemps, mais j&amp;#39;ai été agréablement surpris des similitudes entre les environnements. Le système de dock par exemple se comporte quasiment comme celui de Ubuntu. Les paramètres systèmes sont organisés de la même façon. Oh, je me doute bien de qui a pompé sur qui, pas de souci, mais au final je m&amp;#39;y retrouve plutôt facilement pour le moment.&lt;/p&gt;
+
+&lt;p&gt;Après, il y a également le terrain bien connu du terminal et de la ligne de commande. Ici, même combat, un bash de base quand on lance le terminal, mais le processus d&amp;#39;installation d&amp;#39;un zsh ou même d&amp;#39;un &lt;a href="http://ohmyz.sh"&gt;oh-my-zsh&lt;/a&gt; est identique (on est sur une base BSD) et je retrouve assez vite mon environnement habituel.&lt;/p&gt;
+
+&lt;p&gt;Pour l&amp;#39;installation des applications, pas de déroute non plus car avec &lt;a href="http://brew.sh"&gt;Homebrew&lt;/a&gt; là non plus rien de perturbant. Il y a même une recette pour permettre d&amp;#39;installer des logiciels packagés, et là c&amp;#39;est vraiment le bonheur (même si l&amp;#39;installation d&amp;#39;un &lt;code&gt;.dmg&lt;/code&gt; est vraiment triviale).&lt;/p&gt;
+
+&lt;p&gt;Il y a même par défaut un système bien plus léger et tout aussi pratique que le Dash de Ubuntu pour rechercher et lancer facilement des commandes ou des logiciels.&lt;/p&gt;
+
+&lt;p&gt;Enfin, pour les quelques réglages un peu spécifiques, comme virer ce f*ck*ng &lt;em&gt;shime&lt;/em&gt; au démarrage ou pour accélérer la répétition du clavier, il faut fouiller un peu sur le net et on trouve rapidement une solution soit à l&amp;#39;aide d&amp;#39;outils spécifiques, soit à l&amp;#39;aide de commandes systèmes en terminal.&lt;/p&gt;
+
+&lt;p&gt;Voilà, pas trop dérouté par cette première approche, hormis peut-être le &lt;em&gt;layout&lt;/em&gt; du clavier qui va me poser quelques problèmes un moment (surtout que je passe souvent d&amp;#39;un clavier à un autre, je tape ce texte sur mon portable PC) et de me resituer dans le contexte d&amp;#39;un débutant sur ce système BSD que je connais peu. Mais cette fois-ci, je vais essayer de noter et commenter le plus possible ce que je découvre, le partager ici ou sur le &lt;a href="https://github.com/bobmaerten/TIL.git"&gt;dépôt TIL (Today I Learned)&lt;/a&gt; que j&amp;#39;ai récemment crée pour ce genre de choses.&lt;/p&gt;
+</content>
+  </entry>
+</feed>

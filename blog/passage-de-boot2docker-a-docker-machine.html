@@ -1,0 +1,128 @@
+<!DOCTYPE html><html><head><title>Passage de boot2docker à docker-machine</title><meta charset=utf-8 /><meta content="width=device-width, initial-scale=1" name=viewport /><meta content="Bob Maerten" property="dc:creator"/><meta content="text/html" property="dc:format"/><meta content=fr-FR property="dc:language"/><meta content="Bob Maerten — Blog Perso" property="og:site_name"/><meta content=website property="og:type"/><meta content="https://bobmaerten.eu" property="og:url"/><meta content="Passage de boot2docker à docker-machine" property="og:title"/><meta content="Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités" property="og:description"/><meta content="https://bobmaerten.eu/img/avatar2014-46bb536d.jpg" property="og:image"/><meta content="50.348923;3.488592" name="geo.position"/><meta content="Valenciennes, Nord" name="geo.placename"/><meta content=FR-59 name="geo.region"/><meta content="@bobmaerten" name="twitter:site"/><meta content="Passage de boot2docker à docker-machine" name="twitter:title"/><meta content="Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités" name="twitter:description"/><meta content=summary_large_image name="twitter:card"/><meta content="https://bobmaerten.eu/img/sliders-da765091.jpg" name="twitter:image:src"/><meta content="@bobmaerten" name="twitter:creator"/><meta content="Passage de boot2docker à docker-machine" itemprop=name /><meta content="Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités" itemprop=description /><meta content="https://bobmaerten.eu/img/avatar2014-46bb536d.jpg" itemprop=image /><link href="https://plus.google.com/+BobMaerten" rel=publisher /><link href="/atom.xml" rel=alternate title="Bob Maerten — Blog Perso" type="application/rss+xml"/><meta content=yes name=mobile-web-app-capable /><meta content="Bob Maerten — Blog Perso" name=application-name /><link href="/chrome-touch-icon-192x192.png" rel=icon sizes=192x192 /><meta content=yes name=apple-mobile-web-app-capable /><meta content=black name=apple-mobile-web-app-status-bar-style /><meta content="Bob Maerten — Blog Perso" name=apple-mobile-web-app-title /><link href="/apple-touch-icon.png" rel=apple-touch-icon /><meta content="ms-touch-icon-144x144-precomposed.png" name=msapplication-TileImage /><meta content="#F5F5F5" name=msapplication-TileColor /><meta content="#F5F5F5" name=theme-color /><link href="/favicon-196x196.png" rel=icon sizes=196x196 type="image/png"/><link href="/favicon-160x160.png" rel=icon sizes=160x160 type="image/png"/><link href="/favicon-96x96.png" rel=icon sizes=96x96 type="image/png"/><link href="/favicon-32x32.png" rel=icon sizes=32x32 type="image/png"/><link href="/favicon-16x16.png" rel=icon sizes=16x16 type="image/png"/><link href="../css/main-3bd7cfb8.css" rel=stylesheet /></head><body id=top><header id=header><a class="image avatar" href="/"><img srcset="../img/avatar2014_2x-72fa57cb.jpg 2x" alt="Photo de Bob Maerten" src="../img/avatar2014-46bb536d.jpg"/></a><h1><strong>Bob Maerten</strong><br/> Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités. </h1><ul class=nav><li><a href="../about.html">À propos</a></li><li><a href="./">Blog</a></li></ul></header><div id=main><section id=post><header class=major><h2 class=post-title>Passage de boot2docker à docker-machine</h2></header><div class="image fit"><img srcset="../img/sliders_2x-333f849f.jpg 2x" alt=sliders src="../img/sliders-da765091.jpg"/></div><p class=post-meta><span>17 Mai 2015</span><br/><span><a class="post-category post-category-sysadm" href="tags/sysadm.html">sysadm</a></span><span><a class="post-category post-category-dev" href="tags/dev.html">dev</a></span><span><a class="post-category post-category-linux" href="tags/linux.html">linux</a></span><span><a class="post-category post-category-osx" href="tags/osx.html">osx</a></span></p><div class=post-description><p><p>Entre mon nouveau job, mon passage à OSX pour le boulot, et la défaillance de mon portable sous Linux, j&#39;ai eu peu de temps à consacrer à l&#39;actualité de Docker. Cependant ça bouge pas mal ces derniers temps avec des projets comme <a href="https://docs.docker.com/machine/">machine</a>, <a href="https://docs.docker.com/compose/">compose</a> et <a href="https://docs.docker.com/swarm/">swarm</a> et j&#39;ai récemment essayé de rattraper un peu le retard. Dans ce billet je vais exposer ma découverte de <code>docker-machine</code> qui m&#39;a permis de retrouver l&#39;usage courant que j&#39;avais de docker sous Linux.</p> <p></p> <h2>Boot2Docker</h2> <p>Comme un bon OSXien bien élevé au grain, j&#39;ai tout d&#39;abord suivi les conseils du net en installant <a href="https://github.com/boot2docker/boot2docker">boot2docker</a> pour faire fonctionner docker sous forme d&#39;une VM Linux sous VirtualBox. La procédure est très simple&nbsp;:</p> <pre class="highlight plaintext"><code>$ brew cask install virtualbox
+$ brew install boot2docker
+$ boot2docker up
+</code></pre> <p>Les recettes installent les dernières versions des logiciels requis. <code>boot2docker</code> est au final un executable permettant de lancer/stopper/mettre à jour la VM en suivant les mises à jour de docker. Jusque là tout va bien, on parvient même à oublier la présence de cette VM et il m&#39;est arrivé de chercher la cause de l&#39;absence d&#39;un service web en appelant <code>http://localhost:&lt;service_port&gt;</code> au lieu de <code>http://&lt;boot2docker_ip&gt;:&lt;service_port&gt;</code>&hellip;</p> <p>Il existe certes quelques soucis de performances inhérents à l&#39;usage de VirtualBox qui n&#39;est pas par définition très véloce sur les systèmes de fichiers. Celà dit pour un usage en développent ce n&#39;est pas très ennuyeux, et il existe des <a href="http://blog.blackfire.io/how-we-use-docker.html">solutions de contournement</a>.</p> <h2>Docker Machine</h2> <p>Dernièrement, le sous-projet <code>machine</code> est arrivé chez Docker permettant de faire la même chose mais avec la possibilité d&#39;utiliser différents <em>drivers</em>. En fonction du <em>driver</em> utilisé <code>machine</code> va installer un système d&#39;exploitation permettant d&#39;utiliser docker sur la cible indiquée. Cette cible pouvant être un fournisseur de ressources sur le <em>cloud</em> ou votre propre installation VirtualBox locale.</p> <p>L&#39;intérêt évident ici est de permettre d&#39;utiliser les mêmes commandes et d&#39;acquérir les mêmes habitudes quel que soit l&#39;environnement cible que l&#39;on manipule (dev, staging, prod) et quelque soit le service utilisé (VirtualBox, service Cloud, voire en développant son propre <em>driver</em>).</p> <p>Pour répliquer l&#39;environnement boot2docker, il suffit donc d&#39;installer <code>docker-machine</code> ou de suivre les <a href="https://docs.docker.com/machine/#installation">consignes d&#39;installation</a> du site officiel. Dès lors, <code>machine</code> va télécharger au besoin la dernière version de l&#39;iso de <em>boot2docker</em> et déployer une nouvelle VM sous VirtualBox, exactement de la même manière que le processus “natif” de boot2docker.</p> <pre class="highlight plaintext"><code>$ brew install docker-machine
+$ docker-machine create --driver virtualbox dev
+INFO[0000] Creating SSH key...
+INFO[0000] No default boot2docker iso found locally, downloading the latest release...
+INFO[0001] Downloading latest boot2docker release to /Users/bob/.docker/machine/cache/boot2docker.iso...
+INFO[0044] Creating VirtualBox VM...
+INFO[0051] Starting VirtualBox VM...
+INFO[0051] Waiting for VM to start...
+INFO[0103] 'dev' has been created and is now the active machine.
+INFO[0103] To point your Docker client at it, run this in your shell: eval '$(docker-machine env dev)'
+</code></pre> <p>Remarquez la dernière ligne qui est assez importante. Lancer <code>eval &#39;$(docker-machine env dev)&#39;</code> permet en effet de paramétrer le <em>shell</em> courant pour permettre d&#39;utiliser l&#39;environnement choisi avec les outils docker.</p> <pre class="highlight plaintext"><code>$ eval '$(docker-machine env dev)'
+
+$ docker info
+Containers: 0
+Images: 0
+Storage Driver: aufs
+Root Dir: /mnt/sda1/var/lib/docker/aufs
+Backing Filesystem: extfs
+Dirs: 0
+Dirperm1 Supported: true
+Execution Driver: native-0.2
+Kernel Version: 4.0.3-boot2docker
+Operating System: Boot2Docker 1.6.2 (TCL 5.4); master : 4534e65 - Wed May 13 21:24:28 UTC 2015
+CPUs: 8
+Total Memory: 997.3 MiB
+Name: dev
+[...]
+Labels:
+ provider=virtualbox
+
+$ docker run busybox echo Hello World
+Unable to find image 'busybox:latest' locally
+latest: Pulling from busybox
+cf2616975b4a: Pull complete
+6ce2e90b0bc7: Pull complete
+8c2e06607696: Already exists
+busybox:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+Digest: sha256:38a203e1986cf79639cfb9b2e1d6e773de84002feea2d4eb006b52004ee8502d
+Status: Downloaded newer image for busybox:latest
+Hello World
+
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND              CREATED             STATUS                      PORTS               NAMES
+d289f3082caf        busybox:latest      'echo Hello World'   11 seconds ago      Exited (0) 11 seconds ago                       drunk_pare
+</code></pre> <p>Et comme je le disais plus haut, le <em>workflow</em> est exactement le même en utilisant un autre <em>driver</em>&nbsp;:</p> <pre class="highlight plaintext"><code>$ docker-machine create --driver digitalocean --digitalocean-access-token=$MY_ACCESS_TOKEN docker-prod
+INFO[0000] Creating SSH key...
+INFO[0001] Creating Digital Ocean droplet...
+INFO[0201] 'docker-prod' has been created and is now the active machine.
+INFO[0201] To point your Docker client at it, run this in your shell: eval '$(docker-machine env docker-prod)'
+
+$ eval '$(docker-machine env docker-prod)'
+
+$ docker run busybox echo Hello World
+Unable to find image 'busybox:latest' locally
+latest: Pulling from busybox
+cf2616975b4a: Pull complete
+6ce2e90b0bc7: Pull complete
+8c2e06607696: Already exists
+busybox:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+Digest: sha256:38a203e1986cf79639cfb9b2e1d6e773de84002feea2d4eb006b52004ee8502d
+Status: Downloaded newer image for busybox:latest
+Hello World
+
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND              CREATED             STATUS                     PORTS               NAMES
+7b8b283fceaa        busybox:latest      'echo Hello World'   11 seconds ago      Exited (0) 9 seconds ago                       gloomy_bohr
+</code></pre> <p>Et ces deux environnements sont désormais accessibles en permuttant d&#39;une cible à l&#39;autre avec la commande <code>eval</code> indiquée au démarrage d&#39;une machine&nbsp;:</p> <pre class="highlight plaintext"><code>$ docker-machine ls
+NAME          ACTIVE   DRIVER         STATE     URL                         SWARM
+dev                    virtualbox     Running   tcp://192.168.99.102:2376
+docker-prod   *        digitalocean   Running   tcp://45.55.254.233:2376
+
+$ eval '$(docker-machine env dev)'
+
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND              CREATED             STATUS                      PORTS               NAMES
+d289f3082caf        busybox:latest      'echo Hello World'   2 minutes ago       Exited (0) 2 minutes ago                        drunk_pare
+</code></pre> <h2>Accéder aux containers depuis l&#39;hôte</h2> <p>Il y avait encore quelque chose qui me gênait dans l&#39;usage d&#39;une VM pour Docker en local, c&#39;est l&#39;accès aux containers directement depuis ma machine. Sous linux, Docker est exposé sur une interface routée par défaut. Avec une VM sous VirtualBox, il faut déclarer la route manuellement&nbsp;:</p> <pre class="highlight plaintext"><code>$ /usr/sbin/scutil -w State:/Network/Interface/vboxnet0/IPv4 -t 0
+
+$ sudo /sbin/route -n add -net 172.17.0.0 -netmask 255.255.0.0 -gateway $(docker-machine ip)
+</code></pre> <p>On peut ainsi créer un <em>container</em> et le <em>ping</em>er depuis le système local.</p> <pre class="highlight plaintext"><code>$ docker run --name=redis -d redis
+
+$ ping -c 3 $(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $(docker ps -ql))
+PING 172.17.0.1 (172.17.0.1): 56 data bytes
+64 bytes from 172.17.0.1: icmp_seq=0 ttl=63 time=3.164 ms
+64 bytes from 172.17.0.1: icmp_seq=1 ttl=63 time=3.985 ms
+64 bytes from 172.17.0.1: icmp_seq=2 ttl=63 time=9.379 ms
+
+--- 172.17.0.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 3.164/5.509/9.379/2.757 ms
+</code></pre> <p>Cette manipulation ne résistant pas au reboot, sous OSX on peut ajouter un <code>plist</code> pour remettre la route au démarrage de la machine. Il faut toutefois faire attention à quel <em>vboxnet</em> est rattaché la VM et quelle est l&#39;ip attribuée par VirtualBox&nbsp;:</p> <p>Voici le plist (<code>/Library/LaunchDaemons/com.docker.route.plist</code>) pour ma VM sur le vboxnet0 et d&#39;adresse IP 192.168.99.100</p> <pre class="highlight xml"><code><span class="cp">&lt;?xml version='1.0' encoding='UTF-8'?&gt;</span>
+<span class="cp">&lt;!DOCTYPE plist PUBLIC '-//Apple//DTD PLIST 1.0//EN' 'http://www.apple.com/DTDs/PropertyList-1.0.dtd'&gt;</span>
+<span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">'1.0'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;dict&gt;</span>
+  <span class="nt">&lt;key&gt;</span>Label<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;string&gt;</span>com.docker.route<span class="nt">&lt;/string&gt;</span>
+  <span class="nt">&lt;key&gt;</span>ProgramArguments<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;array&gt;</span>
+    <span class="nt">&lt;string&gt;</span>bash<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string&gt;</span>-c<span class="nt">&lt;/string&gt;</span>
+    <span class="c">&lt;!-- You need to adapt the vboxnet0 to the interface that suits your setup, use ifconfig to find it --&gt;</span>
+    <span class="nt">&lt;string&gt;</span>/usr/sbin/scutil -w State:/Network/Interface/vboxnet0/IPv4 -t 0;sudo /sbin/route -n add -net 172.17.0.0 -netmask 255.255.0.0 -gateway 192.168.99.100<span class="nt">&lt;/string&gt;</span>
+  <span class="nt">&lt;/array&gt;</span>
+  <span class="nt">&lt;key&gt;</span>KeepAlive<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;false/&gt;</span>
+  <span class="nt">&lt;key&gt;</span>RunAtLoad<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;true/&gt;</span>
+  <span class="nt">&lt;key&gt;</span>LaunchOnlyOnce<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;true/&gt;</span>
+<span class="nt">&lt;/dict&gt;</span>
+<span class="nt">&lt;/plist&gt;</span>
+</code></pre> <h2>Bonus: accéder aux containers par un nom DNS</h2> <p>Le top du top serait d&#39;avoir un système qui permet d&#39;accéder aux conteneurs créés par leur nom plutôt que par un IP ou une redirection de port. On trouve pas mal de projets liés à cette problèmatique sur github, mais celui qui a retenu mon attention est <a href="https://github.com/tonistiigi/dnsdock">dnsdock</a>. Il s&#39;appuie sur les recherches d&rsquo;<a href="http://www.asbjornenge.com/wwc/vagrant_skydocking.html">autres</a> <a href="https://github.com/tonistiigi/dnsdock">projet</a>, mais il a pour lui la simplicité que je recherchais à la fois dans son installation et son utilisation.</p> <p>Dans un premier temps il suffit de lancer un conteneur qui va repérer la création/suppression d&#39;autre conteneur et enregistrer leurs nom dans un service DNS&nbsp;:</p> <pre class="highlight plaintext"><code>$ docker run -d -v /var/run/docker.sock:/var/run/docker.sock --name dnsdock --restart=always -p 172.17.42.1:53:53/udp tonistiigi/dnsdock
+</code></pre> <p>Notez l&#39;utilisation <code>--restart=always</code> permettant de recharger le container au redémarrage de la VM.</p> <p>Ensuite, il suffit d&#39;ajouter un <code>resolver</code> à OSX pour résoudre les noms des conteneurs avec le suffixe <code>.docker</code> (voir la documentation de dnsdock pour un paramétrage différent).</p> <pre class="highlight plaintext"><code>$ sudo mkdir -p /etc/resolver ; echo 'nameserver 172.17.42.1' | sudo tee /etc/resolver/docker
+
+$ ping redis.docker
+PING redis.docker (172.17.0.2): 56 data bytes
+64 bytes from 172.17.0.2: icmp_seq=0 ttl=63 time=2.256 ms
+64 bytes from 172.17.0.2: icmp_seq=1 ttl=63 time=5.212 ms
+64 bytes from 172.17.0.2: icmp_seq=2 ttl=63 time=2.228 ms
+
+--- redis.docker ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 2.228/3.232/5.212/1.400 ms
+</code></pre> <p>A priori il est possible de faire la même chose sous Linux en ajoutant l&#39;adresse de <em>bridge</em> au fichier <code>/etc/resolv.conf</code> en tant que <em>resolver</em>, mais n&#39;en ayant plus sous la main je ne peux donner de mode opératoire. L&#39;utilisation d&#39;une autre image comme <a href="https://github.com/iverberk/docker-spy">docker-spy</a> pourrait être opportune également.</p> <h2>Conclusion</h2> <p>Voilà, j&#39;ai désormais de quoi faire tourner des conteneurs Docker de manière pas trop douloureuse sous OSX, mais entre boot2docker et docker-machine alors, comment choisir&nbsp;? Les moins de 40 ans ne comprendront surement pas l&#39;allusion mais voici ma petite recette pour choisir.</p> <p><img alt="Pub FLUOGUM" src="http://i.imgur.com/QkkmmIs.png"/></p> <p>À ma gauche un <em>host</em> qui tourne sous boot2docker.</p> <p>À ma droite mon <em>host</em> qui tourne sous docker-machine.</p> <p>A priori c&#39;est la même chose, mais ce n&#39;est pas la même chose !</p> <p>Car dans mon host, y&#39;a du docker-machine,</p> <p>et ♫ “docker-machine, c&#39;est bon pour <a href="https://twitter.com/icecrime/status/599928881953443840">créer et switcher d&#39;environnement</a>&nbsp;!”</p> </p></div></section><section id=comments><h2>Commentaires</h2><div aria-live=polite id=juvia_thread><noscript>Please enable JavaScript to view the comments powered by Juvia.</noscript></div></section></div><footer id=footer><ul class=icons><li><a class="icon fa-envelope-o" href="#email-protection-uryyb@oboznregra.rh"><span class=label>Email</span></a></li><li><a class="icon fa-rss" href="/atom.xml"><span class=label>RSS</span></a></li><li><a class="icon fa-twitter" href="https://twitter.com/bobmaerten"><span class=label>Twitter</span></a></li><li><a class="icon fa-github" href="https://github.com/bobmaerten"><span class=label>Github</span></a></li></ul><ul class=copyright><li>© Bob Maerten</li><li>Design&nbsp;: <a href="http://html5up.net">HTML5 UP</a></li><li>Photo&nbsp;: <a href="http://unsplash.com/juskteez/">Juskteez Vu</a></li></ul></footer><script src="../js/all-39da47a7.js"></script><script src="../js/juvia-10e4cb99.js"></script><script type="text/javascript">!function(){try{var a,b,c,d,g=document.getElementsByTagName("a");for(c=0;g.length-c;c++)try{b=g[c].getAttribute("href"),b&&b.indexOf("#email-protection-")>-1&&b.length>19&&(a="",d=19+b.indexOf("#email-protection-"),b.length>d&&(a=b.substr(18).replace(/[a-zA-Z]/g,function(a){return String.fromCharCode(("Z">=a?90:122)>=(a=a.charCodeAt(0)+13)?a:a-26)})),g[c].setAttribute("href","mailto:"+a))}catch(h){}}catch(h){}}();</script>
+</body></html>
