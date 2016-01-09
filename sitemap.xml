@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://bobmaerten.eu/404.html</loc>
+    <loc>https://bobmaerten.eu/blog/tags/page/2.html</loc>
   </url>
   <url>
     <loc>https://bobmaerten.eu/about.html</loc>
@@ -127,31 +127,28 @@
     <loc>https://bobmaerten.eu/blog</loc>
   </url>
   <url>
-    <loc>https://bobmaerten.eu/blog/tags/page/2.html</loc>
-  </url>
-  <url>
-    <loc>https://bobmaerten.eu/blog/archives/page/2.html</loc>
-  </url>
-  <url>
-    <loc>https://bobmaerten.eu/blog/tags/osx.html</loc>
-  </url>
-  <url>
-    <loc>https://bobmaerten.eu/blog/tags/work.html</loc>
-  </url>
-  <url>
-    <loc>https://bobmaerten.eu/blog/tags/docker.html</loc>
-  </url>
-  <url>
-    <loc>https://bobmaerten.eu/blog/tags/git.html</loc>
-  </url>
-  <url>
-    <loc>https://bobmaerten.eu/blog/tags/patisserie.html</loc>
+    <loc>https://bobmaerten.eu/blog/tags/linux.html</loc>
   </url>
   <url>
     <loc>https://bobmaerten.eu/blog/tags/web.html</loc>
   </url>
   <url>
-    <loc>https://bobmaerten.eu/blog/tags/linux.html</loc>
+    <loc>https://bobmaerten.eu/blog/tags/git.html</loc>
+  </url>
+  <url>
+    <loc>https://bobmaerten.eu/blog/tags/docker.html</loc>
+  </url>
+  <url>
+    <loc>https://bobmaerten.eu/blog/tags/work.html</loc>
+  </url>
+  <url>
+    <loc>https://bobmaerten.eu/blog/tags/osx.html</loc>
+  </url>
+  <url>
+    <loc>https://bobmaerten.eu/blog/archives/page/2.html</loc>
+  </url>
+  <url>
+    <loc>https://bobmaerten.eu/404.html</loc>
   </url>
   <url>
     <loc>https://bobmaerten.eu/blog</loc>
@@ -200,5 +197,8 @@
   </url>
   <url>
     <loc>https://bobmaerten.eu/blog/tags/debian.html</loc>
+  </url>
+  <url>
+    <loc>https://bobmaerten.eu/blog/tags/patisserie.html</loc>
   </url>
 </urlset>
