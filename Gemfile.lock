@@ -182,15 +182,15 @@ DEPENDENCIES
   middleman-autoprefixer (~> 2.1.1)
   middleman-blog (~> 3.5.3)
   middleman-favicon-maker (~> 3.7)
-  middleman-imageoptim
+  middleman-imageoptim (~> 0.2.1)
   middleman-livereload (~> 3.4.2)
   middleman-minify-html (~> 3.4.0)
-  middleman-protect-emails
+  middleman-protect-emails (~> 0.3.1)
   middleman-sitemap (~> 0.0.13)
-  middleman-syntax
+  middleman-syntax (~> 2.0.0)
   nokogiri (~> 1.6.3.1)
-  redcarpet
+  redcarpet (~> 3.3.3)
   slim (~> 3.0.2)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
