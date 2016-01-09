@@ -20,6 +20,6 @@ section#previous-posts
         h3 = link_to post.title, post
         - if post.data.image
           a.image.fit.thumb href="#{post.url}"
-            = image_tag "#{post.data.image}.jpg", srcset: "#{post.data.image}_2x.jpg 2x", alt: 'Map'
+            = image_tag "mini/#{post.data.image}.jpg", srcset: "mini/#{post.data.image}_2x.jpg 2x", alt: "#{post.data.image}"
         p.post-meta
           = partial 'metadata', object: post
