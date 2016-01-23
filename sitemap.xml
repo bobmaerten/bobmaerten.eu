@@ -118,13 +118,10 @@
     <loc>https://bobmaerten.eu/blog/comportement-des-touches-home-et-end-du-pave-numerique-sous-osx.html</loc>
   </url>
   <url>
-    <loc>https://bobmaerten.eu/blog/archives</loc>
+    <loc>https://bobmaerten.eu/blog/tags/debian.html</loc>
   </url>
   <url>
-    <loc>https://bobmaerten.eu/blog/tags</loc>
-  </url>
-  <url>
-    <loc>https://bobmaerten.eu/blog</loc>
+    <loc>https://bobmaerten.eu/blog/tags/patisserie.html</loc>
   </url>
   <url>
     <loc>https://bobmaerten.eu/blog/tags/linux.html</loc>
@@ -149,6 +146,18 @@
   </url>
   <url>
     <loc>https://bobmaerten.eu/404.html</loc>
+  </url>
+  <url>
+    <loc>https://bobmaerten.eu/blog/utiliser-la-virtualisation-native-d-osx-pour-docker.html</loc>
+  </url>
+  <url>
+    <loc>https://bobmaerten.eu/blog/archives</loc>
+  </url>
+  <url>
+    <loc>https://bobmaerten.eu/blog/tags</loc>
+  </url>
+  <url>
+    <loc>https://bobmaerten.eu/blog</loc>
   </url>
   <url>
     <loc>https://bobmaerten.eu/blog</loc>
@@ -194,11 +203,5 @@
   </url>
   <url>
     <loc>https://bobmaerten.eu/blog/tags/life.html</loc>
-  </url>
-  <url>
-    <loc>https://bobmaerten.eu/blog/tags/debian.html</loc>
-  </url>
-  <url>
-    <loc>https://bobmaerten.eu/blog/tags/patisserie.html</loc>
   </url>
 </urlset>

@@ -1,14 +1,112 @@
-<!DOCTYPE html><html lang="fr"><head><title>Blog | Bob Maerten</title><meta charset="UTF-8" /><meta content="Blog de Bob Maerten ou y sont exposés en vrac, humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités." name="description" /><meta content="width=device-width, initial-scale=1" name="viewport" /><meta content="Bob Maerten" property="dc:creator" /><meta content="text/html" property="dc:format" /><meta content="fr-FR" property="dc:language" /><meta content="Bob Maerten — Blog Perso" property="og:site_name" /><meta content="website" property="og:type" /><meta content="https://bobmaerten.eu" property="og:url" /><meta content="Bob Maerten — Blog Perso" property="og:title" /><meta content="Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités" property="og:description" /><meta content="https://bobmaerten.eu/img/avatar2014-89449806.jpg" property="og:image" /><meta content="50.348923;3.488592" name="geo.position" /><meta content="Valenciennes, Nord" name="geo.placename" /><meta content="FR-59" name="geo.region" /><meta content="@bobmaerten" name="twitter:site" /><meta content="Bob Maerten — Blog Perso" name="twitter:title" /><meta content="Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités" name="twitter:description" /><meta content="summary" name="twitter:card" /><meta content="https://bobmaerten.eu/img/avatar2014-89449806.jpg" name="twitter:image" /><meta content="Bob Maerten — Blog Perso" itemprop="name" /><meta content="Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités" itemprop="description" /><meta content="https://bobmaerten.eu/img/avatar2014-89449806.jpg" itemprop="image" /><link href="https://plus.google.com/+BobMaerten" rel="publisher" /><link href="/atom.xml" rel="alternate" title="Bob Maerten — Blog Perso" type="application/rss+xml" /><meta content="yes" name="mobile-web-app-capable" /><meta content="Bob Maerten — Blog Perso" name="application-name" /><link href="/chrome-touch-icon-192x192.png" rel="icon" sizes="192x192" /><meta content="yes" name="apple-mobile-web-app-capable" /><meta content="black" name="apple-mobile-web-app-status-bar-style" /><meta content="Bob Maerten — Blog Perso" name="apple-mobile-web-app-title" /><link href="/apple-touch-icon.png" rel="apple-touch-icon" /><meta content="ms-touch-icon-144x144-precomposed.png" name="msapplication-TileImage" /><meta content="#F5F5F5" name="msapplication-TileColor" /><meta content="#F5F5F5" name="theme-color" /><link href="/favicon-196x196.png" rel="icon" sizes="196x196" type="image/png" /><link href="/favicon-160x160.png" rel="icon" sizes="160x160" type="image/png" /><link href="/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png" /><link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" /><link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" /><link href="css/main-8e11d2a2.css" rel="stylesheet" /></head><body id="top"><header id="header"><a class="image avatar" href="/"><img srcset="img/avatar2014_2x-09ee3761.jpg 2x" alt="Photo de Bob Maerten" src="img/avatar2014-89449806.jpg" /></a><h1><strong>Bob Maerten</strong><br /> Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités. </h1><ul class="nav"><li><a href="about.html">À propos</a></li><li><a href="blog/">Blog</a></li></ul></header><div id="main"><?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Bob Maerten — Blog Perso</title>
   <subtitle>Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités</subtitle>
   <id>https://bobmaerten.eu/blog</id>
   <link href="https://bobmaerten.eu/blog"/>
   <link href="https://bobmaerten.eu/blog/feed.xml" rel="self"/>
-  <updated>2015-06-26T17:23:10+02:00</updated>
+  <updated>2016-01-23T15:16:10+01:00</updated>
   <author>
     <name>Bob Maerten</name>
   </author>
+  <entry>
+    <title>Utiliser la virtualisation native d'OSX pour Docker</title>
+    <link rel="alternate" href="https://bobmaerten.eu/blog/utiliser-la-virtualisation-native-d-osx-pour-docker.html"/>
+    <id>https://bobmaerten.eu/blog/utiliser-la-virtualisation-native-d-osx-pour-docker.html</id>
+    <published>2016-01-23T15:16:10+01:00</published>
+    <updated>2016-01-23T17:52:10+01:00</updated>
+    <author>
+      <name>Bob Maerten — Blog Perso</name>
+    </author>
+    <content type="html">&lt;p&gt;Docker est un outil linux natif et pour l&amp;#39;utiliser sous OSX (ou Windows) il faut passer par une machine virtuelle sous linux pour faire tourner le &lt;em&gt;daemon&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Pour cela, la pratique courante est d&amp;#39;installer un hyperviseur (habituellement Virtualbox) afin de faire tourner &lt;code&gt;boot2docker&lt;/code&gt;, la micro-VM fournie par Docker afin de l&amp;#39;utiliser sous un autre système. Mais il est désormais possible de s&amp;#39;en passer sous OSX.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2&gt;Hypervisor.framework&lt;/h2&gt;
+
+&lt;p&gt;La version 10.10 (Yosemite) d&amp;#39;OSX a introduit un système de virtualisation natif en mode utilisateur et permet l&amp;#39;utilisation directe des instructions VT-x des processeurs Intel. Cela permet donc de virtualiser des applications, sans extension du noyau.&lt;/p&gt;
+
+&lt;p&gt;D&amp;#39;ailleurs, &lt;a href="http://veertu.com/"&gt;Veertu&lt;/a&gt;, récemment publié sur l&amp;#39;app store permet d&amp;#39;installer des VMs en utilisant l&amp;#39;hyperviseur natif d&amp;#39;OSX, explique bien cette différence.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Legacy Virt" src="http://veertu.com/test/wp-content/uploads/2015/10/legacy.svg" /&gt;
+&lt;img alt="OSX Virt" src="http://veertu.com/test/wp-content/uploads/2015/10/new.svg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Bien que Veertu propose l&amp;rsquo;&lt;a href="https://twitter.com/veertu_labs/status/687552097869533184"&gt;installation de boot2docker&lt;/a&gt; ce n&amp;#39;est pas de ce système dont je vais vous parler.&lt;/p&gt;
+
+&lt;h2&gt;Xhyve et son driver docker-machine&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/mist64/xhyve"&gt;Xhyve&lt;/a&gt; s&amp;#39;appuie également sur l&amp;rsquo;&lt;em&gt;hypervisor.framework&lt;/em&gt; d&amp;#39;OSX et permet de virtualiser des systèmes linux et BSD tout comme il était possible de le faire avec Virtualbox, mais sans la lourdeur d&amp;#39;Oracle. Son installation est on ne peut plus simple dès lors que &lt;em&gt;homebrew&lt;/em&gt; est installé (&lt;em&gt;t&amp;#39;es un dev sous mac et t&amp;#39;as pas homebrew installé, nan mais all&amp;hellip;&lt;/em&gt; 😬) : &lt;code&gt;brew install xhyve&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Mais là ou cela devient intéressant, c&amp;#39;est qu&amp;#39;il existe désormais un &lt;a href="https://github.com/zchee/docker-machine-driver-xhyve"&gt;driver xhyve pour docker-machine&lt;/a&gt; (celui de Virtualbox est utilisé par défaut si on n&amp;#39;en précise pas). L&amp;#39;installer est tout aussi simple : &lt;code&gt;brew install docker-machine-driver-xhyve&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Cela dit, je vous recommande chaudement de tout installer avec homebrew. J&amp;#39;avais des restes d&amp;#39;installation de &lt;strong&gt;docker-toolbox&lt;/strong&gt; et la création de la VM n&amp;#39;a pas fonctionné. Le mieux est donc de supprimer les binaires et de les réinstaller avec homebrew :&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;brew install xhyve docker docker-machine docker-compose docker-machine-driver-xhyve
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Au jour de rédaction de ce billet, voici les versions installées suite à cette commande :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;xhyve-0.2.0&lt;/li&gt;
+&lt;li&gt;docker-1.9.1_1&lt;/li&gt;
+&lt;li&gt;docker-machine-0.5.6_1&lt;/li&gt;
+&lt;li&gt;docker-compose-1.5.2&lt;/li&gt;
+&lt;li&gt;docker-machine-driver-xhyve-0.2.1&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Création et démarrage de la VM&lt;/h2&gt;
+
+&lt;p&gt;Pour installer et démarrer la VM docker, il suffit d&amp;#39;utiliser docker-machine avec le driver xhyve.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker-machine create dockerhost --driver xhyve
+Running pre-create checks...
+Creating machine...
+(dockerhost) Copying /Users/bob/.docker/machine/cache/boot2docker.iso to /Users/bob/.docker/machine/machines/dockerhost/boot2docker.iso...
+(dockerhost) Creating VM...
+(dockerhost) Extracting vmlinuz64 and initrd.img from boot2docker.iso...
+(dockerhost) /dev/disk2                                                 /Users/bob/.docker/machine/machines/dockerhost/b2d-image
+(dockerhost) "disk2" unmounted.
+(dockerhost) "disk2" ejected.
+(dockerhost) Generating 20000MB disk image...
+(dockerhost) created: /Users/bob/.docker/machine/machines/dockerhost/root-volume.sparsebundle
+(dockerhost) Creating SSH key...
+(dockerhost) Fix file permission...
+(dockerhost) Generate UUID...
+(dockerhost) Convert UUID to MAC address...
+(dockerhost) Starting dockerhost...
+(dockerhost) Waiting for VM to come online...
+(dockerhost) Waiting on a pseudo-terminal to be ready... done
+(dockerhost) Hook up your terminal emulator to /dev/ttys004 in order to connect to your VM
+Waiting for machine to be running, this may take a few minutes...
+(dockerhost) Getting to VM state...
+Machine is running, waiting for SSH to be available...
+Detecting operating system of created instance...
+Detecting the provisioner...
+Provisioning with boot2docker...
+Copying certs to the local machine directory...
+Copying certs to the remote machine...
+Setting Docker configuration on the remote daemon...
+Checking connection to Docker...
+Docker is up and running!
+To see how to connect Docker to this machine, run: docker-machine env dockerhost
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Il suffit ensuite de raccrocher l&amp;#39;environnement local à la nouvelle VM docker :&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ eval "$(docker-machine env dockerhost)"
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+$ docker run --rm busybox echo 'plop!
+latest: Pulling from library/busybox
+583635769552: Pull complete
+b175bcb79023: Pull complete
+Digest: sha256:c1bc9b4bffe665bf014a305cc6cf3bca0e6effeb69d681d7a208ce741dad58e0
+Status: Downloaded newer image for busybox:latest
+plop!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Et voilà, vous pouvez effacer votre stack Virtualbox ! Bon, peut-être pas tout de suite car ceci est encore plutôt expérimental, aussi je vais éprouver la solution dans les jours/semaines qui viennent, et ce sera l&amp;#39;occasion d&amp;#39;un prochain billet pour évalauer les performances et la fiabilité de la &lt;em&gt;stack&lt;/em&gt;.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Comportement des touches Home et End du pavé numérique sous OSX</title>
     <link rel="alternate" href="https://bobmaerten.eu/blog/comportement-des-touches-home-et-end-du-pave-numerique-sous-osx.html"/>
@@ -456,33 +554,4 @@ Pour le déploiement, j&amp;#39;ai à ma disposition une petite instance d&amp;#
 &lt;p&gt;J&amp;#39;essairai de faire d&amp;#39;autres points prochainement, et je l&amp;#39;espère des billets un peu plus techniques et concrèts quand je serai plus à l&amp;#39;aise. En attendant, je retourne m&amp;#39;imprégner de cette &lt;em&gt;codebase&lt;/em&gt; que je ne désespère pas d&amp;#39;appréhender globalement tantôt.&lt;/p&gt;
 </content>
   </entry>
-  <entry>
-    <title>Premiers pas avec OSX Yosemite</title>
-    <link rel="alternate" href="https://bobmaerten.eu/blog/premiers-pas-avec-osx-yosemite.html"/>
-    <id>https://bobmaerten.eu/blog/premiers-pas-avec-osx-yosemite.html</id>
-    <published>2015-03-15T10:11:00+01:00</published>
-    <updated>2015-11-08T12:29:14+01:00</updated>
-    <author>
-      <name>Bob Maerten — Blog Perso</name>
-    </author>
-    <content type="html">&lt;p&gt;Comme je le disais dans le &lt;a href="/blog/2015/preparation-au-changement"&gt;précédent billet&lt;/a&gt;, je vais dès le mois prochain changer d&amp;#39;environnement professionnel, mais également d&amp;#39;environnement logiciel et matériel dans la mesure où je vais passer sous OSX Yosemite.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;La réception du matos ce weekend m&amp;#39;a permis de remettre les mains dans l&amp;#39;environnement à la pomme auquel je n&amp;#39;avais pas vraiment touché depuis une formation à OSX 10.6 il y a quelques années, laissée sans suite.&lt;/p&gt;
-
-&lt;p&gt;Si vous suivez mon activité en ligne vous savez surement que je suis un utilisateur de GNU/Linux (et Debian/Ubuntu en particulier) depuis trèèèèèès longtemps, mais j&amp;#39;ai été agréablement surpris des similitudes entre les environnements. Le système de dock par exemple se comporte quasiment comme celui de Ubuntu. Les paramètres systèmes sont organisés de la même façon. Oh, je me doute bien de qui a pompé sur qui, pas de souci, mais au final je m&amp;#39;y retrouve plutôt facilement pour le moment.&lt;/p&gt;
-
-&lt;p&gt;Après, il y a également le terrain bien connu du terminal et de la ligne de commande. Ici, même combat, un bash de base quand on lance le terminal, mais le processus d&amp;#39;installation d&amp;#39;un zsh ou même d&amp;#39;un &lt;a href="http://ohmyz.sh"&gt;oh-my-zsh&lt;/a&gt; est identique (on est sur une base BSD) et je retrouve assez vite mon environnement habituel.&lt;/p&gt;
-
-&lt;p&gt;Pour l&amp;#39;installation des applications, pas de déroute non plus car avec &lt;a href="http://brew.sh"&gt;Homebrew&lt;/a&gt; là non plus rien de perturbant. Il y a même une recette pour permettre d&amp;#39;installer des logiciels packagés, et là c&amp;#39;est vraiment le bonheur (même si l&amp;#39;installation d&amp;#39;un &lt;code&gt;.dmg&lt;/code&gt; est vraiment triviale).&lt;/p&gt;
-
-&lt;p&gt;Il y a même par défaut un système bien plus léger et tout aussi pratique que le Dash de Ubuntu pour rechercher et lancer facilement des commandes ou des logiciels.&lt;/p&gt;
-
-&lt;p&gt;Enfin, pour les quelques réglages un peu spécifiques, comme virer ce f*ck*ng &lt;em&gt;shime&lt;/em&gt; au démarrage ou pour accélérer la répétition du clavier, il faut fouiller un peu sur le net et on trouve rapidement une solution soit à l&amp;#39;aide d&amp;#39;outils spécifiques, soit à l&amp;#39;aide de commandes systèmes en terminal.&lt;/p&gt;
-
-&lt;p&gt;Voilà, pas trop dérouté par cette première approche, hormis peut-être le &lt;em&gt;layout&lt;/em&gt; du clavier qui va me poser quelques problèmes un moment (surtout que je passe souvent d&amp;#39;un clavier à un autre, je tape ce texte sur mon portable PC) et de me resituer dans le contexte d&amp;#39;un débutant sur ce système BSD que je connais peu. Mais cette fois-ci, je vais essayer de noter et commenter le plus possible ce que je découvre, le partager ici ou sur le &lt;a href="https://github.com/bobmaerten/TIL.git"&gt;dépôt TIL (Today I Learned)&lt;/a&gt; que j&amp;#39;ai récemment crée pour ce genre de choses.&lt;/p&gt;
-</content>
-  </entry>
 </feed>
-</div><footer id="footer"><ul class="icons"><li><a class="icon fa-envelope-o" href="mailto:hello@bobmaerten.eu"><span class="label">Email</span></a></li><li><a class="icon fa-rss" href="/atom.xml"><span class="label">RSS</span></a></li><li><a class="icon fa-twitter" href="https://twitter.com/bobmaerten"><span class="label">Twitter</span></a></li><li><a class="icon fa-github" href="https://github.com/bobmaerten"><span class="label">Github</span></a></li></ul><ul class="copyright"><li>© Bob Maerten</li><li>Design&nbsp;: <a href="http://html5up.net">HTML5 UP</a></li><li>Photo&nbsp;: <a href="http://unsplash.com/juskteez/">Juskteez Vu</a></li></ul></footer><script src="js/all-39da47a7.js"></script></body></html>
