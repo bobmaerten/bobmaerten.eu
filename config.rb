@@ -62,6 +62,7 @@ page '/404.html',       directory_index: false
 page '/about.html',     directory_index: false
 page '/sitemap.xml',    layout: false
 page '/atom.xml',       layout: false
+page '/feed.xml',       layout: false
 page 'blog/index.html', proxy: '/blog.html'
 page 'index.html',      proxy: '/blog.html'
 
