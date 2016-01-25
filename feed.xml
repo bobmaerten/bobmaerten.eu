@@ -14,7 +14,7 @@
     <link rel="alternate" href="https://bobmaerten.eu/blog/utiliser-la-virtualisation-native-d-osx-pour-docker.html"/>
     <id>https://bobmaerten.eu/blog/utiliser-la-virtualisation-native-d-osx-pour-docker.html</id>
     <published>2016-01-23T15:16:10+01:00</published>
-    <updated>2016-01-23T17:52:10+01:00</updated>
+    <updated>2016-01-25T09:05:32+01:00</updated>
     <author>
       <name>Bob Maerten — Blog Perso</name>
     </author>
@@ -105,6 +105,15 @@ plop!
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Et voilà, vous pouvez effacer votre stack Virtualbox ! Bon, peut-être pas tout de suite car ceci est encore plutôt expérimental, aussi je vais éprouver la solution dans les jours/semaines qui viennent, et ce sera l&amp;#39;occasion d&amp;#39;un prochain billet pour évalauer les performances et la fiabilité de la &lt;em&gt;stack&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Edit du 25/01/2016&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;La source de cet essai est un blog post d&amp;rsquo;&lt;a href="https://allysonjulian.com/setting-up-docker-with-xhyve/"&gt;Allyson Julian&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Si vous voulez utiliser des volumes partagés avec l&amp;#39;hôte (pas la VM, mais bien l&amp;#39;hôte OSX), il faut ajouter à l&amp;#39;installation de la VM le flag &lt;code&gt;--xhyve-experimental-nfs-share&lt;/code&gt;, sinon ça ne fonctionne pas.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Bon &lt;em&gt;hacking&lt;/em&gt; !&lt;/p&gt;
 </content>
   </entry>
   <entry>
