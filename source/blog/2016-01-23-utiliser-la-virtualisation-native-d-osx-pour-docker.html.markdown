@@ -89,3 +89,11 @@ Il suffit ensuite de raccrocher l'environnement local à la nouvelle VM docker :
     plop!
 
 Et voilà, vous pouvez effacer votre stack Virtualbox ! Bon, peut-être pas tout de suite car ceci est encore plutôt expérimental, aussi je vais éprouver la solution dans les jours/semaines qui viennent, et ce sera l'occasion d'un prochain billet pour évalauer les performances et la fiabilité de la _stack_.
+
+
+### Edit du 25/01/2016
+
+- La source de cet essai est un blog post d'[Allyson Julian](https://allysonjulian.com/setting-up-docker-with-xhyve/)
+- Si vous voulez utiliser des volumes partagés avec l'hôte (pas la VM, mais bien l'hôte OSX), il faut ajouter à l'installation de la VM le flag `--xhyve-experimental-nfs-share`, sinon ça ne fonctionne pas.
+
+Bon _hacking_ !
