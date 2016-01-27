@@ -5,10 +5,77 @@
   <id>https://bobmaerten.eu/blog</id>
   <link href="https://bobmaerten.eu/blog"/>
   <link href="https://bobmaerten.eu/blog/atom.xml" rel="self"/>
-  <updated>2016-01-23T15:16:10+01:00</updated>
+  <updated>2016-01-27T09:08:09+01:00</updated>
   <author>
     <name>Bob Maerten</name>
   </author>
+  <entry>
+    <title>Un certificat Let's Encrypt toujours à jour sur le blog avec Docker</title>
+    <link rel="alternate" href="https://bobmaerten.eu/blog/un-certificat-let-s-encrypt-toujours-a-jour-sur-le-blog-avec-docker.html"/>
+    <id>https://bobmaerten.eu/blog/un-certificat-let-s-encrypt-toujours-a-jour-sur-le-blog-avec-docker.html</id>
+    <published>2016-01-27T09:08:09+01:00</published>
+    <updated>2016-01-27T14:22:24+01:00</updated>
+    <author>
+      <name>Bob Maerten — Blog Perso</name>
+    </author>
+    <content type="html">&lt;p&gt;Depuis l&amp;#39;année dernière ce blog répond exclusivement en HTTPS grâce à un certificat valide et reconnu, issu d&amp;#39;une &lt;a href="https://www.wosign.com"&gt;autorité de certification chinoise&lt;/a&gt; qui propose (proposait ?) des certificats gratuits. Mais depuis, &lt;a href="https://letsencrypt.org"&gt;Let&amp;rsquo;s encrypt&lt;/a&gt; est disponible en béta publique et je cherchais depuis quelques jours un moyen de l&amp;#39;inclure dans la &lt;em&gt;stack&lt;/em&gt; d&amp;#39;hébergement de ce blog et permettre la création et le renouvellement automatique de certificat SSL, comme il est promis dans la documentation.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2&gt;Contexte&lt;/h2&gt;
+
+&lt;p&gt;Ce blog est servi au travers de deux conteneurs Docker:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;un issu de l&amp;#39;image officielle &lt;a href="http://hub.docker.com/_/nginx"&gt;nginx&lt;/a&gt; sur laquelle j&amp;#39;y ajoute le &lt;a href="http://github.com/bobmaerten/bobmaerten.eu"&gt;contenu statique&lt;/a&gt; ;&lt;/li&gt;
+&lt;li&gt;un autre exécutant l&amp;#39;image du &lt;a href="http://hub.docker.com/r/jwilder/nginx-proxy"&gt;reverse-proxy nginx&lt;/a&gt; de &lt;a href="http://jasonwilder.com/"&gt;Jason Wilder&lt;/a&gt; permettant d&amp;#39;uniformiser la configuration des différents sites et d&amp;#39;aiguiller vers le bon conteneur.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Il ne manquait plus qu&amp;#39;un dernier conteneur qui assurerait la gestion et le suivi des certificats issus de Let&amp;rsquo;s Encrypt. Mais j&amp;#39;avais beau essayer d&amp;#39;utiliser le client officiel de différente manières, il y a toujours une étape ou le client doit se substituer au serveur web réel pour répondre au challenge proposé par les serveurs de Let&amp;rsquo;s Encrypt, afin de valider la demande de certificat.&lt;/p&gt;
+
+&lt;p&gt;Heureusement, nous évoluons dans une sphère libre ! Il existe dès lors &lt;a href="https://www.metachris.com/2015/12/comparison-of-10-acme-lets-encrypt-clients/"&gt;moultes implémentations&lt;/a&gt; légèrement différentes du client officiel. Et c&amp;#39;est avec l&amp;#39;une de ces implémentations qu&amp;rsquo;&lt;a href="https://github.com/JrCs"&gt;Yves Blusseau&lt;/a&gt; a eu l&amp;#39;excellente idée d&amp;rsquo;&lt;a href="https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion"&gt;implémenter ce que je cherchais à faire&lt;/a&gt; : un conteneur qui fait tourner un client lets-encrypt, pilotant automatiquement la configuration du reverse-proxy pour la réponse au challenge du serveur et assurant la gestion des certificats, en incluant tout cela dans la configuration de nginx.&lt;/p&gt;
+
+&lt;h2&gt;Bon et techniquement, ça donne quoi ?&lt;/h2&gt;
+
+&lt;p&gt;Donc voici les commandes qui me permettent de lancer la &lt;em&gt;stack&lt;/em&gt; de ce blog&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Démarrage du reverse-proxy nginx&lt;/span&gt;
+docker run --name nginx-proxy &lt;span class="se"&gt;\&lt;/span&gt;
+  -p 80:80 -p 443:443 &lt;span class="se"&gt;\&lt;/span&gt;
+  -v /home/bob/certs:/etc/nginx/certs:ro &lt;span class="se"&gt;\&lt;/span&gt;
+  -v /etc/nginx/vhost.d &lt;span class="se"&gt;\&lt;/span&gt;
+  -v /usr/share/nginx/html &lt;span class="se"&gt;\&lt;/span&gt;
+  -v /var/run/docker.sock:/tmp/docker.sock:ro &lt;span class="se"&gt;\&lt;/span&gt;
+  --restart&lt;span class="o"&gt;=&lt;/span&gt;always &lt;span class="se"&gt;\&lt;/span&gt;
+  --detach jwilder/nginx-proxy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Le conteneur accède au répertoire de l&amp;#39;hôte pour les certificats ainsi que sur le socket du &lt;em&gt;daemon&lt;/em&gt; Docker, car il a besoin de récupérer les metadonnées des conteneurs (notamment la variable VIRTUAL_HOST, voir ci-dessous). Deux volumes sur &lt;code&gt;/etc/nginx/vhost.d&lt;/code&gt; et &lt;code&gt;/usr/share/nginx/html&lt;/code&gt; sont déclarés car ils seront utilisés par le conteneur lets-encrypt.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Démarrage du conteneur de gestion des certificats et de la conf nginx&lt;/span&gt;
+docker run --name letsencrypt-companion &lt;span class="se"&gt;\&lt;/span&gt;
+  -v /home/bob/certs:/etc/nginx/certs:rw &lt;span class="se"&gt;\&lt;/span&gt;
+  --volumes-from nginx-proxy &lt;span class="se"&gt;\&lt;/span&gt;
+  -v /var/run/docker.sock:/var/run/docker.sock:ro &lt;span class="se"&gt;\&lt;/span&gt;
+  --restart&lt;span class="o"&gt;=&lt;/span&gt;always &lt;span class="se"&gt;\&lt;/span&gt;
+  --detach jrcs/letsencrypt-nginx-proxy-companion
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ici le répertoire des certificats est monté en écriture et il sera partagé (sur l&amp;#39;hôte) avec le reverse-proxy. Ce conteneur utilise les volumes déclarés dans le reverse-proxy (&lt;code&gt;volumes-from&lt;/code&gt;) ainsi que l&amp;#39;accès au socket du &lt;em&gt;daemon&lt;/em&gt; Docker également (pour lire les variables d&amp;#39;environnement déclarées sur les conteneurs “client”).&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Démarrage du conteneur du blog&lt;/span&gt;
+docker run --name bobmaerten-eu &lt;span class="se"&gt;\&lt;/span&gt;
+   -e      &lt;span class="nv"&gt;VIRTUAL_HOST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"bobmaerten.eu"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+   -e  &lt;span class="nv"&gt;LETSENCRYPT_HOST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"bobmaerten.eu"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+   -e &lt;span class="nv"&gt;LETSENCRYPT_EMAIL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"hello@bobmaerten.eu"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+   --restart&lt;span class="o"&gt;=&lt;/span&gt;always &lt;span class="se"&gt;\&lt;/span&gt;
+   --detach bobmaerten/bobmaerten.eu:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Enfin, le conteneur qui sert le blog, ou je déclare les variables d&amp;#39;environnement qui seront utilisées pour la configuration du reverse-proxy (VIRTUAL_HOST) et du client lets-encrypt.&lt;/p&gt;
+
+&lt;p&gt;Au démarrage de la &lt;em&gt;stack&lt;/em&gt;, le reverse-proxy détecte le VIRTUAL_HOST &lt;code&gt;bobmaerten.eu&lt;/code&gt; et crée dynamiquement l&amp;#39;entrée &lt;code&gt;server&lt;/code&gt; dans la configuration de nginx, et le client lets-encrypt modifie également dynamiquement la configuration du reverse-proxy si un certificat est échu ou renouvelé.&lt;/p&gt;
+
+&lt;p&gt;Je vous laisse le soin d&amp;#39;aller explorer les différents dépôts respectifs à cette &lt;em&gt;stack&lt;/em&gt; si vous êtes curieux du &lt;em&gt;comment-ça-marche-sous-le-capot&lt;/em&gt;.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Utiliser la virtualisation native d'OSX pour Docker</title>
     <link rel="alternate" href="https://bobmaerten.eu/blog/utiliser-la-virtualisation-native-d-osx-pour-docker.html"/>
@@ -535,32 +602,6 @@ Pour le déploiement, j&amp;#39;ai à ma disposition une petite instance d&amp;#
 &lt;h2&gt;Résultats&lt;/h2&gt;
 
 &lt;p&gt;Si tout vas bien, lors du déploiement de cette version du site avec ce billet, le layout devrait afficher la liste des commentaires des billets ainsi qu&amp;#39;un formulaire pour en laisser. Ce sera l&amp;#39;occasion de tester l&amp;#39;application en réel et de voir les améliorations à apporter même si j&amp;#39;ai déjà quelques idées (localisation, ajout de notifications, etc.).&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Mon nouveau travail, bilan après un mois</title>
-    <link rel="alternate" href="https://bobmaerten.eu/blog/mon-nouveau-travail-bilan-apres-un-mois.html"/>
-    <id>https://bobmaerten.eu/blog/mon-nouveau-travail-bilan-apres-un-mois.html</id>
-    <published>2015-04-25T15:25:48+02:00</published>
-    <updated>2015-11-08T12:29:14+01:00</updated>
-    <author>
-      <name>Bob Maerten — Blog Perso</name>
-    </author>
-    <content type="html">&lt;p&gt;Pour être tout à fait honnête, j&amp;#39;avais prévu de faire un point une semaine, 15j et 1 mois après mon changement de travail, mais force est de constater que je suis complètement largué sur le timing.&lt;/p&gt;
-
-&lt;p&gt;Il faut dire que le changement fût assez rude. Je n&amp;#39;aurais pas cru que de revenir à mes premières amours de développeur serait aussi difficile&amp;nbsp;! Les journées, voire les semaines passent à une vitesse&amp;hellip; Bref, ce n&amp;#39;est pas simple, mais ça revient un peu à la fois, et j&amp;#39;apprends plein de choses en plus de découvrir ce nouveau domaine assez méconnu pour moi qu&amp;#39;est le e-commerce.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;Sans entrer dans les détails, je travaille pour un client qui utilise notre solution &lt;em&gt;adhoc&lt;/em&gt; de site de e-commerce, associé à un back-office de gestion commerciale, le tout développé en &lt;a href="http://rubyonrails.org/"&gt;Ruby on Rails&lt;/a&gt; depuis quelques années et quelques versions majeures de &lt;em&gt;RoR&lt;/em&gt;, donc qui a beaucoup évolué depuis. Même sans prendre en compte mon double &lt;em&gt;noobiisme&lt;/em&gt; de sysadmin en rémission et du domaine concerné, rentrer dans le concept de l&amp;#39;application n&amp;#39;est pas simple. Mon boss a eu la bonne idée de me coller sur la couverture des tests. C&amp;#39;est un très bon moyen de comprendre ce qu&amp;#39;est censé faire l&amp;#39;appli, tout en me replongeant dans la logique des tests unitaires/fonctionnels. C&amp;#39;est également un excellent moyen d&amp;#39;augmenter la confiance dans les modifications que je peux apporter.&lt;/p&gt;
-
-&lt;p&gt;J&amp;#39;apprécie également le flux de travail mis en place. Répartis à quatres coins de mon écran, un éditeur de texte, plusieurs &lt;em&gt;shells&lt;/em&gt; au sein d&amp;#39;une session &lt;a href="http://tmux.sourceforge.net/"&gt;tmux&lt;/a&gt; faisant tourner la &lt;em&gt;stack&lt;/em&gt; de l&amp;#39;application, un &lt;a href="https://github.com/guard/guard"&gt;guard&lt;/a&gt; pour valider les tests associés au fichier que je suis en train de modifier, une console pour accéder aux données, l&amp;#39;appli github pour &lt;em&gt;commit&lt;/em&gt;er et &lt;em&gt;push&lt;/em&gt;er mes changements. Une fois le travail poussé sur github, les hooks se mettent en marche et déclenchent un test global chez &lt;a href="https://codeship.com"&gt;codeship&lt;/a&gt; ainsi qu&amp;#39;une analyse du code chez &lt;a href="https://codeclimate.com"&gt;codeclimate&lt;/a&gt; et je suis notifié du résultat dans &lt;a href="https://slack.com"&gt;slack&lt;/a&gt;.  Ces actions s&amp;#39;exécutent également lorsque qu&amp;#39;on fait un &lt;em&gt;Pull Request&lt;/em&gt; et ont la bonne idée de s&amp;#39;insérer directement dans les infos de github, ce qui permet d&amp;#39;avoir une confiance accrue dans la fusion de branche, et ça franchement c&amp;#39;est top.&lt;/p&gt;
-
-&lt;p&gt;En ce qui concerne l&amp;#39;organisation du travail, j&amp;#39;avais naturellement des appréhensions vis à vis de ma relation au télétravail, mais finalement elles se sont dissipées assez rapidement. Des &lt;em&gt;calls&lt;/em&gt; (&lt;a href="http://www.mumble.com"&gt;mumble&lt;/a&gt;/&lt;a href="https://join.me"&gt;join.me&lt;/a&gt;) réguliers avec mon boss et les clients (y compris quand je bloque sur un point), un &lt;a href="https://slack.com"&gt;slack&lt;/a&gt; pour la communication interne, et un compte-rendu du travail effectué en fin de journée que j&amp;#39;organise un peu comme je l&amp;#39;entends du moment que le travail est fait. Et ça, ça change tout&amp;nbsp;! Aller poster un courrier ou chercher un recommandé à la poste, prendre une 1/2h pour aller chez le coiffeur ou à un rendez-vous médical, effectuer une démarche administrative pendant les horaires de bureaux, tout cela est possible et accessible.&lt;/p&gt;
-
-&lt;p&gt;Donc me voilà, presque un mois après cette reconversion assez inatendue, de retour derrière un éditeur de texte pour transformer des specifications en services concrets, utiles et utilisés. Rien que cela est un énorme gain qui, certes me prends du temps et de l&amp;#39;énergie, mais qui m&amp;#39;apporte la satisfaction professionnelle qui me manquait tant. L&amp;#39;effort intellectuel est parfois difficile, tant au niveau du retard à rattraper sur les évolutions des outils, des concepts et parfois aussi de l&amp;#39;algorithmique que je n&amp;#39;ai que peu pratiquée ces dernières années, mais en vaut largement la chandelle.&lt;/p&gt;
-
-&lt;p&gt;J&amp;#39;essairai de faire d&amp;#39;autres points prochainement, et je l&amp;#39;espère des billets un peu plus techniques et concrèts quand je serai plus à l&amp;#39;aise. En attendant, je retourne m&amp;#39;imprégner de cette &lt;em&gt;codebase&lt;/em&gt; que je ne désespère pas d&amp;#39;appréhender globalement tantôt.&lt;/p&gt;
 </content>
   </entry>
 </feed>
