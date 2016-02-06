@@ -5,10 +5,150 @@
   <id>https://bobmaerten.eu/blog</id>
   <link href="https://bobmaerten.eu/blog"/>
   <link href="https://bobmaerten.eu/blog/atom.xml" rel="self"/>
-  <updated>2016-01-27T09:08:09+01:00</updated>
+  <updated>2016-02-06T14:38:57+01:00</updated>
   <author>
     <name>Bob Maerten</name>
   </author>
+  <entry>
+    <title>Une image docker de base légère pour rails5</title>
+    <link rel="alternate" href="https://bobmaerten.eu/blog/une-image-docker-de-base-legere-pour-rails5.html"/>
+    <id>https://bobmaerten.eu/blog/une-image-docker-de-base-legere-pour-rails5.html</id>
+    <published>2016-02-06T14:38:57+01:00</published>
+    <updated>2016-02-06T22:15:32+01:00</updated>
+    <author>
+      <name>Bob Maerten — Blog Perso</name>
+    </author>
+    <content type="html">&lt;p&gt;Une des bonnes pratiques pour la construction d&amp;#39;images docker est de minimiser leur taille et en particulier d&amp;#39;avoir le moins de &amp;ldquo;couche&amp;rdquo; possible. D&amp;#39;ailleurs, il y a quelques jours, Docker a &lt;a href="https://www.brianchristner.io/docker-is-moving-to-alpine-linux/"&gt;annoncé la migration de ses images officielles&lt;/a&gt; de la distribution ubuntu à alpine-linux pour réduire au maximum le volume de données utiles. Parmi ces images, c&amp;#39;est &lt;a href="https://hub.docker.com/_/ruby/"&gt;&lt;code&gt;ruby:alpine&lt;/code&gt;&lt;/a&gt; qui m&amp;#39;intéresse particulièrement, et c&amp;#39;était l&amp;#39;occasion rêvée d&amp;#39;expérimenter la création d&amp;#39;une image d&amp;#39;une application de base pour rails 5.0.0-beta2.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Il faut dire que l&amp;#39;image officielle de rails n&amp;#39;est pas des plus légère :&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker images | grep rails
+rails   latest   efa7b55d5f4d   9 days ago   826.4 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;L&amp;#39;idée est donc de partir de l&amp;#39;image officielle ruby-alpine qui a également l&amp;#39;avantage de fournir la version 2.3 de ruby.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;FROM ruby:2.3-alpine
+MAINTAINER bob.maerten@gmail.com
+
+COPY Gemfile Gemfile.lock /app/
+WORKDIR /app
+
+RUN \
+    # Install ruby packages needed for runtime
+    apk add --no-cache \
+      nodejs \
+      postgresql-client \
+      libgcrypt \
+      libxml2 \
+      libxslt \
+      tzdata \
+    # Install ruby packages needed for native gems building
+ &amp;amp;&amp;amp; apk add --no-cache --virtual build-dependencies \
+      build-base \
+      postgresql-dev \
+      libc-dev \
+      curl-dev \
+      qt-dev \
+      libxml2-dev \
+      libxslt-dev \
+      linux-headers \
+    # Configure bundler to use system libxml libraries at compile time
+ &amp;amp;&amp;amp; bundle config build.nokogiri --use-system-libraries \
+    # Install default rails5 gems
+ &amp;amp;&amp;amp; bundle install --without development test \
+    # Remove native gem building dependencies to ease weight on docker image
+ &amp;amp;&amp;amp; apk del build-dependencies \
+    # Also remove cache to gain even more
+ &amp;amp;&amp;amp; rm -rf /var/cache/apk/*
+
+ADD . /app
+RUN chown -R nobody:nogroup /app
+USER nobody
+ENV RAILS_ENV production
+
+CMD  ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Reste plus qu&amp;#39;à construire cette image :&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker build -t rails5-alpine-base .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pour constater une jolie économie :&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker images | grep rails
+rails5-alpine-base  latest  fab4676a469a  2 minutes ago  216.1 MB
+rails               latest  efa7b55d5f4d  9 days ago     826.4 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Et pourtant fonctionnelle, pour peu qu&amp;#39;on lui associe une base postgres, comme avec ce &lt;em&gt;compose file&lt;/em&gt; :&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;postgres:
+  image: postgres:9.5
+  environment:
+    POSTGRES_USER: railsapp
+    POSTGRES_PASSWORD: railsapp
+
+web:
+  image: bobmaerten:rails5-alpine-base
+  links:
+    - postgres
+  ports:
+    - '3000:3000'
+  environment:
+    RAILS_ENV: development
+    DATABASE_URL: "postgresql://railsapp:railsapp@postgres/railsapp?pool=5"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Et de lancer la &lt;em&gt;stack&lt;/em&gt; avec la commande :&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker-compose up -d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Et voila notre application rails de base disponible !&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Ruby on Rails 5" src="blog/une-image-docker-de-base-legere-pour-rails5/Ruby_on_Rails-ad72eb85.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Bon, évidemment il ne s&amp;#39;agit là que de l&amp;#39;application nue, et il est fort probable que pour chaque nouvelle gem ajoutée à notre &lt;code&gt;Gemfile&lt;/code&gt; une &lt;em&gt;lib&lt;/em&gt; manquera à l&amp;#39;appel et il faudra spécialiser l&amp;#39;image en reprenant le &lt;em&gt;process&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Pour ce faire, il est donc possible de créer un autre &lt;code&gt;Dockerfile&lt;/code&gt; qui hérite de notre image de base et reprendre l&amp;#39;ajout de &lt;em&gt;packages&lt;/em&gt; nécessaires à la compilation des gems natives, un peu comme cet exemple :&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;FROM bobmaerten:rails5-alpine-base
+MAINTAINER bob.maerten@gmail.com
+
+# switch to root to install packages
+USER root
+RUN set -x \
+  &amp;amp;&amp;amp; apk add --no-cache \
+        #  &amp;lt;insert packages needed for runtime here&amp;gt; \
+        bash \
+ &amp;amp;&amp;amp; apk add --no-cache --virtual .gems-builddeps \
+        # &amp;lt;insert packages needed for native gem buiding here&amp;gt; \
+        build-base \
+        postgresql-dev \
+        libc-dev \
+        curl-dev \
+        qt-dev \
+        libxml2-dev \
+        libxslt-dev \
+        linux-headers \
+   &amp;amp;&amp;amp; rm -rf /var/cache/apk/*
+
+COPY Gemfile /app/
+COPY Gemfile.lock /app/
+RUN bundle install
+
+# Remove gems building packages deps
+RUN apk del .gems-builddeps
+
+# switch back to default user to run app
+USER nobody
+COPY . /app
+
+CMD  ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Mais cela me fait poser la question de l&amp;#39;intérêt de sous-classer plutôt que de profiter du système de cache de docker et de reprendre la création de l&amp;#39;image quasiment à sa base (alpine:3.3).&lt;/p&gt;
+
+&lt;p&gt;Je ne pense pas avoir assez de recul ni sur cette problématique ni sur l&amp;#39;usage au quotidien de rails avec docker pour répondre à cette question. Mais si vous avez un avis la dessus (en attendant un retour prochain des commentaires), n&amp;#39;hésitez pas à ma le partager via les réseaux sociaux, ou par mail si vous préférez plus d&amp;rsquo;&amp;lsquo;intimité, après un passage sur &lt;a href="https://keybase.io/bobmaerten"&gt;keybase.io&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Un certificat Let's Encrypt toujours à jour sur le blog avec Docker</title>
     <link rel="alternate" href="https://bobmaerten.eu/blog/un-certificat-let-s-encrypt-toujours-a-jour-sur-le-blog-avec-docker.html"/>
@@ -457,151 +597,6 @@ round-trip min/avg/max/stddev = 2.228/3.232/5.212/1.400 ms
 &lt;p&gt;Car dans mon host, y&amp;#39;a du docker-machine,&lt;/p&gt;
 
 &lt;p&gt;et ♫ “docker-machine, c&amp;#39;est bon pour &lt;a href="https://twitter.com/icecrime/status/599928881953443840"&gt;créer et switcher d&amp;#39;environnement&lt;/a&gt;&amp;nbsp;!”&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Retour (virtuel) des commentaires</title>
-    <link rel="alternate" href="https://bobmaerten.eu/blog/retour-virtuel-des-commentaires.html"/>
-    <id>https://bobmaerten.eu/blog/retour-virtuel-des-commentaires.html</id>
-    <published>2015-05-10T18:09:02+02:00</published>
-    <updated>2015-11-08T12:29:14+01:00</updated>
-    <author>
-      <name>Bob Maerten — Blog Perso</name>
-    </author>
-    <content type="html">&lt;p&gt;Cela faisait un petit moment que je voulais réintéger les commentaires sur ce blog. Étant hébergé sur GitHub Pages et donc purement statique, la solution est forcément externe. Je ne souhaitais pas pour autant utiliser le service évident pour ce genre de chose (disqus).&lt;/p&gt;
-
-&lt;p&gt;Non pas que j&amp;#39;eusse de quelconques griefs envers ce service mais dans la continuité de proposer du contenu relativement maitrisé (un site statique), je souhaiter également maitriser cette partie commentaires. J&amp;#39;avais fait quelques essais il y quelques mois avec une appli Rails appelée &lt;a href="https://github.com/phusion/juvia"&gt;Juvia&lt;/a&gt; produite par &lt;a href="http://www.phusion.nl"&gt;Phusion&lt;/a&gt; qui manifestment n&amp;#39;est plus maintenue, mais qui a poutant été mis à jour entre temps en 4.2.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;Je me suis dit que ce serait une bonne occasion de tester la mise en place de cette application dans un container Docker. De plus cela me permettrait d&amp;#39;associer la veille technologique nécessaire à cette mise en place avec mes nouvelles activités professionnelles (Rails + Sysadm + Hébergement).&lt;/p&gt;
-
-&lt;h2&gt;Construction de l&amp;#39;image&lt;/h2&gt;
-
-&lt;p&gt;Les gens qui gravitent autour de docker ne chôment pas. Des images officielles pour faire tourner des scripts &lt;a href="https://registry.hub.docker.com/_/ruby/"&gt;ruby&lt;/a&gt; et même des applications &lt;a href="https://registry.hub.docker.com/_/rails/"&gt;rails&lt;/a&gt; sont disponibles. En regardant le Dockerfile de l&amp;#39;image rails, on remarque qu&amp;#39;elle surcharge celle de ruby2.2, qui elle même s&amp;#39;appuie sur une succession d&amp;#39;images dérivées de debian:jessie. Ce qui signifie qu&amp;#39;il est toujours possible d&amp;#39;ajouter de nouveaux packages en cas d&amp;#39;usage d&amp;#39;une gem qui nécessite une compilation particulière.&lt;/p&gt;
-
-&lt;p&gt;C&amp;#39;est ce qui s&amp;#39;est produit lors de l&amp;#39;essai de contruction de l&amp;#39;image de l&amp;#39;application de gestion des commentaires dont il est question ici. Le &lt;code&gt;Dockerfile&lt;/code&gt; est très simple comme le recommande le README de l&amp;#39;image, mais la construction échoue&amp;nbsp;:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ cat Dockerfile
-FROM rails:onbuild
-
-$ docker build -t juvia_image .
-Sending build context to Docker daemon 160.5 MB
-Sending build context to Docker daemon
-Step 0 : FROM rails:onbuild
-# Executing 4 build triggers
-Trigger 0, COPY Gemfile /usr/src/app/
-Step 0 : COPY Gemfile /usr/src/app/
- ---&amp;gt; Using cache
-Trigger 1, COPY Gemfile.lock /usr/src/app/
-Step 0 : COPY Gemfile.lock /usr/src/app/
- ---&amp;gt; Using cache
-Trigger 2, RUN bundle install
-Step 0 : RUN bundle install
- ---&amp;gt; Running in f004b22629a9
-Don't run Bundler as root. Bundler can ask for sudo if it is needed, and
-installing your bundle as root will break this application for all non-root
-users on this machine.
-Fetching gem metadata from https://rubygems.org/.........
-Fetching version metadata from https://rubygems.org/...
-Fetching dependency metadata from https://rubygems.org/..
-Using rake 10.4.2
-Installing i18n 0.7.0
-Installing json 1.8.2
-...
-Installing capybara-screenshot 1.0.9
-
-Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
-
-    /usr/local/bin/ruby -r ./siteconf20150510-5-1wvt9so.rb extconf.rb
-Command 'qmake -spec linux-g++ ' not available
-
-Makefile not found
-
-Gem files will remain installed in /usr/local/bundle/gems/capybara-webkit-1.3.1 for inspection.
-Results logged to /usr/local/bundle/extensions/x86_64-linux/2.2.0-static/capybara-webkit-1.3.1/gem_make.out
-An error occurred while installing capybara-webkit (1.3.1), and Bundler cannot
-continue.
-Make sure that `gem install capybara-webkit -v '1.3.1'` succeeds before
-bundling.
-INFO[0154] The command [/bin/sh -c bundle install] returned a non-zero code: 5
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Comme on le constate, il manque l&amp;#39;outil &lt;code&gt;qmake&lt;/code&gt; pour que capybara-webkit puisse se compiler. Il faudrait ajouter l&amp;#39;installation du paquet en question dans le Dockerfile. Mais cette gem est dans les groupes :development et :test, qui ne sont pas utiles pour le fonctionnement en production. Pour éviter leur installation, il faudrait pouvoir préciser &lt;code&gt;--without test development&lt;/code&gt; à la commande bundle. Dans tous les cas, il faut réécrire le Dockerfile et en s&amp;#39;inspirant de celui de l&amp;#39;image rails, on arrive à quelque chose comme ça&amp;nbsp;:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ cat Dockerfile
-FROM ruby:2.2.2
-RUN apt-get update \
-        &amp;amp;&amp;amp; apt-get install sqlite3 nodejs --no-install-recommends -y qt5-default libqt5webkit5-dev \
-        &amp;amp;&amp;amp; apt-get clean \
-        &amp;amp;&amp;amp; rm -rf /var/lib/apt/lists/*
-
-RUN bundle config --global frozen 1
-
-ENV RAILS_ENV production
-
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-COPY Gemfile /usr/src/app/Gemfile
-COPY Gemfile.lock /usr/src/app/Gemfile.lock
-RUN bundle install --without='development test postgres mysql' --path=help
-
-COPY . /usr/src/app
-
-RUN bundle exec rake db:create \
- &amp;amp;&amp;amp; bundle exec rake db:schema:load \
- &amp;amp;&amp;amp; bundle exec rake assets:precompile RAILS_GROUPS=assets
-
-EXPOSE 3000
-CMD ['rails', 'server', '-b', '0.0.0.0']
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Je passe les petites corrections pour avoir les bonnes valeurs sur les fichiers sensibles de Rails (SECREY_KEY_BASE en production, des valeurs correctes dans database.yml, etc.). Au final l&amp;#39;image se construit et on peut valider le fonctionnement.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker run --detach --name juvia_app -e SECRET_KEY_BASE='abcde' juvia_image
-3489371959f964b3b7d85e2bbda19d294a2c841b0a987261d68794c21bb4d59b
-
-$ docker logs juvia_app
-[2015-05-10 17:18:12] INFO  WEBrick 1.3.1
-[2015-05-10 17:18:12] INFO  ruby 2.2.2 (2015-04-13) [x86_64-linux]
-[2015-05-10 17:18:12] INFO  WEBrick::HTTPServer#start: pid=1 port=3000
-
-$ curl -I $(boot2docker ip):3000
-HTTP/1.1 302 Found
-X-Frame-Options: SAMEORIGIN
-X-Xss-Protection: 1; mode=block
-X-Content-Type-Options: nosniff
-Location: http://192.168.59.103:3000/admin/dashboard/new_admin
-Content-Type: text/html; charset=utf-8
-Cache-Control: no-cache
-X-Request-Id: ba8299a1-d93d-4a14-93c1-d573e2c31178
-X-Runtime: 0.002761
-Server: WEBrick/1.3.1 (Ruby/2.2.2/2015-04-13)
-Date: Sun, 10 May 2015 17:21:14 GMT
-Content-Length: 0
-Connection: Keep-Alive
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Oui, vous constatez l&amp;#39;utilisation de &lt;a href="http://boot2docker.io"&gt;boot2docker&lt;/a&gt;. Depuis mon passage sur OSX, mon portable sous linux a rendu l&amp;#39;âme (carte mère grillé), donc je me suis rabattu sur un environnement compatible, malgré &lt;a href="https://twitter.com/bobmaerten/status/597347960058454016"&gt;quelques surprises&lt;/a&gt;. Au fond c&amp;#39;est assez transparent, une fois la &lt;a href="http://blog.blackfire.io/how-we-use-docker.html"&gt;configuration correctement installée&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2&gt;Mise en place du conteneur&lt;/h2&gt;
-
-&lt;p&gt;Voila, nous avons une image plus ou moins fonctionelle, reste plus qu&amp;#39;à la déployer et assurer la persistance des données.
-Pour le déploiement, j&amp;#39;ai à ma disposition une petite instance d&amp;#39;un serveur Ubuntu chez &lt;a href="https://www.digitalocean.com/?refcode=dd83518f68db"&gt;DigitalOcean&lt;/a&gt; sur lequel un &lt;em&gt;daemon&lt;/em&gt; docker assure le travail, ainsi qu&amp;#39;un &lt;a href="https://github.com/jwilder/nginx-proxy"&gt;conteneur particulier&lt;/a&gt; qui “écoute” les événements du service et qui met en place un reverse-proxy sur le nom du VIRTUAL_HOST passé en variable d&amp;#39;environnement du conteneur.&lt;/p&gt;
-
-&lt;p&gt;Pour la persitance des données on peut soit monter un dossier de l&amp;#39;hôte lors du démarrage du conteneur avec l&amp;#39;option &lt;code&gt;-v&lt;/code&gt; ou alors créer des &lt;em&gt;data-volumes&lt;/em&gt; et utiliser l&amp;#39;option &lt;code&gt;--volumes-from&lt;/code&gt;. Pour des questions de simplicité et puisque je maitrise mon contexte j&amp;#39;utilise la première solution, mais docker préconise plutôt l&amp;#39;usage de conteneur de données pour des raisons de portabilité.&lt;/p&gt;
-
-&lt;p&gt;Voici donc la ligne de commande permettant de lancer le conteneur&amp;nbsp;:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;docker run --name comments \
-       -e VIRTUAL_HOST='comments.bobmaerten.eu' \
-       -e SECRET_KEY_BASE='$(rake secret)' \
-       -v /root/containers/comments/db:/usr/src/app/db \
-       -v /root/containers/comments/log:/usr/src/app/log \
-       --restart=always \
-       --detach juvia_app
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2&gt;Résultats&lt;/h2&gt;
-
-&lt;p&gt;Si tout vas bien, lors du déploiement de cette version du site avec ce billet, le layout devrait afficher la liste des commentaires des billets ainsi qu&amp;#39;un formulaire pour en laisser. Ce sera l&amp;#39;occasion de tester l&amp;#39;application en réel et de voir les améliorations à apporter même si j&amp;#39;ai déjà quelques idées (localisation, ajout de notifications, etc.).&lt;/p&gt;
 </content>
   </entry>
 </feed>
