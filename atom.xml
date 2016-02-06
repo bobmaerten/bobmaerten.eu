@@ -14,7 +14,7 @@
     <link rel="alternate" href="https://bobmaerten.eu/blog/une-image-docker-de-base-legere-pour-rails5.html"/>
     <id>https://bobmaerten.eu/blog/une-image-docker-de-base-legere-pour-rails5.html</id>
     <published>2016-02-06T14:38:57+01:00</published>
-    <updated>2016-02-06T22:15:32+01:00</updated>
+    <updated>2016-02-06T22:31:11+01:00</updated>
     <author>
       <name>Bob Maerten — Blog Perso</name>
     </author>
@@ -104,7 +104,7 @@ web:
 
 &lt;p&gt;Et voila notre application rails de base disponible !&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt="Ruby on Rails 5" src="blog/une-image-docker-de-base-legere-pour-rails5/Ruby_on_Rails-ad72eb85.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Ruby on Rails 5" src="2016-02-06-une-image-docker-de-base-legere-pour-rails5/Ruby_on_Rails.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Bon, évidemment il ne s&amp;#39;agit là que de l&amp;#39;application nue, et il est fort probable que pour chaque nouvelle gem ajoutée à notre &lt;code&gt;Gemfile&lt;/code&gt; une &lt;em&gt;lib&lt;/em&gt; manquera à l&amp;#39;appel et il faudra spécialiser l&amp;#39;image en reprenant le &lt;em&gt;process&lt;/em&gt;.&lt;/p&gt;
 
