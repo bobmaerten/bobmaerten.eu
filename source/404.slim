@@ -1,8 +1,11 @@
 ---
-title: 404
+title: "404: Page non trouvée"
 ---
-section#error
-  header.major
-    h2 La page demandée est introuvable
-  p
-    = link_to 'Retourner à la page d\'accueil', '/index.html'
+
+.page
+  h1.page-title 404: Page non trouvée
+  p.lead
+    ' Désolé la page demandée a été déplacée ou votre lien pointe vers une page inexistante.
+    a href=data.settings.site.url
+      ' Retournez à l'accueil
+    | pour tenter de trouver la bonne.

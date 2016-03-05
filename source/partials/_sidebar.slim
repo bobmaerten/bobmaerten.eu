@@ -1,0 +1,42 @@
+input#sidebar-checkbox.sidebar-checkbox type="checkbox"
+#sidebar.sidebar
+  .sidebar-item
+    a.image.avatar href='/'
+      = image_tag 'avatar2014.jpg', srcset: 'avatar2014_2x.jpg 2x', alt: 'Photo de Bob Maerten'
+    p = data.settings.site.description
+  nav.sidebar-nav
+    a.sidebar-nav-item class=('active' if current_page.url == '/about/') href='/about/'
+      | À propos
+    a.sidebar-nav-item class=('active ' if current_page.url == '/') href='/'
+      | Blog
+      / data.settings.site.url
+    / The code below dynamically generates a sidebar nav of pages with `layout: page`
+    / in the front-matter. See readme for usage.
+    / - data.settings.pages.each do |node|
+    /   - if node.title && node.layout == "page"
+    /     a.sidebar-nav-item class=('active' if page.url == node.url) href=node.url
+    /       = node.title
+    a.sidebar-nav-item class=('active ' if current_page.url.start_with?('/blog/archives/')) href='/blog/archives/'
+      | Archives
+    a.sidebar-nav-item class=('active ' if current_page.url.start_with?('/blog/tags/')) href='/blog/tags/'
+      | Catégories
+    a.sidebar -nav-item href=data.settings.social.twitter.url
+      = data.settings.social.twitter.name
+    a.sidebar-nav-item href=data.settings.social.github.url
+      | GitHub
+    a.sidebar-nav-item href=data.settings.social.email
+      | E-mail
+  .sidebar-item
+    p
+      ' Theme
+      a href='http://lanyon.getpoole.com/'
+        ' Lanyon
+      ' made by
+      a href='https://twitter.com/mdo'
+        b @mdo
+    p
+      => data.settings.site.author
+      ' /
+      ' 2012 -
+      = Time.now.year
+      | .

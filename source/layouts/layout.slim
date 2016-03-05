@@ -1,54 +1,16 @@
 doctype html
-html lang='fr'
-  head
-    title = current_page.data.title || 'Blog' + ' | Bob Maerten'
-    meta charset="UTF-8"
-    meta name="description" content="Blog de Bob Maerten ou y sont exposés en vrac, humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités."
-    meta name="viewport" content="width=device-width, initial-scale=1"
-    = partial 'open_graph'
-    = partial 'favicons'
-    = stylesheet_link_tag 'main'
-  body#top
-    header#header
-      a.image.avatar href='/'
-        = image_tag 'avatar2014.jpg', srcset: 'avatar2014_2x.jpg 2x', alt: 'Photo de Bob Maerten'
-      h1
-        strong Bob Maerten
-        br
-        |  Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités. 
-      ul.nav
-        li = link_to 'À propos', '/about.html'
-        li = link_to 'Blog', '/blog/index.html'
-    #main
+html lang="fr"
+ = partial 'head'
+body
+  = partial 'sidebar' 
+  .wrap
+    .masthead
+      .container
+        h3.masthead-title
+          a href='/' title="Accueil" => data.settings.site.title
+          small = data.settings.site.tagline
+    .container.content
       == yield
-    footer#footer
-      ul.icons
-        li
-          a.icon.fa-envelope-o href="mailto:#{data.settings.social.email}"
-            span.label
-              | Email
-        li
-          a.icon.fa-rss href="#{data.settings.social.rss.url}"
-            span.label
-              | RSS
-        li
-          a.icon.fa-twitter href="#{data.settings.social.twitter.url}"
-            span.label
-              | Twitter
-        li
-          a.icon.fa-github href="#{data.settings.social.github.url}"
-            span.label
-              | Github
-      ul.copyright
-        li
-          | © Bob Maerten
-        li
-          | Design&nbsp;: 
-          a href='http://html5up.net' 
-            | HTML5 UP
-        li
-          | Photo&nbsp;: 
-          a href='http://unsplash.com/juskteez/'
-            | Juskteez Vu
-    = javascript_include_tag 'all'
-    = yield_content :javascripts
+  label.sidebar-toggle for="sidebar-checkbox"
+  javascript:
+    (function(document) { var toggle = document.querySelector('.sidebar-toggle'); var sidebar = document.querySelector('#sidebar'); var checkbox = document.querySelector('#sidebar-checkbox'); document.addEventListener('click', function(e) { var target = e.target; if(!checkbox.checked || sidebar.contains(target) || (target === checkbox || target === toggle)) return; checkbox.checked = false; }, false); })(document); 

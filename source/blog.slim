@@ -1,25 +1,14 @@
-- latest_post = blog.articles.first
-
+---
+title: Accueil
+---
 section#featured-post
-  header.major
-    h2 = link_to latest_post.title, latest_post, style: 'border-bottom: none;'
-  .image.fit
-    = image_tag "#{latest_post.data.image}.jpg", srcset: "#{latest_post.data.image}_2x.jpg 2x", alt: 'Map'
-  = partial 'metadata', object: latest_post
-  p =  latest_post.summary
-  p = link_to 'Lire la suite…', latest_post, class: 'button'
+  .posts
+    = partial 'post', object: blog.articles.first, locals: { display_image: true }
 section#previous-posts
-  h2 Précédents billets
-  .row
-    - blog.articles[1..-1].each_with_index do |post, i|
-      - if i%2 == 0
-        - align = '6u 12u$(xsmall)'
-      - else
-        - align = '6u$ 12u(xsmall)'
-      article.work-item class="#{align}"
-        h3 = link_to post.title, post
-        - if post.data.image
-          a.image.fit.thumb href="#{post.url}"
-            = image_tag "mini/#{post.data.image}.jpg", srcset: "mini/#{post.data.image}_2x.jpg 2x", alt: "#{post.data.image}"
-        p.post-meta
-          = partial 'metadata', object: post
+  .posts
+    - blog.articles[1..5].each do |post|
+      = partial 'post', object: post
+    
+    p
+      a href='/blog/archives/'
+        | Voir tous les billets

@@ -92,7 +92,7 @@ Et de lancer la _stack_ avec la commande :
 
 Et voila notre application rails de base disponible !
 
-![Ruby on Rails 5](../2016-02-06-une-image-docker-de-base-legere-pour-rails5/Ruby_on_Rails.png)
+![Ruby on Rails 5](/blog/2016-02-06-une-image-docker-de-base-legere-pour-rails5/Ruby_on_Rails.png)
 
 Bon, évidemment il ne s'agit là que de l'application nue, et il est fort probable que pour chaque nouvelle gem ajoutée à notre `Gemfile` une _lib_ manquera à l'appel et il faudra spécialiser l'image en reprenant le _process_.
 

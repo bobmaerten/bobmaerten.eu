@@ -8,7 +8,7 @@ section#categories
     h2 = "Billets dans la catégorie #{tagname}"
 
   ul
-  - page_articles.each_with_index do |article, i|
+  - page_articles.each do |article|
     li
       = article.date.strftime('%d/%m/%Y')
       |  - 

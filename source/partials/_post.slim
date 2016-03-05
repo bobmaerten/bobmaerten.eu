@@ -1,0 +1,8 @@
+.post
+  h1.post-title = link_to post.title, post
+  - if defined?(display_image)
+    .image.fit
+      = image_tag "#{post.data.image}.jpg", srcset: "#{post.data.image}_2x.jpg 2x", alt: "#{post.data.image}"
+  = partial 'metadata', object: post
+  p = post.summary
+  p = link_to 'Lire la suite…', post, class: 'button'

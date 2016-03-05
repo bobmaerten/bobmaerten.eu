@@ -5,7 +5,7 @@ per_page: 30
 
 ---
 section#archives
-  header.major
+  header
     h2 Archives
 
   - if paginate
@@ -14,7 +14,7 @@ section#archives
       p = link_to 'Page précédente', prev_page
 
   ul
-    - page_articles.each_with_index do |article, i|
+    - page_articles.each do |article|
       li
         span = article.date.strftime('%d/%m/%Y')
         |  - 

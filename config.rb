@@ -58,8 +58,8 @@ end
 #
 # With no layout
 # page '/path/to/file.html', :layout => false
-page '/404.html',       directory_index: false
-page '/about.html',     directory_index: false
+page '/404.html',       directory_indexes: false
+page '/about.html',     directory_indexes: false
 page '/sitemap.xml',    layout: false
 page '/atom.xml',       layout: false
 page '/feed.xml',       layout: false
