@@ -1,0 +1,10 @@
+blog:
+  build: .
+  environment:
+    VIRTUAL_HOST: "blog.bobmaerten.eu"
+    # LETSENCRYPT_HOST: "bobmaerten.eu"
+    # LETSENCRYPT_EMAIL: "hello@bobmaerten.eu"
+  # log_driver: syslog
+  # log_opt:
+  #     syslog-facility: local7
+  #     tag: "bobmaerten-eu"
