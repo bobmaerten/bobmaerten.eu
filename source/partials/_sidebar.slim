@@ -24,7 +24,7 @@ input#sidebar-checkbox.sidebar-checkbox type="checkbox"
       = data.settings.social.twitter.name
     a.sidebar-nav-item href=data.settings.social.github.url
       | GitHub
-    a.sidebar-nav-item href=data.settings.social.email
+    a.sidebar-nav-item href="mailto:#{data.settings.social.email}"
       | E-mail
   .sidebar-item
     p
