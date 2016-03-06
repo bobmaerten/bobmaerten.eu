@@ -4,7 +4,7 @@
     <loc>https://bobmaerten.eu/blog/tags/page/2.html</loc>
   </url>
   <url>
-    <loc>https://bobmaerten.eu/about.html</loc>
+    <loc>https://bobmaerten.eu/about</loc>
   </url>
   <url>
     <loc>https://bobmaerten.eu/blog/bilan-de-2-semaines-de-bepo.html</loc>
@@ -118,6 +118,9 @@
     <loc>https://bobmaerten.eu/blog/comportement-des-touches-home-et-end-du-pave-numerique-sous-osx.html</loc>
   </url>
   <url>
+    <loc>https://bobmaerten.eu/blog/tags/life.html</loc>
+  </url>
+  <url>
     <loc>https://bobmaerten.eu/blog/tags/debian.html</loc>
   </url>
   <url>
@@ -145,7 +148,7 @@
     <loc>https://bobmaerten.eu/blog/archives/page/2.html</loc>
   </url>
   <url>
-    <loc>https://bobmaerten.eu/404.html</loc>
+    <loc>https://bobmaerten.eu/404</loc>
   </url>
   <url>
     <loc>https://bobmaerten.eu/blog/utiliser-la-virtualisation-native-d-osx-pour-docker.html</loc>
@@ -155,6 +158,9 @@
   </url>
   <url>
     <loc>https://bobmaerten.eu/blog/une-image-docker-de-base-legere-pour-rails5.html</loc>
+  </url>
+  <url>
+    <loc>https://bobmaerten.eu/blog/un-nouveau-look-pour-le-blog.html</loc>
   </url>
   <url>
     <loc>https://bobmaerten.eu/blog/archives</loc>
@@ -206,8 +212,5 @@
   </url>
   <url>
     <loc>https://bobmaerten.eu/blog/tags/links.html</loc>
-  </url>
-  <url>
-    <loc>https://bobmaerten.eu/blog/tags/life.html</loc>
   </url>
 </urlset>

@@ -1,22 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Bob Maerten — Blog Perso</title>
+  <title>Bob Maerten</title>
   <subtitle>Humeurs, interrogations, pâtisseries, développement web, systèmes Linux et autres curiosités</subtitle>
   <id>https://bobmaerten.eu/blog</id>
   <link href="https://bobmaerten.eu/blog"/>
   <link href="https://bobmaerten.eu/blog/atom.xml" rel="self"/>
-  <updated>2016-02-06T14:38:57+01:00</updated>
+  <updated>2016-03-06T14:12:07+01:00</updated>
   <author>
     <name>Bob Maerten</name>
   </author>
+  <entry>
+    <title>Un nouveau look pour le blog</title>
+    <link rel="alternate" href="https://bobmaerten.eu/blog/un-nouveau-look-pour-le-blog.html"/>
+    <id>https://bobmaerten.eu/blog/un-nouveau-look-pour-le-blog.html</id>
+    <published>2016-03-06T14:12:07+01:00</published>
+    <updated>2016-03-06T14:26:22+01:00</updated>
+    <author>
+      <name>Bob Maerten</name>
+    </author>
+    <content type="html">&lt;p&gt;Il y avait décidement trop d&amp;#39;images sur cette page d&amp;#39;accueil et cela faisait quelques temps que je souhaitais rendre plus lisible le texte des billets.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;C&amp;#39;est désormais chose faite avec ce nouveau thème : &lt;a href="http://lanyon.getpoole.com/"&gt;Lanyon&lt;/a&gt; issu du monde &amp;ldquo;Jekyll&amp;rdquo; que je trouve particulièrement épuré.&lt;/p&gt;
+
+&lt;p&gt;J&amp;#39;ai hésité (et j&amp;#39;avoue hésiter encore) avec un autre thème épuré que j&amp;#39;apprécie égamement : &lt;a href="https://github.com/danielbayerlein/middleman-casper"&gt;Casper&lt;/a&gt;. C&amp;#39;est le thème de base utilisé par le CMS &lt;a href="https://ghost.org"&gt;Ghost&lt;/a&gt; avec la même philosophie de simplicité, mais j&amp;#39;ai trouvé que Laynon était plus facile à adapter à la logique existante de ma configuration de &lt;a href="https://middlemanapp.com"&gt;Middleman 3&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Eh non, je ne suis toujours pas passé à la version 4, le monde du CMS statique étant moins sensible à la montée en version des générateurs…&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Une image docker de base légère pour rails5</title>
     <link rel="alternate" href="https://bobmaerten.eu/blog/une-image-docker-de-base-legere-pour-rails5.html"/>
     <id>https://bobmaerten.eu/blog/une-image-docker-de-base-legere-pour-rails5.html</id>
     <published>2016-02-06T14:38:57+01:00</published>
-    <updated>2016-02-06T22:31:11+01:00</updated>
+    <updated>2016-03-06T14:26:22+01:00</updated>
     <author>
-      <name>Bob Maerten — Blog Perso</name>
+      <name>Bob Maerten</name>
     </author>
     <content type="html">&lt;p&gt;Une des bonnes pratiques pour la construction d&amp;#39;images docker est de minimiser leur taille et en particulier d&amp;#39;avoir le moins de &amp;ldquo;couche&amp;rdquo; possible. D&amp;#39;ailleurs, il y a quelques jours, Docker a &lt;a href="https://www.brianchristner.io/docker-is-moving-to-alpine-linux/"&gt;annoncé la migration de ses images officielles&lt;/a&gt; de la distribution ubuntu à alpine-linux pour réduire au maximum le volume de données utiles. Parmi ces images, c&amp;#39;est &lt;a href="https://hub.docker.com/_/ruby/"&gt;&lt;code&gt;ruby:alpine&lt;/code&gt;&lt;/a&gt; qui m&amp;#39;intéresse particulièrement, et c&amp;#39;était l&amp;#39;occasion rêvée d&amp;#39;expérimenter la création d&amp;#39;une image d&amp;#39;une application de base pour rails 5.0.0-beta2.&lt;/p&gt;
 
@@ -104,7 +124,7 @@ web:
 
 &lt;p&gt;Et voila notre application rails de base disponible !&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt="Ruby on Rails 5" src="2016-02-06-une-image-docker-de-base-legere-pour-rails5/Ruby_on_Rails.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Ruby on Rails 5" src="blog/une-image-docker-de-base-legere-pour-rails5/Ruby_on_Rails-ad72eb85.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Bon, évidemment il ne s&amp;#39;agit là que de l&amp;#39;application nue, et il est fort probable que pour chaque nouvelle gem ajoutée à notre &lt;code&gt;Gemfile&lt;/code&gt; une &lt;em&gt;lib&lt;/em&gt; manquera à l&amp;#39;appel et il faudra spécialiser l&amp;#39;image en reprenant le &lt;em&gt;process&lt;/em&gt;.&lt;/p&gt;
 
@@ -156,7 +176,7 @@ CMD  ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
     <published>2016-01-27T09:08:09+01:00</published>
     <updated>2016-01-27T14:22:24+01:00</updated>
     <author>
-      <name>Bob Maerten — Blog Perso</name>
+      <name>Bob Maerten</name>
     </author>
     <content type="html">&lt;p&gt;Depuis l&amp;#39;année dernière ce blog répond exclusivement en HTTPS grâce à un certificat valide et reconnu, issu d&amp;#39;une &lt;a href="https://www.wosign.com"&gt;autorité de certification chinoise&lt;/a&gt; qui propose (proposait ?) des certificats gratuits. Mais depuis, &lt;a href="https://letsencrypt.org"&gt;Let&amp;rsquo;s encrypt&lt;/a&gt; est disponible en béta publique et je cherchais depuis quelques jours un moyen de l&amp;#39;inclure dans la &lt;em&gt;stack&lt;/em&gt; d&amp;#39;hébergement de ce blog et permettre la création et le renouvellement automatique de certificat SSL, comme il est promis dans la documentation.&lt;/p&gt;
 
@@ -221,9 +241,9 @@ docker run --name bobmaerten-eu &lt;span class="se"&gt;\&lt;/span&gt;
     <link rel="alternate" href="https://bobmaerten.eu/blog/utiliser-la-virtualisation-native-d-osx-pour-docker.html"/>
     <id>https://bobmaerten.eu/blog/utiliser-la-virtualisation-native-d-osx-pour-docker.html</id>
     <published>2016-01-23T15:16:10+01:00</published>
-    <updated>2016-01-25T09:05:32+01:00</updated>
+    <updated>2016-03-05T09:44:10+01:00</updated>
     <author>
-      <name>Bob Maerten — Blog Perso</name>
+      <name>Bob Maerten</name>
     </author>
     <content type="html">&lt;p&gt;Docker est un outil linux natif et pour l&amp;#39;utiliser sous OSX (ou Windows) il faut passer par une machine virtuelle sous linux pour faire tourner le &lt;em&gt;daemon&lt;/em&gt;.&lt;/p&gt;
 
@@ -330,7 +350,7 @@ plop!
     <published>2015-06-26T17:23:10+02:00</published>
     <updated>2015-11-08T12:29:14+01:00</updated>
     <author>
-      <name>Bob Maerten — Blog Perso</name>
+      <name>Bob Maerten</name>
     </author>
     <content type="html">&lt;p&gt;Le truc qui me rendait fous depuis mon passage sous OSX c&amp;#39;était le comportement des touches &lt;code&gt;Home&lt;/code&gt; et &lt;code&gt;End&lt;/code&gt; du pavé numérique. En tant que développeur, dans mon éditeur de texte, le comportement est d&amp;#39;aller respectivement en début et en fin de ligne. Or dans le navigateur et en particulier dans les &lt;em&gt;textarea&lt;/em&gt; de GitHub, le comportement des touches en question est rattaché au &lt;em&gt;viewport&lt;/em&gt; du navigateur. Si bien que lorsque naturellement j&amp;#39;appuie sur &lt;code&gt;Home&lt;/code&gt; pour revenir en début de ligne, mon navigateur me renvoyait en début de page.&lt;/p&gt;
 
@@ -364,7 +384,7 @@ plop!
     <published>2015-06-17T21:15:39+02:00</published>
     <updated>2015-11-08T12:29:14+01:00</updated>
     <author>
-      <name>Bob Maerten — Blog Perso</name>
+      <name>Bob Maerten</name>
     </author>
     <content type="html">&lt;p&gt;Tiens il y avait un moment que je n&amp;#39;avais pas écrit par ici, et une fois n&amp;#39;est pas coutume il s&amp;#39;agit d&amp;#39;un billet pour évacuer. C&amp;#39;est Prestashop qui va en prendre pour son grade. Eh oui, Prestashop. Car même si mon activité principale est d&amp;#39;évoluer avec Ruby on Rails, il arrive à l&amp;#39;occasion que l&amp;#39;on doivent explorer d&amp;#39;autres univers.&lt;/p&gt;
 
@@ -387,216 +407,6 @@ plop!
 &lt;p&gt;Déjà que j&amp;#39;étais pas fan de XML, mais là, devoir le triturer pour pouvoir mettre à jour des données, c&amp;#39;était le pompon. Heureusement qu&amp;#39;il y a des &lt;em&gt;libs&lt;/em&gt; qui font ça à peu près bien, mais tout ça reste du XML et quelque part, pas franchement naturel à utiliser.&lt;/p&gt;
 
 &lt;p&gt;Allez, on va dire que c&amp;#39;était un mauvais moment à passer. Jusqu&amp;#39;à la prochaine mise à jour de l&amp;#39;API… 😬&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Passage de boot2docker à docker-machine</title>
-    <link rel="alternate" href="https://bobmaerten.eu/blog/passage-de-boot2docker-a-docker-machine.html"/>
-    <id>https://bobmaerten.eu/blog/passage-de-boot2docker-a-docker-machine.html</id>
-    <published>2015-05-17T13:12:14+02:00</published>
-    <updated>2015-11-08T12:29:14+01:00</updated>
-    <author>
-      <name>Bob Maerten — Blog Perso</name>
-    </author>
-    <content type="html">&lt;p&gt;Entre mon nouveau job, mon passage à OSX pour le boulot, et la défaillance de mon portable sous Linux, j&amp;#39;ai eu peu de temps à consacrer à l&amp;#39;actualité de Docker. Cependant ça bouge pas mal ces derniers temps avec des projets comme &lt;a href="https://docs.docker.com/machine/"&gt;machine&lt;/a&gt;, &lt;a href="https://docs.docker.com/compose/"&gt;compose&lt;/a&gt; et &lt;a href="https://docs.docker.com/swarm/"&gt;swarm&lt;/a&gt; et j&amp;#39;ai récemment essayé de rattraper un peu le retard. Dans ce billet je vais exposer ma découverte de &lt;code&gt;docker-machine&lt;/code&gt; qui m&amp;#39;a permis de retrouver l&amp;#39;usage courant que j&amp;#39;avais de docker sous Linux.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2&gt;Boot2Docker&lt;/h2&gt;
-
-&lt;p&gt;Comme un bon OSXien bien élevé au grain, j&amp;#39;ai tout d&amp;#39;abord suivi les conseils du net en installant &lt;a href="https://github.com/boot2docker/boot2docker"&gt;boot2docker&lt;/a&gt; pour faire fonctionner docker sous forme d&amp;#39;une VM Linux sous VirtualBox. La procédure est très simple&amp;nbsp;:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ brew cask install virtualbox
-$ brew install boot2docker
-$ boot2docker up
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Les recettes installent les dernières versions des logiciels requis. &lt;code&gt;boot2docker&lt;/code&gt; est au final un executable permettant de lancer/stopper/mettre à jour la VM en suivant les mises à jour de docker. Jusque là tout va bien, on parvient même à oublier la présence de cette VM et il m&amp;#39;est arrivé de chercher la cause de l&amp;#39;absence d&amp;#39;un service web en appelant &lt;code&gt;http://localhost:&amp;lt;service_port&amp;gt;&lt;/code&gt; au lieu de &lt;code&gt;http://&amp;lt;boot2docker_ip&amp;gt;:&amp;lt;service_port&amp;gt;&lt;/code&gt;&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Il existe certes quelques soucis de performances inhérents à l&amp;#39;usage de VirtualBox qui n&amp;#39;est pas par définition très véloce sur les systèmes de fichiers. Celà dit pour un usage en développent ce n&amp;#39;est pas très ennuyeux, et il existe des &lt;a href="http://blog.blackfire.io/how-we-use-docker.html"&gt;solutions de contournement&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2&gt;Docker Machine&lt;/h2&gt;
-
-&lt;p&gt;Dernièrement, le sous-projet &lt;code&gt;machine&lt;/code&gt; est arrivé chez Docker permettant de faire la même chose mais avec la possibilité d&amp;#39;utiliser différents &lt;em&gt;drivers&lt;/em&gt;. En fonction du &lt;em&gt;driver&lt;/em&gt; utilisé &lt;code&gt;machine&lt;/code&gt; va installer un système d&amp;#39;exploitation permettant d&amp;#39;utiliser docker sur la cible indiquée. Cette cible pouvant être un fournisseur de ressources sur le &lt;em&gt;cloud&lt;/em&gt; ou votre propre installation VirtualBox locale.&lt;/p&gt;
-
-&lt;p&gt;L&amp;#39;intérêt évident ici est de permettre d&amp;#39;utiliser les mêmes commandes et d&amp;#39;acquérir les mêmes habitudes quel que soit l&amp;#39;environnement cible que l&amp;#39;on manipule (dev, staging, prod) et quelque soit le service utilisé (VirtualBox, service Cloud, voire en développant son propre &lt;em&gt;driver&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;Pour répliquer l&amp;#39;environnement boot2docker, il suffit donc d&amp;#39;installer &lt;code&gt;docker-machine&lt;/code&gt; ou de suivre les &lt;a href="https://docs.docker.com/machine/#installation"&gt;consignes d&amp;#39;installation&lt;/a&gt; du site officiel. Dès lors, &lt;code&gt;machine&lt;/code&gt; va télécharger au besoin la dernière version de l&amp;#39;iso de &lt;em&gt;boot2docker&lt;/em&gt; et déployer une nouvelle VM sous VirtualBox, exactement de la même manière que le processus “natif” de boot2docker.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ brew install docker-machine
-$ docker-machine create --driver virtualbox dev
-INFO[0000] Creating SSH key...
-INFO[0000] No default boot2docker iso found locally, downloading the latest release...
-INFO[0001] Downloading latest boot2docker release to /Users/bob/.docker/machine/cache/boot2docker.iso...
-INFO[0044] Creating VirtualBox VM...
-INFO[0051] Starting VirtualBox VM...
-INFO[0051] Waiting for VM to start...
-INFO[0103] 'dev' has been created and is now the active machine.
-INFO[0103] To point your Docker client at it, run this in your shell: eval '$(docker-machine env dev)'
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Remarquez la dernière ligne qui est assez importante. Lancer &lt;code&gt;eval &amp;#39;$(docker-machine env dev)&amp;#39;&lt;/code&gt; permet en effet de paramétrer le &lt;em&gt;shell&lt;/em&gt; courant pour permettre d&amp;#39;utiliser l&amp;#39;environnement choisi avec les outils docker.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ eval '$(docker-machine env dev)'
-
-$ docker info
-Containers: 0
-Images: 0
-Storage Driver: aufs
-Root Dir: /mnt/sda1/var/lib/docker/aufs
-Backing Filesystem: extfs
-Dirs: 0
-Dirperm1 Supported: true
-Execution Driver: native-0.2
-Kernel Version: 4.0.3-boot2docker
-Operating System: Boot2Docker 1.6.2 (TCL 5.4); master : 4534e65 - Wed May 13 21:24:28 UTC 2015
-CPUs: 8
-Total Memory: 997.3 MiB
-Name: dev
-[...]
-Labels:
- provider=virtualbox
-
-$ docker run busybox echo Hello World
-Unable to find image 'busybox:latest' locally
-latest: Pulling from busybox
-cf2616975b4a: Pull complete
-6ce2e90b0bc7: Pull complete
-8c2e06607696: Already exists
-busybox:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
-Digest: sha256:38a203e1986cf79639cfb9b2e1d6e773de84002feea2d4eb006b52004ee8502d
-Status: Downloaded newer image for busybox:latest
-Hello World
-
-$ docker ps -a
-CONTAINER ID        IMAGE               COMMAND              CREATED             STATUS                      PORTS               NAMES
-d289f3082caf        busybox:latest      'echo Hello World'   11 seconds ago      Exited (0) 11 seconds ago                       drunk_pare
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Et comme je le disais plus haut, le &lt;em&gt;workflow&lt;/em&gt; est exactement le même en utilisant un autre &lt;em&gt;driver&lt;/em&gt;&amp;nbsp;:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker-machine create --driver digitalocean --digitalocean-access-token=$MY_ACCESS_TOKEN docker-prod
-INFO[0000] Creating SSH key...
-INFO[0001] Creating Digital Ocean droplet...
-INFO[0201] 'docker-prod' has been created and is now the active machine.
-INFO[0201] To point your Docker client at it, run this in your shell: eval '$(docker-machine env docker-prod)'
-
-$ eval '$(docker-machine env docker-prod)'
-
-$ docker run busybox echo Hello World
-Unable to find image 'busybox:latest' locally
-latest: Pulling from busybox
-cf2616975b4a: Pull complete
-6ce2e90b0bc7: Pull complete
-8c2e06607696: Already exists
-busybox:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
-Digest: sha256:38a203e1986cf79639cfb9b2e1d6e773de84002feea2d4eb006b52004ee8502d
-Status: Downloaded newer image for busybox:latest
-Hello World
-
-$ docker ps -a
-CONTAINER ID        IMAGE               COMMAND              CREATED             STATUS                     PORTS               NAMES
-7b8b283fceaa        busybox:latest      'echo Hello World'   11 seconds ago      Exited (0) 9 seconds ago                       gloomy_bohr
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Et ces deux environnements sont désormais accessibles en permuttant d&amp;#39;une cible à l&amp;#39;autre avec la commande &lt;code&gt;eval&lt;/code&gt; indiquée au démarrage d&amp;#39;une machine&amp;nbsp;:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker-machine ls
-NAME          ACTIVE   DRIVER         STATE     URL                         SWARM
-dev                    virtualbox     Running   tcp://192.168.99.102:2376
-docker-prod   *        digitalocean   Running   tcp://45.55.254.233:2376
-
-$ eval '$(docker-machine env dev)'
-
-$ docker ps -a
-CONTAINER ID        IMAGE               COMMAND              CREATED             STATUS                      PORTS               NAMES
-d289f3082caf        busybox:latest      'echo Hello World'   2 minutes ago       Exited (0) 2 minutes ago                        drunk_pare
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2&gt;Accéder aux containers depuis l&amp;#39;hôte&lt;/h2&gt;
-
-&lt;p&gt;Il y avait encore quelque chose qui me gênait dans l&amp;#39;usage d&amp;#39;une VM pour Docker en local, c&amp;#39;est l&amp;#39;accès aux containers directement depuis ma machine. Sous linux, Docker est exposé sur une interface routée par défaut. Avec une VM sous VirtualBox, il faut déclarer la route manuellement&amp;nbsp;:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ /usr/sbin/scutil -w State:/Network/Interface/vboxnet0/IPv4 -t 0
-
-$ sudo /sbin/route -n add -net 172.17.0.0 -netmask 255.255.0.0 -gateway $(docker-machine ip)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;On peut ainsi créer un &lt;em&gt;container&lt;/em&gt; et le &lt;em&gt;ping&lt;/em&gt;er depuis le système local.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker run --name=redis -d redis
-
-$ ping -c 3 $(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $(docker ps -ql))
-PING 172.17.0.1 (172.17.0.1): 56 data bytes
-64 bytes from 172.17.0.1: icmp_seq=0 ttl=63 time=3.164 ms
-64 bytes from 172.17.0.1: icmp_seq=1 ttl=63 time=3.985 ms
-64 bytes from 172.17.0.1: icmp_seq=2 ttl=63 time=9.379 ms
-
---- 172.17.0.1 ping statistics ---
-3 packets transmitted, 3 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 3.164/5.509/9.379/2.757 ms
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cette manipulation ne résistant pas au reboot, sous OSX on peut ajouter un &lt;code&gt;plist&lt;/code&gt; pour remettre la route au démarrage de la machine. Il faut toutefois faire attention à quel &lt;em&gt;vboxnet&lt;/em&gt; est rattaché la VM et quelle est l&amp;#39;ip attribuée par VirtualBox&amp;nbsp;:&lt;/p&gt;
-
-&lt;p&gt;Voici le plist (&lt;code&gt;/Library/LaunchDaemons/com.docker.route.plist&lt;/code&gt;) pour ma VM sur le vboxnet0 et d&amp;#39;adresse IP 192.168.99.100&lt;/p&gt;
-&lt;pre class="highlight xml"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;?xml version='1.0' encoding='UTF-8'?&amp;gt;&lt;/span&gt;
-&lt;span class="cp"&gt;&amp;lt;!DOCTYPE plist PUBLIC '-//Apple//DTD PLIST 1.0//EN' 'http://www.apple.com/DTDs/PropertyList-1.0.dtd'&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;plist&lt;/span&gt; &lt;span class="na"&gt;version=&lt;/span&gt;&lt;span class="s"&gt;'1.0'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;dict&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;Label&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;com.docker.route&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;ProgramArguments&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;array&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;bash&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;-c&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
-    &lt;span class="c"&gt;&amp;lt;!-- You need to adapt the vboxnet0 to the interface that suits your setup, use ifconfig to find it --&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;string&amp;gt;&lt;/span&gt;/usr/sbin/scutil -w State:/Network/Interface/vboxnet0/IPv4 -t 0;sudo /sbin/route -n add -net 172.17.0.0 -netmask 255.255.0.0 -gateway 192.168.99.100&lt;span class="nt"&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;/array&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;KeepAlive&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;false/&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;RunAtLoad&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;LaunchOnlyOnce&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;true/&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/dict&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/plist&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2&gt;Bonus: accéder aux containers par un nom DNS&lt;/h2&gt;
-
-&lt;p&gt;Le top du top serait d&amp;#39;avoir un système qui permet d&amp;#39;accéder aux conteneurs créés par leur nom plutôt que par un IP ou une redirection de port. On trouve pas mal de projets liés à cette problèmatique sur github, mais celui qui a retenu mon attention est &lt;a href="https://github.com/tonistiigi/dnsdock"&gt;dnsdock&lt;/a&gt;. Il s&amp;#39;appuie sur les recherches d&amp;rsquo;&lt;a href="http://www.asbjornenge.com/wwc/vagrant_skydocking.html"&gt;autres&lt;/a&gt; &lt;a href="https://github.com/tonistiigi/dnsdock"&gt;projet&lt;/a&gt;, mais il a pour lui la simplicité que je recherchais à la fois dans son installation et son utilisation.&lt;/p&gt;
-
-&lt;p&gt;Dans un premier temps il suffit de lancer un conteneur qui va repérer la création/suppression d&amp;#39;autre conteneur et enregistrer leurs nom dans un service DNS&amp;nbsp;:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ docker run -d -v /var/run/docker.sock:/var/run/docker.sock --name dnsdock --restart=always -p 172.17.42.1:53:53/udp tonistiigi/dnsdock
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Notez l&amp;#39;utilisation &lt;code&gt;--restart=always&lt;/code&gt; permettant de recharger le container au redémarrage de la VM.&lt;/p&gt;
-
-&lt;p&gt;Ensuite, il suffit d&amp;#39;ajouter un &lt;code&gt;resolver&lt;/code&gt; à OSX pour résoudre les noms des conteneurs avec le suffixe &lt;code&gt;.docker&lt;/code&gt; (voir la documentation de dnsdock pour un paramétrage différent).&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ sudo mkdir -p /etc/resolver ; echo 'nameserver 172.17.42.1' | sudo tee /etc/resolver/docker
-
-$ ping redis.docker
-PING redis.docker (172.17.0.2): 56 data bytes
-64 bytes from 172.17.0.2: icmp_seq=0 ttl=63 time=2.256 ms
-64 bytes from 172.17.0.2: icmp_seq=1 ttl=63 time=5.212 ms
-64 bytes from 172.17.0.2: icmp_seq=2 ttl=63 time=2.228 ms
-
---- redis.docker ping statistics ---
-3 packets transmitted, 3 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 2.228/3.232/5.212/1.400 ms
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A priori il est possible de faire la même chose sous Linux en ajoutant l&amp;#39;adresse de &lt;em&gt;bridge&lt;/em&gt; au fichier &lt;code&gt;/etc/resolv.conf&lt;/code&gt; en tant que &lt;em&gt;resolver&lt;/em&gt;, mais n&amp;#39;en ayant plus sous la main je ne peux donner de mode opératoire. L&amp;#39;utilisation d&amp;#39;une autre image comme &lt;a href="https://github.com/iverberk/docker-spy"&gt;docker-spy&lt;/a&gt; pourrait être opportune également.&lt;/p&gt;
-
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;Voilà, j&amp;#39;ai désormais de quoi faire tourner des conteneurs Docker de manière pas trop douloureuse sous OSX, mais entre boot2docker et docker-machine alors, comment choisir&amp;nbsp;? Les moins de 40 ans ne comprendront surement pas l&amp;#39;allusion mais voici ma petite recette pour choisir.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Pub FLUOGUM" src="http://i.imgur.com/QkkmmIs.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;À ma gauche un &lt;em&gt;host&lt;/em&gt; qui tourne sous boot2docker.&lt;/p&gt;
-
-&lt;p&gt;À ma droite mon &lt;em&gt;host&lt;/em&gt; qui tourne sous docker-machine.&lt;/p&gt;
-
-&lt;p&gt;A priori c&amp;#39;est la même chose, mais ce n&amp;#39;est pas la même chose !&lt;/p&gt;
-
-&lt;p&gt;Car dans mon host, y&amp;#39;a du docker-machine,&lt;/p&gt;
-
-&lt;p&gt;et ♫ “docker-machine, c&amp;#39;est bon pour &lt;a href="https://twitter.com/icecrime/status/599928881953443840"&gt;créer et switcher d&amp;#39;environnement&lt;/a&gt;&amp;nbsp;!”&lt;/p&gt;
 </content>
   </entry>
 </feed>
