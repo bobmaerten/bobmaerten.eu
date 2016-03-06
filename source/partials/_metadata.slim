@@ -1,4 +1,4 @@
 span => I18n.l metadata.date, format: '%e %B %Y'
 ' —
 - metadata.tags.each_with_index do |tag|
-  span = link_to tag, tag_path(tag), class: "post-category post-category-#{tag}"
+  span class="post-category post-category-#{tag}" => link_to tag, tag_path(tag)
