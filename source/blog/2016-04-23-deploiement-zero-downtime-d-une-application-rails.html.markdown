@@ -8,6 +8,6 @@ Lors du dernier apéro [Ruby Nord](http://ruby-nord.org), j'ai eu l'opportunité
 
 READMORE
 
-![Talk Avril 2016](/img/posts/talk_avril_2016.jpg)
+![Talk Avril 2016](../img/posts/talk_avril_2016.jpg)
 
 [Les _slides_ de ce _talk_](https://speakerdeck.com/bobmaerten/deploiment-dune-application-rails-sans-interruption-de-service) se trouvent sur SpeakerDeck, et les [sources](https://gitlab.com/bobmaerten/presentation-zdd) sont disponibles chez GitLab.
