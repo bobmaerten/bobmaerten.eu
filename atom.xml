@@ -5,26 +5,44 @@
   <id>https://bobmaerten.eu/blog</id>
   <link href="https://bobmaerten.eu/blog"/>
   <link href="https://bobmaerten.eu/blog/atom.xml" rel="self"/>
-  <updated>2016-03-06T14:12:07+01:00</updated>
+  <updated>2016-04-23T13:59:46+02:00</updated>
   <author>
     <name>Bob Maerten</name>
   </author>
+  <entry>
+    <title>Déploiement zero-downtime d'une application Rails</title>
+    <link rel="alternate" href="https://bobmaerten.eu/blog/deploiement-zero-downtime-d-une-application-rails.html"/>
+    <id>https://bobmaerten.eu/blog/deploiement-zero-downtime-d-une-application-rails.html</id>
+    <published>2016-04-23T13:59:46+02:00</published>
+    <updated>2016-04-23T14:27:11+02:00</updated>
+    <author>
+      <name>Bob Maerten</name>
+    </author>
+    <content type="html">&lt;p&gt;Lors du dernier apéro &lt;a href="http://ruby-nord.org"&gt;Ruby Nord&lt;/a&gt;, j&amp;#39;ai eu l&amp;#39;opportunité d&amp;#39;exposer les concepts du déploiement d&amp;#39;application Rails sans interruption de service.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Talk Avril 2016" src="img/posts/talk_avril_2016-ff147572.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://speakerdeck.com/bobmaerten/deploiment-dune-application-rails-sans-interruption-de-service"&gt;Les &lt;em&gt;slides&lt;/em&gt; de ce &lt;em&gt;talk&lt;/em&gt;&lt;/a&gt; se trouvent sur SpeakerDeck, et les &lt;a href="https://gitlab.com/bobmaerten/presentation-zdd"&gt;sources&lt;/a&gt; sont disponibles chez GitLab.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Un nouveau look pour le blog</title>
     <link rel="alternate" href="https://bobmaerten.eu/blog/un-nouveau-look-pour-le-blog.html"/>
     <id>https://bobmaerten.eu/blog/un-nouveau-look-pour-le-blog.html</id>
     <published>2016-03-06T14:12:07+01:00</published>
-    <updated>2016-03-06T14:26:22+01:00</updated>
+    <updated>2016-03-12T08:44:02+01:00</updated>
     <author>
       <name>Bob Maerten</name>
     </author>
-    <content type="html">&lt;p&gt;Il y avait décidement trop d&amp;#39;images sur cette page d&amp;#39;accueil et cela faisait quelques temps que je souhaitais rendre plus lisible le texte des billets.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Il y avait décidément trop d&amp;#39;images sur cette page d&amp;#39;accueil et cela faisait quelques temps que je souhaitais rendre plus lisible le texte des billets.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;C&amp;#39;est désormais chose faite avec ce nouveau thème : &lt;a href="http://lanyon.getpoole.com/"&gt;Lanyon&lt;/a&gt; issu du monde &amp;ldquo;Jekyll&amp;rdquo; que je trouve particulièrement épuré.&lt;/p&gt;
 
-&lt;p&gt;J&amp;#39;ai hésité (et j&amp;#39;avoue hésiter encore) avec un autre thème épuré que j&amp;#39;apprécie égamement : &lt;a href="https://github.com/danielbayerlein/middleman-casper"&gt;Casper&lt;/a&gt;. C&amp;#39;est le thème de base utilisé par le CMS &lt;a href="https://ghost.org"&gt;Ghost&lt;/a&gt; avec la même philosophie de simplicité, mais j&amp;#39;ai trouvé que Laynon était plus facile à adapter à la logique existante de ma configuration de &lt;a href="https://middlemanapp.com"&gt;Middleman 3&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;J&amp;#39;ai hésité (et j&amp;#39;avoue hésiter encore) avec un autre thème épuré que j&amp;#39;apprécie également : &lt;a href="https://github.com/danielbayerlein/middleman-casper"&gt;Casper&lt;/a&gt;. C&amp;#39;est le thème de base utilisé par le CMS &lt;a href="https://ghost.org"&gt;Ghost&lt;/a&gt; avec la même philosophie de simplicité, mais j&amp;#39;ai trouvé que Lanyon était plus facile à adapter à la logique existante de ma configuration de &lt;a href="https://middlemanapp.com"&gt;Middleman 3&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Eh non, je ne suis toujours pas passé à la version 4, le monde du CMS statique étant moins sensible à la montée en version des générateurs…&lt;/p&gt;
 </content>
@@ -375,38 +393,6 @@ plop!
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;et de redémarrer une nouvelle session afin de retrouver un niveau de santé mentale viable.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Quelques déboires avec le webservice de Prestashop</title>
-    <link rel="alternate" href="https://bobmaerten.eu/blog/quelques-deboires-avec-le-webservice-de-prestashop.html"/>
-    <id>https://bobmaerten.eu/blog/quelques-deboires-avec-le-webservice-de-prestashop.html</id>
-    <published>2015-06-17T21:15:39+02:00</published>
-    <updated>2015-11-08T12:29:14+01:00</updated>
-    <author>
-      <name>Bob Maerten</name>
-    </author>
-    <content type="html">&lt;p&gt;Tiens il y avait un moment que je n&amp;#39;avais pas écrit par ici, et une fois n&amp;#39;est pas coutume il s&amp;#39;agit d&amp;#39;un billet pour évacuer. C&amp;#39;est Prestashop qui va en prendre pour son grade. Eh oui, Prestashop. Car même si mon activité principale est d&amp;#39;évoluer avec Ruby on Rails, il arrive à l&amp;#39;occasion que l&amp;#39;on doivent explorer d&amp;#39;autres univers.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;Dans le cadre du boulot nous devons actuellement interfacer un &lt;em&gt;backoffice&lt;/em&gt; maison avec un &lt;em&gt;front-end&lt;/em&gt; Prestashop. Pour cela, nous avons pris le parti d&amp;#39;utiliser au maximum l&amp;#39;API REST de l&amp;#39;outil. Celle-ci est assez bien fichue car elle permet non seulement d&amp;#39;accéder aux principaux éléments de la boutique (produits, commandes, clients, stocks, etc.) mais également de les modifier. Et c&amp;#39;est sur ces mises à jour que s&amp;#39;est déversé la rage que je tente d&amp;#39;évacuer ici…&lt;/p&gt;
-
-&lt;p&gt;J&amp;#39;avais des erreurs 500 qui se déclenchaient lors de mes tentatives de mise à jours via le webservice, mais rien d&amp;#39;autre. Les retours des appels HTTP se contentaient de préciser d&amp;#39;aller voir les logs, dans lesquels il n&amp;#39;y avait bien évidemment rien, malgré un paramétrage de PHP/Apache plutôt verbeux.&lt;/p&gt;
-
-&lt;p&gt;Il faut savoir que les appels à l&amp;#39;API ne sont pas verbeux par défaut, et il m&amp;#39;a fallu longuement chercher pour comprendre et forcer le système de verbosité du webservice de Prestashop. J&amp;#39;ai clairement perdu les réflexes et les usages des applications PHP, et surtout travaillant avec Rails, on s&amp;#39;habitue vite aux environnements bien isolés et proprement déclarés (merci &lt;code&gt;RAKE_ENV/RAILS_ENV&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;Par convention les valeurs permettant de contrôler le comportement de Prestashop sont à modifier dans &lt;code&gt;config/settings.inc.php&lt;/code&gt;. Or pour la verbosité des messages d&amp;#39;erreurs du webservice, il faut forcer dans &lt;code&gt;config/defines.inc.php&lt;/code&gt; la variable &lt;code&gt;_PS_MODE_DEV_&lt;/code&gt; à &lt;strong&gt;true&lt;/strong&gt; par que dans celui dans lequel on s&amp;#39;attend à ce que ça fonctionne, eh bien, ça ne fonctionne pas. Et je passe sur le fait de devoir fonctionner en mode &lt;code&gt;DEV&lt;/code&gt; pour avoir les messages d&amp;#39;erreurs de l&amp;#39;API. Eh donc ça veut dire qu&amp;#39;en prod, tu dois tourner en mode dev aussi&amp;nbsp;?!&lt;/p&gt;
-
-&lt;p&gt;D&amp;#39;autre part, la consigne dans les documentations du webservice stipulent bien que pour la modification d&amp;#39;une ressource il faut d&amp;#39;abord récupérer le contenu XML via le webservice pour le renvoyer selon le même format avec les modifications. Cela ne fonctionnait pas sur certaines ressources (stock, produits, etc.) mais par manque de verbosité des messages il était délicat de comprendre pourquoi.&lt;/p&gt;
-
-&lt;p&gt;Avec des messages plus “clairs” sur la mise à jour du stock comme : “Vous ne pouvez pas mettre à jour le stock disponible quand il dépend du stock”, ce n&amp;#39;est pas forcément beaucoup plus évident, mais en l&amp;#39;occurrence l&amp;#39;idée est ici de modifier non seulement la valeur de quantité mais également la valeur de &lt;code&gt;depends_on_stock&lt;/code&gt;. Je n&amp;#39;aurais jamais trouvé sans l&amp;#39;affichage de ces messages d&amp;#39;erreurs&amp;nbsp;!&lt;/p&gt;
-
-&lt;p&gt;D&amp;#39;autres sont plus mystérieux dans la mesure ou il faut supprimer des lignes pour que la validation de la ressource s&amp;#39;effectue correctement. Ce n&amp;#39;est bien évidemment pas précisé dans la documentation, uniquement sur ces fichus messages d&amp;#39;erreur. Pour la mise à jour d&amp;#39;un produit par exemple&amp;nbsp;: “&lt;em&gt;parameter &lt;code&gt;manufacturer_name&lt;/code&gt; not writable. Please remove this attribute of this XML&lt;/em&gt;”, signifie qu&amp;#39;il faut supprimer le paramètre spécifié dans le XML passé (et &lt;code&gt;quantity&lt;/code&gt; également au passage, message qui n&amp;#39;apparaît qu&amp;#39;à la tentative suivante…). Bref, tout cela va peut-être sans dire pour les habitués du &lt;em&gt;framework&lt;/em&gt;, mais ça va tout de même mieux en le disant.&lt;/p&gt;
-
-&lt;p&gt;Déjà que j&amp;#39;étais pas fan de XML, mais là, devoir le triturer pour pouvoir mettre à jour des données, c&amp;#39;était le pompon. Heureusement qu&amp;#39;il y a des &lt;em&gt;libs&lt;/em&gt; qui font ça à peu près bien, mais tout ça reste du XML et quelque part, pas franchement naturel à utiliser.&lt;/p&gt;
-
-&lt;p&gt;Allez, on va dire que c&amp;#39;était un mauvais moment à passer. Jusqu&amp;#39;à la prochaine mise à jour de l&amp;#39;API… 😬&lt;/p&gt;
 </content>
   </entry>
 </feed>
